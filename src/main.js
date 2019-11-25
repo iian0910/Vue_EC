@@ -1,4 +1,7 @@
 import Vue from 'vue'
+// BT 套件
+import 'bootstrap'
+// 官方套件
 import App from './App.vue'
 import router from './router'
 
