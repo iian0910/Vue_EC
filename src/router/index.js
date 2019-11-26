@@ -17,14 +17,15 @@ const routes = [
       {
         path: 'products',
         name: 'Products',
-        component: () => import('../views/Products.vue')
+        component: () => import('../views/Products.vue'),
+        meta: { requiresAuth: true }
       }
     ]
   }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   routes
 })

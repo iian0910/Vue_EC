@@ -1,6 +1,7 @@
 <template>
   <div class="dashboard">
     <Navbar/>
+    <Alert/>
     <div class="container-fluid">
       <div class="row">
         <Sidebar/>
@@ -15,12 +16,14 @@
 <script>
 import Navbar from '../views/DashboardNav'
 import Sidebar from '../views/DashboardSidebar'
+import Alert from './AlertMessage'
 
 export default {
   name: 'dashboard',
   components: {
     Navbar,
-    Sidebar
+    Sidebar,
+    Alert
   }
 }
 </script>

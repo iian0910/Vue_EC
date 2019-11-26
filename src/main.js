@@ -1,14 +1,47 @@
+// npm套件
 import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css'
 // BT 套件
 import 'bootstrap'
 // 官方套件
 import App from './App.vue'
 import router from './router'
+// 載入 bus.js 設定檔
+import './bus'
+// 載入自定義 Filter 檔案
+import currencyFilter from './filters/currency'
 
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
+Vue.component('Loading', Loading)
+
+// 全域啟用 Filter 設定
+Vue.filter('currency', currencyFilter)
+
+// 跨網域撈資料設定
+axios.defaults.withCredentials = true
+
+// 導航守衛
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    const api = `${process.env.VUE_APP_APIPATH}/api/user/check`
+    axios.post(api).then((response) => {
+      console.log(response.data)
+      if (response.data.success) {
+        next()
+      } else {
+        next({
+          path: '/login'
+        })
+      }
+    })
+  } else {
+    next()
+  }
+})
 
 new Vue({
   router,
