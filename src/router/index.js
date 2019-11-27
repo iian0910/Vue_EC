@@ -12,12 +12,24 @@ const routes = [
   {
     path: '/admin',
     name: 'Dashboard',
-    component: () => import('../components/Dashboard.vue'),
+    component: () => import('../views/Dashboard.vue'),
     children: [
       {
         path: 'products',
         name: 'Products',
         component: () => import('../views/Products.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
+        path: 'orderList',
+        name: 'OrderList',
+        component: () => import('../views/OrderList.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
+        path: 'coupons',
+        name: 'Coupons',
+        component: () => import('../views/Coupons.vue'),
         meta: { requiresAuth: true }
       }
     ]

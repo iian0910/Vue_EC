@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import Navbar from '../views/DashboardNav'
-import Sidebar from '../views/DashboardSidebar'
-import Alert from './AlertMessage'
+import Navbar from '../components/DashboardNav'
+import Sidebar from '../components/DashboardSidebar'
+import Alert from '../components/AlertMessage'
 
 export default {
   name: 'dashboard',

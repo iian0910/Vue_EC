@@ -238,7 +238,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-danger" @click.prevent="delProduct">確認刪除</button>
+            <button type="button" class="btn btn-danger" @click.prevent="delProduct"><i class="fas fa-spinner fa-spin mr-2" v-if="status.loadingItem === tempProduct.id"></i>確認刪除</button>
           </div>
         </div>
       </div>
@@ -265,7 +265,8 @@ export default {
       isNew: false,
       isLoading: false,
       status: {
-        fileUploading: false
+        fileUploading: false,
+        loadingItem: ''
       }
     }
   },
@@ -284,11 +285,11 @@ export default {
     openModal (isNew, item) {
       const vm = this
       if (isNew) {
-        vm.tempProduct = {}
         vm.isNew = true
+        vm.tempProduct = {}
       } else {
-        vm.tempProduct = Object.assign({}, item)
         vm.isNew = false
+        vm.tempProduct = Object.assign({}, item)
         $('.editModalTitle').text(`編輯產品: ${vm.tempProduct.title}`)
       }
       $('#productModal').modal('show')
@@ -316,6 +317,7 @@ export default {
       const uploadedFile = this.$refs.files.files[0]
       const formData = new FormData()
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/upload`
+      // 使用 FormData 來傳送資料到後端
       formData.append('file-to-upload', uploadedFile)
       vm.status.fileUploading = true
       this.$http.post(url, formData, {
@@ -325,7 +327,7 @@ export default {
       }).then(response => {
         if (response.data.success) {
           vm.status.fileUploading = false
-          // 透過 $set() 指令，將欄位名稱強制寫入
+          // 透過 $set(寫入的目標, key值, 寫入的資料) 指令，將欄位名稱強制寫入
           vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl)
         } else {
           vm.$bus.$emit('message:push', response.data.message, 'danger')
@@ -340,9 +342,11 @@ export default {
     delProduct () {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`
+      vm.status.loadingItem = vm.tempProduct.id
       this.$http.delete(api).then(response => {
         console.log(response)
         $('#delProductModal').modal('hide')
+        vm.status.loadingItem = ''
         vm.getProducts()
       })
     }

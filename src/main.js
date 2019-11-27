@@ -13,6 +13,7 @@ import router from './router'
 import './bus'
 // 載入自定義 Filter 檔案
 import currencyFilter from './filters/currency'
+import dateFilter from './filters/date'
 
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
@@ -20,6 +21,7 @@ Vue.component('Loading', Loading)
 
 // 全域啟用 Filter 設定
 Vue.filter('currency', currencyFilter)
+Vue.filter('date', dateFilter)
 
 // 跨網域撈資料設定
 axios.defaults.withCredentials = true
