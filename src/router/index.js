@@ -33,6 +33,11 @@ const routes = [
         meta: { requiresAuth: true }
       }
     ]
+  },
+  {
+    path: '/WMall',
+    name: 'WMall',
+    component: () => import('../views/WMall.vue')
   }
 ]
 

@@ -14,6 +14,8 @@ import './bus'
 // 載入自定義 Filter 檔案
 import currencyFilter from './filters/currency'
 import dateFilter from './filters/date'
+import textFilter from './filters/textShow'
+import titleFilter from './filters/productTitleShow'
 
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
@@ -22,6 +24,8 @@ Vue.component('Loading', Loading)
 // 全域啟用 Filter 設定
 Vue.filter('currency', currencyFilter)
 Vue.filter('date', dateFilter)
+Vue.filter('textShow', textFilter)
+Vue.filter('titleFilter', titleFilter)
 
 // 跨網域撈資料設定
 axios.defaults.withCredentials = true

@@ -25,7 +25,7 @@
           <td class="text-center">{{ item.percent }}%</td>
           <td class="text-center">{{ item.due_date | date }}</td>
           <td class="text-center">
-            <span v-if="coupons.is_enabled" class="text-success">啟用</span>
+            <span v-if="item.is_enabled" class="text-success">啟用</span>
             <span v-else>未啟用</span>
           </td>
           <td class="text-center">
