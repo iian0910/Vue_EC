@@ -1,6 +1,6 @@
 <template>
   <div class="wmall">
-    <div class="container mb-4">
+    <div class="container mb-4 h-100">
       <!-- Start Navbar -->
       <Header/>
       <!-- End Navbar -->
