@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="container">
+  <div class="wmall">
+    <div class="container mb-4">
       <!-- Start Navbar -->
       <Header/>
       <!-- End Navbar -->
@@ -18,9 +18,11 @@
                 <ul class="list-group list-group-flush">
                   <li
                     class="list-group-item"
+                    :class="{'active': selected === `${ item }`}"
                     v-for="item in filterCategory"
                     :key="item.id"
-                    @click="filterItem"
+                    :data-category="`${ item }`"
+                    @click="selectedItem"
                   >{{ item }}</li>
                 </ul>
               </div>
@@ -29,7 +31,7 @@
         </div>
         <div class="col-md-10">
           <div class="row">
-            <div class="col-md-4 mb-4" v-for="item in products" :key="item.id">
+            <div class="col-md-4 mb-4" v-for="item in filterProducts" :key="item.id">
               <div class="card border-primary rounded-sm shadow-sm">
                 <div style="height: 150px; background-size: cover; background-position: center;" :style="{backgroundImage:`url(${item.imageUrl})`}"></div>
                 <div class="card-body">
@@ -93,6 +95,8 @@ export default {
       category: [
         '全部'
       ],
+      selected: '全部',
+      datasetItem: '',
       pagination: {},
       status: {
         loadingItem: ''
@@ -100,11 +104,26 @@ export default {
     }
   },
   computed: {
-    filterCategory () {
+    // 使用 filter() 過濾重複值
+    filterCategory (e) {
       const vm = this
       return vm.category.filter((element, index, arr) => {
         return arr.indexOf(element) === index
       })
+    },
+    // 使用 forEach() 篩選我要的資料
+    filterProducts () {
+      const vm = this
+      let newProducts = []
+      if (vm.selected === '全部') {
+        return vm.products
+      }
+      vm.products.forEach((item) => {
+        if (vm.selected === item.category) {
+          newProducts.push(item)
+        }
+      })
+      return newProducts
     }
   },
   methods: {
@@ -119,8 +138,13 @@ export default {
         }
       })
     },
-    filterItem () {
-
+    selectedItem (e) {
+      const vm = this
+      const dataitem = e.target.dataset.category
+      const item = e.target.textContent
+      console.log('item', item)
+      vm.datasetItem = dataitem
+      vm.selected = item
     }
   },
   created () {
@@ -130,6 +154,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.wmall{
+  height: 100vh;
+}
 .list-group-item{
   border-color: #7093bb;
   cursor: pointer;
