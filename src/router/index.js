@@ -38,6 +38,11 @@ const routes = [
     path: '/WMall',
     name: 'WMall',
     component: () => import('../views/WMall.vue')
+  },
+  {
+    path: '/product/:id',
+    name: 'Product',
+    component: () => import('../views/Product.vue')
   }
 ]
 

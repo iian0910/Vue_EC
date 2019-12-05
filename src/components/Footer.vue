@@ -7,7 +7,7 @@
 <style lang="scss" scoped>
 .footerComponent{
   width: 100%;
-  position: relative;
+  position: absolute;
   left: 0;
   bottom: 0;
 }

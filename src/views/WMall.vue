@@ -1,6 +1,6 @@
 <template>
   <div class="wmall">
-    <div class="container mb-4 h-100">
+    <div class="container mb-4">
       <!-- Start Navbar -->
       <Header/>
       <!-- End Navbar -->
@@ -37,7 +37,7 @@
                 <div class="card-body">
                   <span class="badge badge-primary float-right ml-2">{{item.category}}</span>
                   <h5 class="card-title">
-                    <a href="#" class="text-dark">{{item.title | titleFilter}}</a>
+                    <a href="#" class="text-dark product_title">{{item.title | titleFilter}}</a>
                   </h5>
                   <p class="card-text text-secondary">{{item.discription | textShow}}</p>
                   <div class="d-flex justify-content-between align-items-baseline">
@@ -47,8 +47,8 @@
                   </div>
                 </div>
                 <div class="card-footer d-flex bg-white">
-                  <button type="button" class="btn btn-yellow btn-sm">
-                    <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
+                  <button type="button" class="btn btn-yellow btn-sm" @click="getProduct(item.id)">
+                    <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id" ></i>
                     查看更多
                   </button>
                   <button type="button" class="btn btn-yellow btn-sm ml-auto">
@@ -92,6 +92,7 @@ export default {
   data () {
     return {
       products: [],
+      product: {},
       category: [
         '全部'
       ],
@@ -145,6 +146,16 @@ export default {
       console.log('item', item)
       vm.datasetItem = dataitem
       vm.selected = item
+    },
+    getProduct (id) {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
+      this.$http.get(api).then(response => {
+        if (response.data.success) {
+          const pageID = response.data.product.id
+          vm.$router.push(`/product/${pageID}`)
+        }
+      })
     }
   },
   created () {
@@ -155,7 +166,9 @@ export default {
 
 <style lang="scss" scoped>
 .wmall{
-  height: 100vh;
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 70px;
 }
 .list-group-item{
   border-color: #7093bb;
@@ -168,6 +181,9 @@ export default {
 }
 .card-body{
   padding: 16px;
+  .product_title{
+    text-decoration: none;
+  }
   .card-text{
     font-size: 1rem;
   }
