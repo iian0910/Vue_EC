@@ -34,15 +34,11 @@
             <div class="price text-danger">網路價 NT<span>{{product.price|currency}}</span></div>
           </div>
           <div class="input-group">
-            <select class="form-control" id="exampleFormControlSelect1">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+            <select class="form-control" v-model="product.num">
+              <option :value="num" v-for="num in 10" :key="num">選購 {{num}} {{product.unit}}</option>
             </select>
             <div class="input-group-append">
-              <button class="btn btn-outline-primary" type="button"><i class="fas fa-cart-arrow-down mr-2"></i>加入購物車</button>
+              <button class="btn btn-outline-primary" type="button" @click.prevent="addToCart(product.id, product.num)"><i class="fas fa-cart-arrow-down mr-2"></i>加入購物車</button>
             </div>
           </div>
         </div>
@@ -60,7 +56,13 @@
     <!-- Start Footer -->
     <Footer/>
     <!-- End Footer -->
-    <i class="fas fa-shopping-cart text-yellow cartIcon"></i>
+    <!-- Start Cart -->
+    <router-link class="nav-link" to="/checkList">
+      <i class="fas fa-shopping-cart text-yellow cartIcon">
+        <span class="badge numBadge bg-yellow text-white d-block">{{cartLen}}</span>
+      </i>
+    </router-link>
+    <!-- End Cart -->
   </div>
 </template>
 
@@ -79,7 +81,8 @@ export default {
   data () {
     return {
       product: {},
-      isLoading: false
+      isLoading: false,
+      cartLen: '0'
     }
   },
   methods: {
@@ -94,10 +97,36 @@ export default {
         vm.product.num = 1
         vm.isLoading = false
       })
+    },
+    addToCart (id, qty = 1) {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      const cart = {
+        product_id: id,
+        qty: qty
+      }
+      vm.isLoading = true
+      this.$http.post(api, { data: cart }).then(response => {
+        console.log(response)
+        vm.isLoading = false
+        vm.getCart()
+      })
+    },
+    getCart () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      this.$http.get(api).then(response => {
+        if (response.data.success) {
+          console.log('length', response.data.data.carts.length)
+          console.log('response', response.data.data)
+          vm.cartLen = response.data.data.carts.length
+        }
+      })
     }
   },
   created () {
     this.getProduct()
+    this.getCart()
   }
 }
 </script>
@@ -138,5 +167,15 @@ export default {
   border: 1px solid #ffbd00;
   font-size: 20px;
   background-color: white;
+}
+.numBadge{
+  // padding: 7px 5px;
+  border-radius: 50%;
+  font-size: 15px;
+  line-height: 12px;
+  transform: translate(58%, 50%);
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
 }
 </style>

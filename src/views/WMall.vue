@@ -1,5 +1,9 @@
 <template>
   <div class="wmall">
+    <loading :active.sync="isLoading">
+      <Circle4></Circle4>
+    </loading>
+
     <div class="container mb-4">
       <!-- Start Navbar -->
       <Header/>
@@ -51,7 +55,7 @@
                     <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id" ></i>
                     查看更多
                   </button>
-                  <button type="button" class="btn btn-yellow btn-sm ml-auto">
+                  <button type="button" class="btn btn-yellow btn-sm ml-auto" @click="addToCart(item.id, item.qty)">
                     <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
                     加到購物車
                   </button>
@@ -60,7 +64,7 @@
             </div>
           </div>
           <!-- pagination start -->
-          <div class="d-flex justify-content-center" v-if="pagination.length">
+          <div class="d-flex justify-content-center">
             <Pagination :pages="pagination" @emitPages="getProducts"></Pagination>
           </div>
           <!-- pagination end -->
@@ -72,11 +76,18 @@
     <!-- Start Footer -->
     <Footer/>
     <!-- End Footer -->
-    <i class="fas fa-shopping-cart text-yellow cartIcon"></i>
+    <!-- Start Cart -->
+    <router-link class="nav-link" to="/checkList">
+      <i class="fas fa-shopping-cart text-yellow cartIcon">
+        <span class="badge numBadge bg-yellow text-white d-block">{{cartLen}}</span>
+      </i>
+    </router-link>
+    <!-- End Cart -->
   </div>
 </template>
 
 <script>
+import { Circle4 } from 'vue-loading-spinner'
 import Pagination from '../components/Pagination'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -87,7 +98,8 @@ export default {
   components: {
     Pagination,
     Header,
-    Footer
+    Footer,
+    Circle4
   },
   data () {
     return {
@@ -101,7 +113,8 @@ export default {
       pagination: {},
       status: {
         loadingItem: ''
-      }
+      },
+      cartLen: '0'
     }
   },
   computed: {
@@ -128,12 +141,15 @@ export default {
     }
   },
   methods: {
-    getProducts () {
+    getProducts (page = 1) {
       const vm = this
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`
+      vm.isLoading = true
       this.$http.get(api).then(response => {
         console.log(response)
         vm.products = response.data.products
+        vm.isLoading = false
+        vm.pagination = response.data.pagination
         for (let i = 0; i < vm.products.length; i++) {
           vm.category.push(response.data.products[i].category)
         }
@@ -150,16 +166,43 @@ export default {
     getProduct (id) {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
+      vm.status.loadingItem = id
       this.$http.get(api).then(response => {
         if (response.data.success) {
           const pageID = response.data.product.id
+          vm.status.loadingItem = ''
           vm.$router.push(`/product/${pageID}`)
+        }
+      })
+    },
+    addToCart (id, qty = 1) {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      vm.status.loadingItem = id
+      const cart = {
+        product_id: id,
+        qty: qty
+      }
+      this.$http.post(api, { data: cart }).then(response => {
+        console.log(response)
+        vm.status.loadingItem = ''
+        vm.getCart()
+      })
+    },
+    getCart () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      this.$http.get(api).then(response => {
+        if (response.data.success) {
+          console.log('length', response.data.data.carts.length)
+          vm.cartLen = response.data.data.carts.length
         }
       })
     }
   },
   created () {
     this.getProducts()
+    this.getCart()
   }
 }
 </script>
@@ -203,5 +246,15 @@ export default {
   border: 1px solid #ffbd00;
   font-size: 20px;
   background-color: white;
+}
+.numBadge{
+  // padding: 7px 5px;
+  border-radius: 50%;
+  font-size: 15px;
+  line-height: 12px;
+  transform: translate(58%, 50%);
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
 }
 </style>
