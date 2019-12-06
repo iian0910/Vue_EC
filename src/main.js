@@ -4,6 +4,8 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
+import VeeValidate from 'vee-validate'
+import zhTWValidate from 'vee-validate/dist/locale/zh_TW.js'
 // BT 套件
 import 'bootstrap'
 // 官方套件
@@ -18,7 +20,9 @@ import textFilter from './filters/textShow'
 import titleFilter from './filters/productTitleShow'
 
 Vue.config.productionTip = false
+VeeValidate.Validator.localize('zh_TW', zhTWValidate)
 Vue.use(VueAxios, axios)
+Vue.use(VeeValidate)
 Vue.component('Loading', Loading)
 
 // 全域啟用 Filter 設定

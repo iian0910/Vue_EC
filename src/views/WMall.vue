@@ -71,17 +71,37 @@
         </div>
       </div>
       <!-- End Content -->
-
     </div>
     <!-- Start Footer -->
     <Footer/>
     <!-- End Footer -->
+
     <!-- Start Cart -->
-    <router-link class="nav-link" to="/checkList">
-      <i class="fas fa-shopping-cart text-yellow cartIcon">
+    <div class="cartIcom">
+      <i class="fas fa-shopping-cart text-yellow cartIcon" data-toggle="collapse" href="#checkList" role="button">
         <span class="badge numBadge bg-yellow text-white d-block">{{cartLen}}</span>
+        <div class="collapse checkList" id="checkList">
+          <div class="card card-body">
+            <p class="mb-3">已選購商品</p>
+            <table class="table table-hover cartList">
+              <tbody>
+                <tr v-for="item in carts" :key="item.id">
+                  <td width="50">
+                    <i class="fas fa-trash-alt" @click="removeCart(item.id)"></i>
+                  </td>
+                  <td>{{item.product.title}}</td>
+                  <td width="50">{{item.qty}}/{{item.product.unit}}</td>
+                  <td width="50">{{item.total}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <router-link to="/customOrder" class="btn btn-primary text-center text-white">
+              結帳去
+            </router-link>
+          </div>
+        </div>
       </i>
-    </router-link>
+    </div>
     <!-- End Cart -->
   </div>
 </template>
@@ -105,6 +125,7 @@ export default {
     return {
       products: [],
       product: {},
+      carts: [],
       category: [
         '全部'
       ],
@@ -195,7 +216,21 @@ export default {
       this.$http.get(api).then(response => {
         if (response.data.success) {
           console.log('length', response.data.data.carts.length)
+          console.log('carts', response.data.data.carts)
           vm.cartLen = response.data.data.carts.length
+          vm.carts = response.data.data.carts
+        }
+      })
+    },
+    removeCart (id) {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
+      vm.isLoading = true
+      this.$http.delete(api).then(response => {
+        if (response.data.success) {
+          console.log('response.data', response.data)
+          vm.getProducts()
+          vm.getCart()
         }
       })
     }
@@ -212,6 +247,9 @@ export default {
   min-height: 100vh;
   position: relative;
   padding-bottom: 70px;
+}
+.table th, .table td {
+  vertical-align: middle;
 }
 .list-group-item{
   border-color: #7093bb;
@@ -256,5 +294,19 @@ export default {
   position: absolute;
   right: 10px;
   bottom: 10px;
+}
+.checkList{
+  position: absolute;
+  right: 0;
+  bottom: 60px;
+  min-width: 300px;
+  i{
+    color: rgba(0,0,0,.25);
+    cursor: pointer;
+  }
+}
+.cartList{
+  font-size: 14px;
+  line-height: 21px;
 }
 </style>
