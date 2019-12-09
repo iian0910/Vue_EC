@@ -13,14 +13,16 @@
       <thead>
         <tr>
           <th class="text-left">名稱</th>
-          <th class="text-center" width="100">折扣百分比</th>
-          <th class="text-center" width="120">到期日</th>
-          <th class="text-center" width="120">是否啟用</th>
-          <th class="text-center" width="150">編輯</th>
+          <th class="text-left">優待碼</th>
+          <th class="text-center">折扣百分比</th>
+          <th class="text-center">到期日</th>
+          <th class="text-center">是否啟用</th>
+          <th class="text-center">編輯</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="item in coupons" :key="item.id">
+          <td class="text-left">{{ item.title }}</td>
           <td class="text-left">{{ item.code }}</td>
           <td class="text-center">{{ item.percent }}%</td>
           <td class="text-center">{{ item.due_date | date }}</td>

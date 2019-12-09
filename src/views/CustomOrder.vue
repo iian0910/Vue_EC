@@ -282,7 +282,9 @@ export default {
         if (result) {
           this.$http.post(api, { data: order }).then(response => {
             console.log('訂單已建立', response)
-            vm.$router.push(`/orderPayment/${response.data.orderId}`)
+            if (response.data.success) {
+              vm.$router.push(`/orderPayment/${response.data.orderId}`)
+            }
           })
         } else {
           console.log('欄位不完正')

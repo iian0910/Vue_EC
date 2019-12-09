@@ -17,10 +17,10 @@
               <div class="step">輸入資料</div>
             </div>
             <div class="col-md-4">
-              <div class="step active">金流付款</div>
+              <div class="step">金流付款</div>
             </div>
             <div class="col-md-4">
-              <div class="step">結帳完成</div>
+              <div class="step active">結帳完成</div>
             </div>
           </div>
           <div class="row mb-5">
@@ -71,7 +71,7 @@
             </div>
           </div>
           <div class="text-center">
-            <button class="btn btn-primary" @click.prevent="payOrder(order.id)">確認付款去</button>
+            <router-link to="/WMall" class="btn btn-primary">回購物商城</router-link>
           </div>
         </div>
       </div>
@@ -115,13 +115,6 @@ export default {
           vm.order = response.data.order
           vm.isLoading = false
         }
-      })
-    },
-    payOrder (id) {
-      const vm = this
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderId}`
-      this.$http.post(api).then(response => {
-        vm.$router.push(`/orderPayment/${vm.orderId}/success`)
       })
     }
   },

@@ -50,9 +50,14 @@ const routes = [
     component: () => import('../views/CustomOrder.vue')
   },
   {
-    path: '/orderPayment/:id',
+    path: '/orderPayment/:orderId',
     name: 'OrderPayment',
     component: () => import('../views/OrderPayment.vue')
+  },
+  {
+    path: '/orderPayment/:orderId/success',
+    name: 'Success',
+    component: () => import('../views/Success.vue')
   }
 ]
 

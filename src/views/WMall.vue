@@ -35,7 +35,7 @@
         </div>
         <div class="col-md-10">
           <div class="row">
-            <div class="col-md-4 mb-4" v-for="item in filterProducts" :key="item.id">
+            <div class="col-md-4 mb-4" v-for="item in filterProducts" :key="item.id" :items-per-page="9">
               <div class="card border-primary rounded-sm shadow-sm">
                 <div style="height: 150px; background-size: cover; background-position: center;" :style="{backgroundImage:`url(${item.imageUrl})`}"></div>
                 <div class="card-body">
