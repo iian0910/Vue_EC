@@ -66,7 +66,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title couponTitle" id="exampleModalLabel">Modal title</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -217,9 +217,13 @@ export default {
       if (isNew) {
         vm.isNew = true
         vm.tempCoupon = {}
+        $('.couponTitle').text('新增優惠券')
+        $('.addCoupon').text('新增優惠券')
       } else {
         vm.isNew = false
         vm.tempCoupon = Object.assign({}, item)
+        $('.couponTitle').text('編輯優惠券')
+        $('.addCoupon').text('更新優惠券')
       }
       $('#couponModal').modal('show')
     },
