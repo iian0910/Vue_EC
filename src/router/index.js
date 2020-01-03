@@ -35,7 +35,7 @@ const routes = [
     ]
   },
   {
-    path: '/WMall',
+    path: '/',
     name: 'WMall',
     component: () => import('../views/WMall.vue')
   },

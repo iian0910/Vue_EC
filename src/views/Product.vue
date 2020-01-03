@@ -40,7 +40,7 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb p-0 mb-4 bg-transparent">
               <li class="breadcrumb-item">
-                <router-link to="/WMall">首頁</router-link>
+                <router-link to="/">首頁</router-link>
               </li>
               <li class="breadcrumb-item active" aria-current="page">{{product.title}}</li>
             </ol>
@@ -173,7 +173,7 @@ export default {
       this.$http.delete(api).then(response => {
         if (response.data.success) {
           console.log('response.data', response.data)
-          vm.getProducts()
+          vm.getProduct()
           vm.getCart()
         }
       })

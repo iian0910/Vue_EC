@@ -71,7 +71,7 @@
             </div>
           </div>
           <div class="text-center">
-            <router-link to="/WMall" class="btn btn-primary">回購物商城</router-link>
+            <router-link to="/" class="btn btn-primary">回購物商城</router-link>
           </div>
         </div>
       </div>

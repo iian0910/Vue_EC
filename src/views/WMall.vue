@@ -36,25 +36,19 @@
 
       <!-- Start Content -->
       <div class="row">
-        <div class="col-md-2">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card border-primary">
-                <ul class="list-group list-group-flush">
-                  <li
-                    class="list-group-item"
-                    :class="{'active': selected === `${ item }`}"
-                    v-for="item in filterCategory"
-                    :key="item.id"
-                    :data-category="`${ item }`"
-                    @click="selectedItem"
-                  >{{ item }}</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+        <div class="col-md-12 mb-4">
+          <ul class="d-flex justify-content-center align-content-around p-0 mb-0">
+            <li
+              class="list-group-item categoryItem"
+              :class="{'active': selected === `${ item }`}"
+              v-for="item in filterCategory"
+              :key="item.id"
+              :data-category="`${ item }`"
+              @click="selectedItem"
+            >{{ item }}</li>
+          </ul>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-12">
           <div class="row">
             <div class="col-md-4 mb-4" v-for="item in filterProducts" :key="item.id" :items-per-page="9">
               <div class="card border-primary rounded-sm shadow-sm">
@@ -71,21 +65,23 @@
                     <div class="h5">特價<span class="price text-danger">{{item.price | currency}}</span>元</div>
                   </div>
                 </div>
-                <div class="card-footer d-flex bg-white">
-                  <button type="button" class="btn btn-yellow btn-sm" @click="getProduct(item.id)">
-                    <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id" ></i>
-                    查看更多
-                  </button>
-                  <button type="button" class="btn btn-yellow btn-sm ml-auto" @click="addToCart(item.id, item.qty)">
-                    <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
-                    加到購物車
-                  </button>
+                <div class="card-footer p-0">
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-yellow product_btn border-yellow" @click="getProduct(item.id)">
+                      <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id" ></i>
+                      查看更多
+                    </button>
+                    <button type="button" class="btn btn-yellow product_btn" @click="addToCart(item.id, item.qty)">
+                      <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
+                      加到購物車
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           <!-- pagination start -->
-          <div class="d-flex justify-content-center">
+          <div class="d-flex justify-content-center pagination">
             <Pagination :pages="pagination" @emitPages="getProducts"></Pagination>
           </div>
           <!-- pagination end -->
@@ -171,6 +167,7 @@ export default {
     filterProducts () {
       const vm = this
       let newProducts = []
+      // let productsLen = 0
       if (vm.selected === '全部') {
         return vm.products
       }
@@ -281,6 +278,20 @@ export default {
     color: white;
   }
 }
+.categoryItem{
+  border: 1px solid #7093bb;
+  border-radius: 0;
+  margin: 0;
+  margin-right: -1px;
+  width: 10%;
+  text-align: center;
+  &:first-child{
+    border-radius: 47px 0 0 47px;
+  }
+  &:last-child{
+    border-radius: 0 47px 47px 0;
+  }
+}
 .card-body{
   padding: 16px;
   .product_title{
@@ -295,6 +306,13 @@ export default {
 }
 .card-footer{
   border-top: 1px solid #7093bb;
+  .btn-group{
+    width: 100%;
+    .product_btn{
+      width: 50%;
+      border-radius: 0;
+    }
+  }
 }
 .cartIcon{
   padding: 1rem;

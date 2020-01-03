@@ -37,7 +37,7 @@
         </h6>
         <ul class="nav flex-column mb-2">
           <li class="nav-item">
-            <router-link to="/WMall" target="_blank" class="nav-link">
+            <router-link to="/" target="_blank" class="nav-link">
               <i class="fas fa-home mr-2"></i>WMall 購物中心
             </router-link>
           </li>
