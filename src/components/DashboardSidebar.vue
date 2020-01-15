@@ -12,7 +12,7 @@
         </h6>
         <ul class="nav flex-column mb-2">
           <li class="nav-item">
-            <router-link to="products" class="nav-link">
+            <router-link to="productsList" class="nav-link">
               <i class="fas fa-box-open mr-2"></i>產品總覽
             </router-link>
           </li>

@@ -1,0 +1,96 @@
+<template>
+  <div>
+    <div class="cartInfo">
+      <div class="cartIcon" data-toggle="collapse" data-target="#cartCollapse">
+        <i class="fas fa-shopping-cart"><div class="dot" v-if="cart.length !== 0"></div></i>
+      </div>
+      <div class="collapse cartCollapse" id="cartCollapse">
+        <div class="card card-body p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" width="10%"></th>
+                <th scope="col" width="80%">品名</th>
+                <th scope="col" width="10%">價格</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in cart" :key="item.id">
+                <th scope="row" class="px-0"><button class="btn btn-outline-danger" @click="updatePageItem(item.id)"><i class="far fa-trash-alt"></i></button></th>
+                <td>{{item.product.title}}</td>
+                <td>{{item.product.price | currency}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <button type="button" class="btn btn-orange btn-block" :class="{disabled:cart.length === 0}">結帳去</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'cart',
+  props: ['cart'],
+  data () {
+    return {
+      // carts: []
+    }
+  },
+  methods: {
+    updatePageItem (id) {
+      this.$emit('emitItem', id)
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+@import "../assets/all.scss";
+
+.cartInfo{
+  position: fixed;
+  right: 5%;
+  bottom: 15%;
+  z-index: 9999;
+  cursor: pointer;
+  .cartIcon{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid $primary;
+    background-color: white;
+    .fa-shopping-cart{
+      font-size: 20px;
+      line-height: 20px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: $primary;
+      .dot{
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: $pink;
+        position: absolute;
+        top: -20%;
+        right: -20%;
+      }
+    }
+  }
+  .cartCollapse{
+    position: absolute;
+    bottom: 60px;
+    right: 0;
+    width: 300px;
+  }
+  .table{
+    display: block;
+    max-height: 300px;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+}
+</style>

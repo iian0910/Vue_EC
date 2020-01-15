@@ -11,8 +11,9 @@ import 'bootstrap'
 // 官方套件
 import App from './App.vue'
 import router from './router'
-// 載入 bus.js 設定檔
+// 載入自定義 js 設定檔
 import './bus'
+import './all'
 // 載入自定義 Filter 檔案
 import currencyFilter from './filters/currency'
 import dateFilter from './filters/date'

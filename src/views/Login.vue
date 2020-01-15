@@ -6,7 +6,7 @@
 
     <div class="signin-bg">
       <form class="form-signin" @submit.prevent="signin">
-        <img class="mb-3 logo" src="../assets/logo.svg" alt="logo" width="100" height="100" />
+        <img class="mb-3 logo" src="../assets/images/logo.svg" alt="logo" width="100" height="100" />
         <h1 class="h3 mb-3 font-weight-normal text-center">登入</h1>
         <label for="inputEmail" class="sr-only">帳號</label>
         <input
@@ -34,8 +34,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "~bootstrap/scss/functions";
-@import "../assets/helpers/variables.scss";
+@import "../assets/all.scss";
 .login {
   width: 100%;
   height: 100vh;
@@ -57,7 +56,7 @@
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    background-image: url("../assets/loginWinnie.svg");
+    background-image: url("../assets/images/loginWinnie.svg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center top;
@@ -148,7 +147,7 @@ export default {
         console.log(response.data)
         vm.isLoading = false
         if (response.data.success) {
-          vm.$router.push('/admin/products')
+          vm.$router.push('/admin/productsList')
         }
       })
     }

@@ -15,9 +15,9 @@ const routes = [
     component: () => import('../views/Dashboard.vue'),
     children: [
       {
-        path: 'products',
-        name: 'Products',
-        component: () => import('../views/Products.vue'),
+        path: 'productsList',
+        name: 'ProductsList',
+        component: () => import('../views/ProductsList.vue'),
         meta: { requiresAuth: true }
       },
       {
@@ -35,29 +35,14 @@ const routes = [
     ]
   },
   {
-    path: '/',
-    name: 'WMall',
-    component: () => import('../views/WMall.vue')
+    path: '/products',
+    name: 'Prducts',
+    component: () => import('../views/Products.vue')
   },
   {
     path: '/product/:id',
-    name: 'Product',
+    name: 'Prduct',
     component: () => import('../views/Product.vue')
-  },
-  {
-    path: '/customOrder',
-    name: 'CustomOrder',
-    component: () => import('../views/CustomOrder.vue')
-  },
-  {
-    path: '/orderPayment/:orderId',
-    name: 'OrderPayment',
-    component: () => import('../views/OrderPayment.vue')
-  },
-  {
-    path: '/orderPayment/:orderId/success',
-    name: 'Success',
-    component: () => import('../views/Success.vue')
   }
 ]
 

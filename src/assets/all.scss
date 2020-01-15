@@ -4,3 +4,7 @@
 @import "~bootstrap/scss/bootstrap";
 // 各頁面scss檔案
 @import "./dashboard";
+
+*{
+    position: relative;
+}
