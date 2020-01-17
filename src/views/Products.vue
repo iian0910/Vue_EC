@@ -106,7 +106,7 @@
         <!---->
       </div>
       <!-- cart Icon -->
-      <Cart :cart="cart" @emitItem="deleteItem"></Cart>
+      <Cart :cart="carts" @emitDelete="deleteItem"></Cart>
       <!---->
     </div>
     <!-- End Content -->
@@ -130,7 +130,8 @@ export default {
       products: [],
       categories: [],
       currentCategory: '',
-      currentPage: 0
+      currentPage: 0,
+      carts: []
     }
   },
   components: {
@@ -229,6 +230,7 @@ export default {
   },
   created () {
     this.getProducts()
+    this.getCart()
   }
 }
 </script>

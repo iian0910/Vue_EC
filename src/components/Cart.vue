@@ -9,20 +9,20 @@
           <table class="table">
             <thead>
               <tr>
-                <th scope="col" width="10%"></th>
-                <th scope="col" width="80%">品名</th>
-                <th scope="col" width="10%">價格</th>
+                <th scope="col" width="25%" class="text-center">刪除</th>
+                <th scope="col" width="50%" class="text-left">品名</th>
+                <th scope="col" width="25%" class="text-left">價格</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="item in cart" :key="item.id">
-                <th scope="row" class="px-0"><button class="btn btn-outline-danger" @click="updatePageItem(item.id)"><i class="far fa-trash-alt"></i></button></th>
+                <th scope="row" class="px-0 text-center"><button class="btn btn-sm btn-outline-danger" @click="deleteItem(item.id)"><i class="far fa-trash-alt"></i></button></th>
                 <td>{{item.product.title}}</td>
                 <td>{{item.product.price | currency}}</td>
               </tr>
             </tbody>
           </table>
-          <button type="button" class="btn btn-orange btn-block" :class="{disabled:cart.length === 0}">結帳去</button>
+          <button type="button" class="btn btn-orange btn-block">結帳去</button>
         </div>
       </div>
     </div>
@@ -34,13 +34,11 @@ export default {
   name: 'cart',
   props: ['cart'],
   data () {
-    return {
-      // carts: []
-    }
+    return {}
   },
   methods: {
-    updatePageItem (id) {
-      this.$emit('emitItem', id)
+    deleteItem (id) {
+      this.$emit('emitDelete', id)
     }
   }
 }
