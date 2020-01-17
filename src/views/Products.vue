@@ -1,9 +1,12 @@
 <template>
   <div class="mainContent">
+    <Alert></Alert>
+    <loading :active.sync="isLoading">
+      <Circle4></Circle4>
+    </loading>
     <!-- Start Header -->
     <Header/>
     <!-- End Header -->
-
     <!-- Start Content -->
     <div class="container">
       <div id="productsBanner" class="carousel slide mb-2" data-ride="carousel">
@@ -77,8 +80,8 @@
                   <p class="card-text">{{ item.discription }}</p>
                 </div>
                 <div class="card-footer productItem_footer d-flex justify-content-between">
-                  <button type="button" class="btn btn-primary" @click="getProduct(item.id)">查看更多</button>
-                  <button type="button" class="btn btn-orange" @click="addToCart(item.id, item.qty)">加入購物車</button>
+                  <button type="button" class="btn btn-primary px-0" @click="getProduct(item.id)">查看更多<i class="fas fa-spinner fa-spin ml-2" v-if="status.getProductIcon"></i></button>
+                  <button type="button" class="btn btn-orange px-0" @click="addToCart(item.id, item.qty)">加入購物車<i class="fas fa-spinner fa-spin ml-2" v-if="status.addToCartIcon"></i></button>
                 </div>
               </div>
             </div>
@@ -118,9 +121,11 @@
 </template>
 
 <script>
+import { Circle4 } from 'vue-loading-spinner'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Cart from '../components/Cart'
+import Alert from '../components/AlertMessage'
 
 export default {
   name: 'product',
@@ -131,13 +136,20 @@ export default {
       categories: [],
       currentCategory: '',
       currentPage: 0,
-      carts: []
+      carts: [],
+      isLoading: false,
+      status: {
+        getProductIcon: false,
+        addToCartIcon: false
+      }
     }
   },
   components: {
+    Circle4,
     Header,
     Footer,
-    Cart
+    Cart,
+    Alert
   },
   computed: {
     filterData () {
@@ -174,10 +186,12 @@ export default {
     getProducts () {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
+      vm.isLoading = true
       vm.axios.get(api).then((response) => {
         console.log(response.data)
         vm.products = response.data.products
         vm.getCategory()
+        vm.isLoading = false
       })
     },
     getCategory () {
@@ -194,10 +208,12 @@ export default {
     getProduct (id) {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
+      vm.status.getProductIcon = true
       vm.axios.get(api).then((response) => {
         const pageID = response.data.product.id
         console.log('pageID', pageID)
         vm.$router.push(`/product/${pageID}`)
+        vm.status.getProductIcon = false
       })
     },
     getCart () {
@@ -215,9 +231,11 @@ export default {
         product_id: id,
         qty: qty
       }
+      vm.status.addToCartIcon = true
       this.$http.post(api, { data: cart }).then(response => {
         console.log(response)
         vm.getCart()
+        vm.status.addToCartIcon = false
       })
     },
     deleteItem (id) {
@@ -229,6 +247,7 @@ export default {
     }
   },
   created () {
+    this.$bus.$emit('message:push', '123', 'danger')
     this.getProducts()
     this.getCart()
   }
@@ -287,8 +306,7 @@ export default {
       font-size: 16px;
       line-height: 16px;
       text-align: center;
-      width: 110px;
-      max-width: 110px;
+      width: 50%;
     }
   }
 }
