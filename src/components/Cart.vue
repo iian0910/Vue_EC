@@ -6,22 +6,24 @@
       </div>
       <div class="collapse cartCollapse" id="cartCollapse">
         <div class="card card-body p-3">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col" width="25%" class="text-center">刪除</th>
-                <th scope="col" width="50%" class="text-left">品名</th>
-                <th scope="col" width="25%" class="text-left">價格</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="item in cart" :key="item.id">
-                <th scope="row" class="px-0 text-center"><button class="btn btn-sm btn-outline-danger" @click="deleteItem(item.id)"><i class="far fa-trash-alt"></i></button></th>
-                <td>{{item.product.title}}</td>
-                <td>{{item.product.price | currency}}</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="overflowCtr">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th scope="col" width="25%" class="text-center">刪除</th>
+                  <th scope="col" width="50%" class="text-left">品名</th>
+                  <th scope="col" width="25%" class="text-left">價格</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="item in cart" :key="item.id">
+                  <th scope="row" class="px-0 text-center"><button class="btn btn-sm btn-outline-danger" @click="deleteItem(item.id)"><i class="far fa-trash-alt"></i></button></th>
+                  <td>{{item.product.title}}</td>
+                  <td>{{item.product.price * item.qty | currency}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <button type="button" class="btn btn-orange btn-block" :disabled="cart.length === 0">結帳去</button>
         </div>
       </div>
@@ -47,12 +49,26 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/all.scss";
 
+$mobile: '568px';
+$pad-m: '768px';
+$pad-l: '960px';
+
+@mixin screen($size){
+  @media(max-width: $size){
+    @content
+  }
+}
+
 .cartInfo{
   position: fixed;
   right: 5%;
   bottom: 15%;
   z-index: 9999;
   cursor: pointer;
+  @include screen($mobile){
+    right: 3%;
+    bottom: 2%
+  }
   .cartIcon{
     width: 50px;
     height: 50px;
@@ -84,9 +100,9 @@ export default {
     right: 0;
     width: 300px;
   }
-  .table{
+  .overflowCtr{
     display: block;
-    max-height: 300px;
+    max-height: 190px;
     overflow: hidden;
     overflow-y: scroll;
   }
