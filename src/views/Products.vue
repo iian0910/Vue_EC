@@ -1,6 +1,6 @@
 <template>
   <div class="mainContent">
-    <Alert></Alert>
+    <Alert/>
     <loading :active.sync="isLoading">
       <Circle4></Circle4>
     </loading>
@@ -121,11 +121,11 @@
 </template>
 
 <script>
+import Alert from '../components/AlertMessage'
 import { Circle4 } from 'vue-loading-spinner'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Cart from '../components/Cart'
-import Alert from '../components/AlertMessage'
 
 export default {
   name: 'product',
@@ -241,15 +241,17 @@ export default {
     deleteItem (id) {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
+      vm.isLoading = true
       vm.axios.delete(api).then((response) => {
         vm.getCart()
+        vm.isLoading = false
       })
     }
   },
   created () {
-    this.$bus.$emit('message:push', '123', 'danger')
     this.getProducts()
     this.getCart()
+    this.$bus.$emit('message:push', 'response.data.message', 'danger')
   }
 }
 </script>

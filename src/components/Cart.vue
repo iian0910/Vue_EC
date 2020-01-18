@@ -22,7 +22,7 @@
               </tr>
             </tbody>
           </table>
-          <button type="button" class="btn btn-orange btn-block">結帳去</button>
+          <button type="button" class="btn btn-orange btn-block" :disabled="cart.length === 0">結帳去</button>
         </div>
       </div>
     </div>
