@@ -19,7 +19,7 @@
       <div class="row">
         <div class="col-md-4">
           <h3 class="mb-4 productTitle">{{product.title}}</h3>
-          <p class="mb-4 productPrice">單價：<span>{{product.price | currency}}</span></p>
+          <p class="mb-4 productPrice"><span class="origin_price mr-2" v-if="product.origin_price !== product.price">市價:{{product.origin_price | currency}}</span>網路價：<span class="price">{{product.price | currency}}</span></p>
           <select class="form-control mb-4" v-model="product.num">
             <option :value="num" v-for="num in 10" :key="num">選購 {{num}} {{product.unit}}</option>
           </select>
@@ -46,9 +46,9 @@
 </template>
 
 <script>
+import { Circle4 } from 'vue-loading-spinner'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { Circle4 } from 'vue-loading-spinner'
 import Cart from '../components/Cart'
 
 export default {
@@ -76,7 +76,7 @@ export default {
       const productID = vm.$route.params.id
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${productID}`
       vm.isLoading = true
-      this.$http.get(api).then(response => {
+      vm.$http.get(api).then(response => {
         console.log(response.data.product)
         vm.isLoading = false
         vm.product = response.data.product
@@ -87,7 +87,7 @@ export default {
     getCart () {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-      vm.axios.get(api).then((response) => {
+      vm.$http.get(api).then((response) => {
         console.log(response.data.data.carts)
         vm.carts = response.data.data.carts
       })
@@ -100,7 +100,7 @@ export default {
         qty: qty
       }
       vm.status.addToCartIcon = true
-      this.$http.post(api, { data: cart }).then(response => {
+      vm.$http.post(api, { data: cart }).then(response => {
         console.log(response)
         vm.getCart()
         vm.status.addToCartIcon = false
@@ -110,7 +110,7 @@ export default {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
       vm.isLoading = true
-      vm.axios.delete(api).then((response) => {
+      vm.$http.delete(api).then((response) => {
         vm.getCart()
         vm.isLoading = false
       })
@@ -137,9 +137,13 @@ export default {
 .productPrice{
   font-size: 16px;
   line-height: 16px;
-  span{
+  .price{
     font-size: 20px;
     font-weight: bold;
+  }
+  .origin_price{
+    text-decoration: line-through;
+    color: #cccccc;
   }
 }
 </style>

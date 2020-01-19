@@ -24,7 +24,7 @@
               </tbody>
             </table>
           </div>
-          <button type="button" class="btn btn-orange btn-block" :disabled="cart.length === 0">結帳去</button>
+          <button class="btn btn-orange btn-block" :disabled="cart.length === 0" @click="getCart">結帳去</button>
         </div>
       </div>
     </div>
@@ -41,6 +41,13 @@ export default {
   methods: {
     deleteItem (id) {
       this.$emit('emitDelete', id)
+    },
+    getCart () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      vm.$http.get(api).then((response) => {
+        vm.$router.push(`/checkout`)
+      })
     }
   }
 }
