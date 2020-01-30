@@ -73,6 +73,37 @@
                         </div>
                     </div>
                 </div>
+                <div class="row mb-4">
+                  <div class="col-12">
+                    <form @submit.prevent="createOrder">
+                      <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" name="email" id="email" v-model="form.user.email" v-validate="'required|email'" placeholder="請輸入 Email">
+                        <span class="text-danger" v-if="errors.has('email')">{{ errors.first('email') }}</span>
+                      </div>
+                      <div class="form-group">
+                        <label for="userName">收件人姓名</label>
+                        <input type="text" class="form-control" :class="{'is-invalid' : errors.has('name')}" name="name" id="userName" v-model="form.user.name" v-validate="'required'" placeholder="請輸入姓名">
+                        <span class="text-danger" v-if="errors.has('name')">姓名必須輸入</span>
+                      </div>
+                      <div class="form-group">
+                        <label for="userTel">收件人電話</label>
+                        <input type="tel" class="form-control" :class="{'is-invalid' : errors.has('tel')}" name="tel" id="userTel" v-model="form.user.tel" v-validate="'required'" placeholder="請輸入電話">
+                        <span class="text-danger" v-if="errors.has('tel')">電話必須輸入</span>
+                      </div>
+                      <div class="form-group">
+                        <label for="userAdd">收件人地址</label>
+                        <input type="text" class="form-control" :class="{'is-invalid' : errors.has('address')}" name="address" id="userAdd" v-model="form.user.address" v-validate="'required'" placeholder="請輸入地址">
+                        <span class="text-danger" v-if="errors.has('address')">地址欄位不得留空</span>
+                      </div>
+                      <div class="form-group">
+                        <label for="comment">留言</label>
+                        <textarea class="form-control" id="comment" v-model="form.message" rows="10"></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-primary">送出訂單</button>
+                    </form>
+                  </div>
+                </div>
             </div>
         </div>
     </div>
@@ -95,7 +126,16 @@ export default {
     return {
       carts: [],
       isLoading: false,
-      totalPrice: 0
+      totalPrice: 0,
+      form: {
+        user: {
+          name: '',
+          email: '',
+          tel: '',
+          address: ''
+        },
+        message: ''
+      }
     }
   },
   components: {
@@ -108,7 +148,7 @@ export default {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       vm.isLoading = true
-      vm.axios.get(api).then((response) => {
+      vm.$http.get(api).then((response) => {
         vm.isLoading = false
         console.log(response.data.data.carts)
         vm.carts = response.data.data.carts
@@ -121,6 +161,25 @@ export default {
       for (let i = 0; i < priceLen; i++) {
         vm.totalPrice += Math.floor(vm.carts[i].product.price)
       }
+    },
+    createOrder () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
+      const order = vm.form
+      vm.isLoading = true
+      vm.$validator.validate().then((result) => {
+        if (result) {
+          vm.$http.post(api, { data: order }).then((response) => {
+            console.log('訂單已建立', response)
+            if (response.data.success) {
+              vm.$router.push(`/checkout/${response.data.orderId}`)
+            }
+            vm.isLoading = false
+          })
+        } else {
+          console.log('欄位不完整')
+        }
+      })
     }
   },
   created () {
@@ -155,5 +214,8 @@ export default {
     .totalPrice{
         font-weight: bold;
     }
+}
+textarea{
+  resize: none;
 }
 </style>
