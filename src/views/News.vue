@@ -3,8 +3,102 @@
     <!-- Start Header -->
     <Header/>
     <!-- End Header -->
+    <div class="pageFullBanner mb-2"></div>
     <div class="container">
-      News
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-2 p-0 bg-transparent">
+          <li class="breadcrumb-item">
+            <router-link to="/" class="breadcrumb-link">首頁</router-link>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">最新消息</li>
+        </ol>
+      </nav>
+      <section class="section">
+        <h3 class="sectionTitle mb-4 text-center">最新消息</h3>
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img class="card-img-top" src="https://fakeimg.pl/600x400/" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">活動消息1</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img class="card-img-top" src="https://fakeimg.pl/600x400/" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">活動消息2</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img class="card-img-top" src="https://fakeimg.pl/600x400/" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">活動消息3</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img class="card-img-top" src="https://fakeimg.pl/600x400/" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">活動消息4</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img class="card-img-top" src="https://fakeimg.pl/600x400/" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">活動消息5</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img class="card-img-top" src="https://fakeimg.pl/600x400/" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">活動消息6</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4 mb-md-0">
+            <div class="card">
+              <img class="card-img-top" src="https://fakeimg.pl/600x400/" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">活動消息7</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4 mb-md-0">
+            <div class="card">
+              <img class="card-img-top" src="https://fakeimg.pl/600x400/" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">活動消息8</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-0">
+            <div class="card">
+              <img class="card-img-top" src="https://fakeimg.pl/600x400/" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">活動消息9</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
     <!-- Start Footer -->
     <Footer/>

@@ -5,40 +5,14 @@
     <!-- End Header -->
     <div class="container">
       <!-- Start Carousel -->
-      <div id="indexBanner" class="carousel slide d-none d-md-block" data-ride="carousel">
+      <div id="indexBanner" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#indexBanner" data-slide-to="0" class="active"></li>
           <li data-target="#indexBanner" data-slide-to="1"></li>
         </ol>
         <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img class="d-block w-100" src="../assets/images/page_banner.jpg" alt="First slide">
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100" src="../assets/images/page_banner_2.jpg" alt="Second slide">
-          </div>
-        </div>
-        <a class="carousel-control-prev" href="#indexBanner" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#indexBanner" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-      <div id="indexBanner" class="carousel slide d-block d-md-none" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#indexBanner" data-slide-to="0" class="active"></li>
-          <li data-target="#indexBanner" data-slide-to="1"></li>
-        </ol>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img class="d-block w-100" src="../assets/images/page_banner_mo.jpg" alt="First slide">
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100" src="../assets/images/page_banner_2_mo.jpg" alt="Second slide">
-          </div>
+          <div class="carousel-item activeBanner01 active"></div>
+          <div class="carousel-item activeBanner02"></div>
         </div>
         <a class="carousel-control-prev" href="#indexBanner" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -110,7 +84,7 @@
               <div class="card border-0">
                 <img src="../assets/images/pig.jpg" alt="" class="rounded-circle img-fluid">
                 <div class="card-body">
-                  <h5 class="card-title text-center">小豬（Pig）</h5>
+                  <h5 class="card-title text-center">小豬（Piglet）</h5>
                 </div>
               </div>
               <button class="btn btn-danger btn-lg charactersBtn">看更多</button>
@@ -185,6 +159,31 @@ export default {
 
 <style lang="scss" scoped>
 @import "../assets/all.scss";
+
+.activeBanner01,
+.activeBanner02{
+  width: 100%;
+  height: 400px;
+  @include screen($mobile){
+    height: 0;
+    padding-top: 78.94%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}
+.activeBanner01{
+  background-image: url('../assets/images/page_banner.jpg');
+  @include screen($mobile){
+    background-image: url('../assets/images/page_banner_mo.jpg');
+  }
+}
+.activeBanner02{
+  background-image: url('../assets/images/page_banner_2.jpg');
+  @include screen($mobile){
+    background-image: url('../assets/images/page_banner_2_mo.jpg');
+  }
+}
 
 .newsLink:hover{
   text-decoration: none !important;
