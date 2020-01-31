@@ -5,7 +5,7 @@
     <!-- End Header -->
     <div class="container">
       <!-- Start Carousel -->
-      <div id="indexBanner" class="carousel slide" data-ride="carousel">
+      <div id="indexBanner" class="carousel slide d-none d-md-block" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#indexBanner" data-slide-to="0" class="active"></li>
           <li data-target="#indexBanner" data-slide-to="1"></li>
@@ -16,6 +16,28 @@
           </div>
           <div class="carousel-item">
             <img class="d-block w-100" src="../assets/images/page_banner_2.jpg" alt="Second slide">
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#indexBanner" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#indexBanner" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+      <div id="indexBanner" class="carousel slide d-block d-md-none" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#indexBanner" data-slide-to="0" class="active"></li>
+          <li data-target="#indexBanner" data-slide-to="1"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100" src="../assets/images/page_banner_mo.jpg" alt="First slide">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="../assets/images/page_banner_2_mo.jpg" alt="Second slide">
           </div>
         </div>
         <a class="carousel-control-prev" href="#indexBanner" role="button" data-slide="prev">
@@ -72,18 +94,18 @@
       <section class="section characters">
         <h3 class="sectionTitle mb-4 text-center">系列角色</h3>
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-6 col-md-3">
             <router-link to="/characters" class="charactersLink">
               <div class="card border-0">
                 <img src="../assets/images/winnie.jpg" alt="" class="rounded-circle img-fluid">
                 <div class="card-body">
-                  <h5 class="card-title text-center">小熊維尼（Winnie）</h5>
+                  <h5 class="card-title text-center">維尼（Winnie）</h5>
                 </div>
               </div>
               <button class="btn btn-danger btn-lg charactersBtn">看更多</button>
             </router-link>
           </div>
-          <div class="col-md-3">
+          <div class="col-6 col-md-3">
             <router-link to="/characters" class="charactersLink">
               <div class="card border-0">
                 <img src="../assets/images/pig.jpg" alt="" class="rounded-circle img-fluid">
@@ -94,7 +116,7 @@
               <button class="btn btn-danger btn-lg charactersBtn">看更多</button>
             </router-link>
           </div>
-          <div class="col-md-3">
+          <div class="col-6 col-md-3">
             <router-link to="/characters" class="charactersLink">
               <div class="card border-0">
                 <img src="../assets/images/tiger.jpg" alt="" class="rounded-circle img-fluid">
@@ -105,7 +127,7 @@
               <button class="btn btn-danger btn-lg charactersBtn">看更多</button>
             </router-link>
           </div>
-          <div class="col-md-3">
+          <div class="col-6 col-md-3">
             <router-link to="/characters" class="charactersLink">
               <div class="card border-0">
                 <img src="../assets/images/eeyore.jpg" alt="" class="rounded-circle img-fluid">
