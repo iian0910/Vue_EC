@@ -35,9 +35,29 @@ const routes = [
     ]
   },
   {
+    path: '/',
+    name: 'Index',
+    component: () => import('../views/Index.vue')
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: () => import('../views/About.vue')
+  },
+  {
     path: '/products',
     name: 'Products',
     component: () => import('../views/Products.vue')
+  },
+  {
+    path: '/characters',
+    name: 'Characters',
+    component: () => import('../views/Characters.vue')
+  },
+  {
+    path: '/news',
+    name: 'News',
+    component: () => import('../views/News.vue')
   },
   {
     path: '/product/:id',

@@ -2,7 +2,7 @@
   <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
       <div class="container">
-        <div class="logo"></div>
+        <router-link class="logo" to="/"></router-link>
         <button
           class="navbar-toggler"
           type="button"
@@ -25,10 +25,13 @@
               <router-link class="item" to="/about">關於我們</router-link>
             </li>
             <li class="nav-item">
+              <router-link class="item" to="/news">最新消息</router-link>
+            </li>
+            <li class="nav-item">
               <router-link class="item" to="/products">相關產品</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="item" to="/contactUs">連絡我們</router-link>
+              <router-link class="item" to="/characters">角色一覽</router-link>
             </li>
           </ul>
           <div class="d-flex flex-row justify-content-center">
