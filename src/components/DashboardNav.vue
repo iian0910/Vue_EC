@@ -33,7 +33,7 @@ export default {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/logout`
       vm.isLoading = true
-      this.$http.post(api).then(response => {
+      vm.$http.post(api).then(response => {
         console.log(response.data)
         vm.isLoading = false
         if (response.data.success) {

@@ -275,7 +275,7 @@ export default {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/products?page=${page}`
       vm.isLoading = true
-      this.$http.get(api).then(response => {
+      vm.$http.get(api).then(response => {
         console.log(response)
         vm.isLoading = false
         vm.products = response.data.products
@@ -302,7 +302,7 @@ export default {
         api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`
         httpMethod = 'put'
       }
-      this.$http[httpMethod](api, { data: vm.tempProduct }).then(response => {
+      vm.$http[httpMethod](api, { data: vm.tempProduct }).then(response => {
         if (response.data.success) {
           $('#productModal').modal('hide')
           vm.getProducts()
@@ -320,7 +320,7 @@ export default {
       // 使用 FormData 來傳送資料到後端
       formData.append('file-to-upload', uploadedFile)
       vm.status.fileUploading = true
-      this.$http.post(url, formData, {
+      vm.$http.post(url, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -343,7 +343,7 @@ export default {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`
       vm.status.loadingItem = vm.tempProduct.id
-      this.$http.delete(api).then(response => {
+      vm.$http.delete(api).then(response => {
         console.log(response)
         $('#delProductModal').modal('hide')
         vm.status.loadingItem = ''

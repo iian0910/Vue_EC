@@ -143,7 +143,7 @@ export default {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/admin/signin`
       vm.isLoading = true
-      this.$http.post(api, vm.user).then(response => {
+      vm.$http.post(api, vm.user).then(response => {
         console.log(response.data)
         vm.isLoading = false
         if (response.data.success) {

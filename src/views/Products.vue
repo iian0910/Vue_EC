@@ -211,7 +211,7 @@ export default {
         qty: qty
       }
       vm.status.addToCartIcon = true
-      this.$http.post(api, { data: cart }).then(response => {
+      vm.$http.post(api, { data: cart }).then(response => {
         console.log(response)
         vm.getCart()
         vm.status.addToCartIcon = false
