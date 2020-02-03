@@ -28,10 +28,10 @@
               <router-link class="item" to="/news">最新消息</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="item" to="/products">相關產品</router-link>
+              <router-link class="item" to="/characters">角色介紹</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="item" to="/characters">角色一覽</router-link>
+              <router-link class="item" to="/products">相關產品</router-link>
             </li>
           </ul>
           <div class="d-flex flex-row justify-content-center">

@@ -71,7 +71,7 @@
           <div class="col-6 col-md-3">
             <router-link to="/characters" class="charactersLink">
               <div class="card border-0">
-                <img src="../assets/images/winnie.jpg" alt="" class="rounded-circle img-fluid">
+                <img src="../assets/images/winnie.png" alt="" class="rounded-circle img-fluid">
                 <div class="card-body">
                   <h5 class="card-title text-center">維尼（Winnie）</h5>
                 </div>
@@ -82,7 +82,7 @@
           <div class="col-6 col-md-3">
             <router-link to="/characters" class="charactersLink">
               <div class="card border-0">
-                <img src="../assets/images/pig.jpg" alt="" class="rounded-circle img-fluid">
+                <img src="../assets/images/pig.png" alt="" class="rounded-circle img-fluid">
                 <div class="card-body">
                   <h5 class="card-title text-center">小豬（Piglet）</h5>
                 </div>
@@ -93,7 +93,7 @@
           <div class="col-6 col-md-3">
             <router-link to="/characters" class="charactersLink">
               <div class="card border-0">
-                <img src="../assets/images/tiger.jpg" alt="" class="rounded-circle img-fluid">
+                <img src="../assets/images/tiger.png" alt="" class="rounded-circle img-fluid">
                 <div class="card-body">
                   <h5 class="card-title text-center">跳跳虎（Tiger）</h5>
                 </div>
@@ -104,7 +104,7 @@
           <div class="col-6 col-md-3">
             <router-link to="/characters" class="charactersLink">
               <div class="card border-0">
-                <img src="../assets/images/eeyore.jpg" alt="" class="rounded-circle img-fluid">
+                <img src="../assets/images/eeyore.png" alt="" class="rounded-circle img-fluid">
                 <div class="card-body">
                   <h5 class="card-title text-center">屹耳（Eeyore）</h5>
                 </div>

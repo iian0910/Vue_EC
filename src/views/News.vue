@@ -5,16 +5,18 @@
     <!-- End Header -->
     <div class="pageFullBanner mb-2"></div>
     <div class="container">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb mb-2 p-0 bg-transparent">
-          <li class="breadcrumb-item">
-            <router-link to="/" class="breadcrumb-link">首頁</router-link>
-          </li>
-          <li class="breadcrumb-item active" aria-current="page">最新消息</li>
-        </ol>
-      </nav>
       <section class="section">
         <h3 class="sectionTitle mb-4 text-center">最新消息</h3>
+        <!-- Start Breadcrumb -->
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-2 p-0 bg-transparent">
+            <li class="breadcrumb-item">
+              <router-link to="/" class="breadcrumb-link">首頁</router-link>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">最新消息</li>
+          </ol>
+        </nav>
+        <!-- End Breadcrumb -->
         <div class="row">
           <div class="col-md-4 mb-4">
             <div class="card">
@@ -111,7 +113,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 
 export default {
-  name: 'product',
+  name: 'news',
   data () {
     return {
 
@@ -125,5 +127,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/all.scss";
 
 </style>
