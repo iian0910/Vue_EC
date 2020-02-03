@@ -7,29 +7,29 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/Login.vue')
+    component: () => import('../views/backEnd/Login.vue')
   },
   {
     path: '/admin',
     name: 'Dashboard',
-    component: () => import('../views/Dashboard.vue'),
+    component: () => import('../views/backEnd/Dashboard.vue'),
     children: [
       {
         path: 'productsList',
         name: 'ProductsList',
-        component: () => import('../views/ProductsList.vue'),
+        component: () => import('../views/backEnd/ProductsList.vue'),
         meta: { requiresAuth: true }
       },
       {
         path: 'orderList',
         name: 'OrderList',
-        component: () => import('../views/OrderList.vue'),
+        component: () => import('../views/backEnd/OrderList.vue'),
         meta: { requiresAuth: true }
       },
       {
         path: 'coupons',
         name: 'Coupons',
-        component: () => import('../views/Coupons.vue'),
+        component: () => import('../views/backEnd/Coupons.vue'),
         meta: { requiresAuth: true }
       }
     ]
@@ -37,47 +37,47 @@ const routes = [
   {
     path: '/',
     name: 'Index',
-    component: () => import('../views/Index.vue')
+    component: () => import('../views/frontEnd/Index.vue')
   },
   {
     path: '/about',
     name: 'About',
-    component: () => import('../views/About.vue')
+    component: () => import('../views/frontEnd/About.vue')
   },
   {
     path: '/products',
     name: 'Products',
-    component: () => import('../views/Products.vue')
+    component: () => import('../views/frontEnd/Products.vue')
   },
   {
     path: '/characters',
     name: 'Characters',
-    component: () => import('../views/Characters.vue')
+    component: () => import('../views/frontEnd/Characters.vue')
   },
   {
     path: '/news',
     name: 'News',
-    component: () => import('../views/News.vue')
+    component: () => import('../views/frontEnd/News.vue')
   },
   {
     path: '/product/:id',
     name: 'Product',
-    component: () => import('../views/Product.vue')
+    component: () => import('../views/frontEnd/Product.vue')
   },
   {
     path: '/checkout',
     name: 'Checkout',
-    component: () => import('../views/Checkout.vue')
+    component: () => import('../views/frontEnd/Checkout.vue')
   },
   {
     path: '/checkout/:orderId',
     name: 'CustomerCheckout',
-    component: () => import('../views/CustomerCheckout.vue')
+    component: () => import('../views/frontEnd/CustomerCheckout.vue')
   },
   {
     path: '/payment_success/:orderId',
     name: 'PaymentSuccess',
-    component: () => import('../views/PaymentSuccess.vue')
+    component: () => import('../views/frontEnd/PaymentSuccess.vue')
   }
 ]
 
