@@ -160,6 +160,22 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/all.scss";
 
+.section{
+  padding-top: 80px;
+  @include screen($mobile){
+    padding-top: 40px;
+  }
+  .sectionTitle{
+    font-size: 26px;
+    line-height: 26px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    @include screen($mobile){
+        font-size: 24px;
+        line-height: 24px;
+    }
+  }
+}
 .activeBanner01,
 .activeBanner02{
   width: 100%;

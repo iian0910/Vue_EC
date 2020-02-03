@@ -20,21 +20,11 @@ $pad-l: '960px';
 }
 
 .section{
-  padding-top: 80px;
+  padding-top: 0;
   padding-bottom: 80px;
   @include screen($mobile){
-    padding-top: 40px;
+    padding-top: 0;
     padding-bottom: 40px;
-  }
-  .sectionTitle{
-    font-size: 26px;
-    line-height: 26px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    @include screen($mobile){
-        font-size: 24px;
-        line-height: 24px;
-    }
   }
 }
 

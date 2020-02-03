@@ -3,10 +3,9 @@
     <!-- Start Header -->
     <Header/>
     <!-- End Header -->
-    <div class="pageFullBanner mb-2"></div>
     <div class="container">
+      <div class="pageFullBanner mb-2"></div>
       <section class="section">
-        <h3 class="sectionTitle mb-4 text-center">最新消息</h3>
         <!-- Start Breadcrumb -->
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb mb-2 p-0 bg-transparent">
@@ -129,4 +128,10 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/all.scss";
 
+.pageFullBanner{
+  background-image: url('../assets/images/page_newsBanner.jpg');
+  @include screen($mobile){
+    background-image: url('../assets/images/page_newsBanner_mo.jpg');
+  }
+}
 </style>

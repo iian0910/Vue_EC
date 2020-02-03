@@ -8,8 +8,8 @@
     <Header/>
     <!-- End Header -->
     <!-- Start Content -->
-    <div class="pageFullBanner mb-2"></div>
     <div class="container">
+      <div class="pageFullBanner mb-2"></div>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb mb-2 p-0 bg-transparent">
           <li class="breadcrumb-item">
@@ -238,6 +238,12 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/all.scss";
 
+.pageFullBanner{
+  background-image: url('../assets/images/page_productsBanner.jpg');
+  @include screen($mobile){
+    background-image: url('../assets/images/page_productsBanner_mo.jpg');
+  }
+}
 .mainContent{
   height: 100vh;
 }
