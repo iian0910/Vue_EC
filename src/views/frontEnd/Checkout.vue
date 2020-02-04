@@ -28,53 +28,6 @@
         <div class="col-md-6 offset-md-3">
           <div class="row mb-4">
             <div class="col-12">
-              <!-- <div id="accordion">
-                            <div class="card">
-                                <button class="card-header btn btn-link d-flex justify-content-between" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <h5 class="mb-0">購物車清單</h5><div class="totalPrice">{{totalPrice|currency}}</div>
-                                </button>
-                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                    <div class="card-body p-0">
-                                        <table class="table mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th width="20%"></th>
-                                                    <th class="text-left">產品名稱</th>
-                                                    <th class="text-center">單位</th>
-                                                    <th class="text-right">價格</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr v-for="item in carts" :key="item.id">
-                                                    <td><img :src="`${item.carts.product.imageUrl}`" :alt="`${item.carts.product.title}`" class="img img-fluid cartImg"></td>
-                                                    <td class="text-left">{{item.carts.product.title}}</td>
-                                                    <td class="text-center">{{item.qty}}/{{item.carts.product.unit}}</td>
-                                                    <td class="text-right">{{item.product.price|currency}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="4">
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control" placeholder="輸入優惠代碼" aria-label="輸入優惠代碼" aria-describedby="basic-addon2">
-                                                            <div class="input-group-append">
-                                                                <button class="btn btn-outline-secondary" type="button">Button</button>
-                                                            </div>
-                                                            </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="3" class="text-right">合計：</td>
-                                                    <td class="text-right">{{carts.total|currency}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="3" class="text-right">折扣價：</td>
-                                                    <td class="text-right">{{carts.final_total|currency}}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-              </div>-->
               <div id="accordion">
                 <div class="card">
                   <button
@@ -242,7 +195,7 @@ export default {
     return {
       cart: {},
       isLoading: false,
-      totalPrice: 0,
+      finalTotal: 0,
       coupon_code: '',
       form: {
         user: {
@@ -267,17 +220,10 @@ export default {
       vm.isLoading = true
       vm.$http.get(api).then(response => {
         vm.isLoading = false
-        console.log(response.data.data)
+        console.log('response.data.data', response.data.data)
         vm.cart = response.data.data
-        vm.addPrice()
+        vm.finalTotal = response.data.data.final_total
       })
-    },
-    addPrice () {
-      const vm = this
-      const priceLen = vm.carts.length
-      for (let i = 0; i < priceLen; i++) {
-        vm.totalPrice += Math.floor(vm.carts[i].product.price)
-      }
     },
     addCouponCode () {
       const vm = this

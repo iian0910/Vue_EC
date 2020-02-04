@@ -9,7 +9,7 @@
 
     <!-- Start Content -->
     <div class="container">
-        <div class="row">
+        <div class="row mb-5">
             <div class="col-md-10 offset-md-1">
                 <div class="row">
                     <div class="col-md-4 mb-2 mb-md-4">
@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <form>
-                  <table class="table mb-4">
+                  <table class="table mb-5">
                     <thead>
                       <tr>
                         <td class="text-left">品名</td>
@@ -42,12 +42,15 @@
                         <td class="text-right">{{ item.final_total | currency }}</td>
                       </tr>
                       <tr>
-                        <td colspan="2" class="text-right">總計</td>
-                        <td class="text-right">{{ order.total | currency }}</td>
+                        <td colspan="2" class="text-right checkoutFinalTotal">總計</td>
+                        <td class="text-right checkoutFinalTotal">{{ order.total | currency }}</td>
                       </tr>
                     </tbody>
                   </table>
-                  <table class="table mb-4">
+                  <table class="table mb-5">
+                    <tr>
+                      <td colspan="2" class="text-center border-0 memberTitle">會員資料核對</td>
+                    </tr>
                     <tr>
                       <td width="20%">Email</td>
                       <td>{{ order.user.email }}</td>
@@ -144,5 +147,17 @@ export default {
         background-color: $primary;
         color: white
     }
+}
+.checkoutFinalTotal{
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: bold;
+  color: $danger;
+}
+.memberTitle{
+  font-size: 26px;
+  line-height: 26px;
+  font-weight: bold;
+  color: $black;
 }
 </style>
