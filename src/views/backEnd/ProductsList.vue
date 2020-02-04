@@ -330,6 +330,7 @@ export default {
           // 透過 $set(寫入的目標, key值, 寫入的資料) 指令，將欄位名稱強制寫入
           vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl)
         } else {
+          // 透過 $bus.$emit() 指令，跳出提示視窗
           vm.$bus.$emit('message:push', response.data.message, 'danger')
         }
       })

@@ -226,7 +226,7 @@ export default {
   created () {
     this.getProducts()
     this.getCart()
-    this.$bus.$emit('message:push', 'response.data.message', 'danger')
+    this.$bus.$emit('123')
   }
 }
 </script>
