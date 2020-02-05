@@ -208,9 +208,14 @@ export default {
       }
       vm.isLoading = true
       vm.$http.post(api, { data: cart }).then(response => {
-        console.log(response)
-        vm.getCart()
-        vm.isLoading = false
+        if (response.data.success) {
+          console.log(response)
+          vm.getCart()
+          vm.isLoading = false
+          vm.$bus.$emit('message:push', response.data.message, 'success')
+        } else {
+          vm.$bus.$emit('message:push', response.data.message, 'danger')
+        }
       })
     },
     deleteItem (id) {
@@ -218,15 +223,19 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
       vm.isLoading = true
       vm.axios.delete(api).then((response) => {
-        vm.getCart()
-        vm.isLoading = false
+        if (response.data.success) {
+          vm.getCart()
+          vm.isLoading = false
+          vm.$bus.$emit('message:push', response.data.message, 'success')
+        } else {
+          vm.$bus.$emit('message:push', response.data.message, 'danger')
+        }
       })
     }
   },
   created () {
     this.getProducts()
     this.getCart()
-    this.$bus.$emit('123')
   }
 }
 </script>

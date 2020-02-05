@@ -38,6 +38,10 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/all.scss";
 
+*{
+  position: relative;
+}
+
 .footerContent{
   width: 100%;
   position: relative;
