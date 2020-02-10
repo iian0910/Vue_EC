@@ -25,7 +25,7 @@
               <router-link class="item" to="/about">關於我們</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="item" to="/news">最新消息</router-link>
+              <router-link class="item" to="/favourable">優惠活動</router-link>
             </li>
             <li class="nav-item">
               <router-link class="item" to="/characters">角色介紹</router-link>

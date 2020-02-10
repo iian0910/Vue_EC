@@ -1,8 +1,5 @@
 <template>
   <div>
-    <!-- Start Header -->
-    <Header/>
-    <!-- End Header -->
     <div class="container">
       <div class="pageFullBanner mb-2"></div>
       <section class="section">
@@ -101,29 +98,8 @@
         </div>
       </section>
     </div>
-    <!-- Start Footer -->
-    <Footer/>
-    <!-- End Footer -->
   </div>
 </template>
-
-<script>
-import Header from '../../components/Header'
-import Footer from '../../components/Footer'
-
-export default {
-  name: 'characters',
-  data () {
-    return {
-
-    }
-  },
-  components: {
-    Header,
-    Footer
-  }
-}
-</script>
 
 <style lang="scss" scoped>
 @import "../../assets/all.scss";

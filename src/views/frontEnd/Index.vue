@@ -1,8 +1,5 @@
 <template>
   <div>
-    <!-- Start Header -->
-    <Header/>
-    <!-- End Header -->
     <div class="container">
       <!-- Start Carousel -->
       <div id="indexBanner" class="carousel slide" data-ride="carousel">
@@ -27,43 +24,66 @@
       <!-- Start News -->
       <section class="section news">
         <h3 class="sectionTitle mb-4 text-center">最新消息</h3>
-        <div class="row">
-          <div class="col-md-4 mb-4 mb-md-0">
-            <router-link to="/news" class="newsLink">
-              <div class="card">
-                <img class="card-img-top" src="https://fakeimg.pl/600x400/" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">活動消息1</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-              </div>
-            </router-link>
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <ul class="news_list">
+              <li class="news_list_item">
+                <div class="news_date">2020.02.10</div>
+                <div class="news_text">戀愛季節【熊愛你】，購物滿 $5,000 送 $500</div>
+              </li>
+              <li class="news_list_item mb-2">
+                <div class="news_date">2020.01.23</div>
+                <div class="news_text">返鄉過年【熊黑皮】，過年期間暫停營業</div>
+              </li>
+              <li class="news_list_item mb-2">
+                <div class="news_date">2020.01.20</div>
+                <div class="news_text">過年放假【熊放肆】，食品系列商品 6 折起</div>
+              </li>
+              <li class="news_list_item mb-2">
+                <div class="news_date">2020.01.01</div>
+                <div class="news_text">跨年無伴【熊孤單】，玩偶系列商品 7 折起</div>
+              </li>
+              <li class="news_list_item mb-2">
+                <div class="news_date">2019.12.25</div>
+                <div class="news_text">冬季聖誕【熊溫暖】，服飾系列商品 85 折起</div>
+              </li>
+            </ul>
           </div>
-          <div class="col-md-4 mb-4 mb-md-0">
-            <router-link to="/news" class="newsLink">
-              <div class="card">
-                <img class="card-img-top" src="https://fakeimg.pl/600x400/" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">活動消息2</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-              </div>
-            </router-link>
-          </div>
-          <div class="col-md-4">
-            <router-link to="/news" class="newsLink">
-              <div class="card">
-                <img class="card-img-top" src="https://fakeimg.pl/600x400/" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">活動消息3</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-              </div>
-            </router-link>
+          <div class="col-md-6">
+            <img src="../../assets/images/newsImg.jpg" class="img img-fluid" alt="">
           </div>
         </div>
       </section>
       <!-- End News -->
+      <!-- Start Hot -->
+      <section class="section hot">
+        <h3 class="sectionTitle mb-4 text-center">經典熱銷</h3>
+        <div class="row">
+          <div class="col-md-4" v-for="item in products.slice(0, 3)" :key="item.key">
+
+            <div class="card productItem">
+              <img class="card-img-top" :src="`${item.imageUrl}`" :alt="`${item.title}`">
+              <div class="card-body productItem_body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h5 class="card-title m-0">{{ item.title | titleFilter}}</h5>
+                  <span class="badge badge-pill badge-primary">{{item.category}}</span>
+                </div>
+                <!-- <p class="card-text">{{ item.discription }}</p> -->
+                <div class="d-flex align-items-end">
+                  <p class="card-text org_price mb-0" v-if="item.origin_price !== item.price">原價：<span>{{ item.origin_price | currency }}</span></p>
+                  <p class="card-text price mb-0">網路價：<span>{{ item.price | currency }}</span></p>
+                </div>
+              </div>
+              <div class="card-footer productItem_footer d-flex justify-content-between">
+                <button type="button" class="btn btn-primary px-0" @click="getProduct(item.id)">查看更多</button>
+                <button type="button" class="btn btn-orange px-0" @click="addToCart(item.id, item.qty)">加入購物車</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+      <!-- End Hot -->
       <!-- Start Characters -->
       <section class="section characters">
         <h3 class="sectionTitle mb-4 text-center">系列角色</h3>
@@ -115,44 +135,30 @@
         </div>
       </section>
       <!-- End Characters -->
-      <!-- Start Vedio -->
-      <section class="section vedio">
-        <h3 class="sectionTitle mb-4 text-center">相關影音</h3>
-        <div class="row">
-          <div class="col-md-6 mb-4 mb-md-0">
-            <div class="embed-responsive embed-responsive-16by9">
-              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/-SwWL5xCzhM"></iframe>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="embed-responsive embed-responsive-16by9">
-              <iframe class="embed-responsive-item" src="https://www.youtube-nocookie.com/embed/eGxMsASLjL8"></iframe>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- End Vedio -->
     </div>
-    <!-- Start Footer -->
-    <Footer/>
-    <!-- End Footer -->
   </div>
 </template>
 
 <script>
-import Header from '../../components/Header'
-import Footer from '../../components/Footer'
-
 export default {
-  name: 'product',
+  name: 'index',
   data () {
     return {
-
+      products: []
     }
   },
-  components: {
-    Header,
-    Footer
+  methods: {
+    getProducts () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
+      vm.axios.get(api).then((response) => {
+        console.log(response.data)
+        vm.products = response.data.products
+      })
+    }
+  },
+  created () {
+    this.getProducts()
   }
 }
 </script>
@@ -200,11 +206,77 @@ export default {
     background-image: url('../../assets/images/page_banner_2_mo.jpg');
   }
 }
-
-.newsLink:hover{
-  text-decoration: none !important;
+.news{
+  &_list{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    &_item{
+      line-height: 27px;
+      border-bottom: 1px solid rgba(129, 129, 129, 0.5);
+      font-size: 18px;
+    }
+  }
+  &_date{
+    color: $yellow;
+    margin-right: 16px;
+    font-weight: bold;
+  }
+  &_text{
+    color: $primary;
+  }
 }
-
+.card{
+  .categoryItem{
+    cursor: pointer;
+  }
+  .productItem_body{
+    padding-bottom: 16px;
+    .badge{
+      font-size: 12px;
+      line-height: 12px;
+      width: 60px;
+      text-align: center;
+    }
+    .card-title{
+      font-size: 24px;
+      line-height: 24px;
+      color: $black;
+    }
+    .org_price{
+      font-size: 12px;
+      line-height: 18px;
+      color: $secondary;
+      text-decoration: line-through;
+      margin-right: 8px;
+    }
+    .price{
+      font-size: 18px;
+      line-height: 18px;
+      color: $black;
+      span{
+        font-size: 22px;
+        line-height: 22px;
+        font-weight: bold;
+        color: $danger;
+      }
+    }
+  }
+  .productItem_footer{
+    padding: 0 20px 20px 20px;
+    border: none;
+    background-color: transparent;
+    .btn{
+      padding-top: calc((45px - 16px) / 2);
+      padding-bottom: calc((45px - 16px) / 2);
+      border-radius: 0;
+      font-size: 16px;
+      line-height: 16px;
+      text-align: center;
+      width: 50%;
+    }
+  }
+}
 .charactersLink{
   display: block;
   width: 100%;

@@ -36,48 +36,55 @@ const routes = [
   },
   {
     path: '/',
-    name: 'Index',
-    component: () => import('../views/frontEnd/Index.vue')
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: () => import('../views/frontEnd/About.vue')
-  },
-  {
-    path: '/products',
-    name: 'Products',
-    component: () => import('../views/frontEnd/Products.vue')
-  },
-  {
-    path: '/characters',
-    name: 'Characters',
-    component: () => import('../views/frontEnd/Characters.vue')
-  },
-  {
-    path: '/news',
-    name: 'News',
-    component: () => import('../views/frontEnd/News.vue')
-  },
-  {
-    path: '/product/:id',
-    name: 'Product',
-    component: () => import('../views/frontEnd/Product.vue')
-  },
-  {
-    path: '/checkout',
-    name: 'Checkout',
-    component: () => import('../views/frontEnd/Checkout.vue')
-  },
-  {
-    path: '/checkout/:orderId',
-    name: 'CustomerCheckout',
-    component: () => import('../views/frontEnd/CustomerCheckout.vue')
-  },
-  {
-    path: '/payment_success/:orderId',
-    name: 'PaymentSuccess',
-    component: () => import('../views/frontEnd/PaymentSuccess.vue')
+    name: 'frontEnd',
+    component: () => import('../views/frontEnd/FrontEnd.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Index',
+        component: () => import('../views/frontEnd/Index.vue')
+      },
+      {
+        path: 'about',
+        name: 'About',
+        component: () => import('../views/frontEnd/About.vue')
+      },
+      {
+        path: 'favourable',
+        name: 'Favourable',
+        component: () => import('../views/frontEnd/Favourable.vue')
+      },
+      {
+        path: 'characters',
+        name: 'Characters',
+        component: () => import('../views/frontEnd/Characters.vue')
+      },
+      {
+        path: 'products',
+        name: 'Products',
+        component: () => import('../views/frontEnd/Products.vue')
+      },
+      {
+        path: 'product/:id',
+        name: 'Product',
+        component: () => import('../views/frontEnd/Product.vue')
+      },
+      {
+        path: 'checkout',
+        name: 'Checkout',
+        component: () => import('../views/frontEnd/Checkout.vue')
+      },
+      {
+        path: 'checkout/:orderId',
+        name: 'CustomerCheckout',
+        component: () => import('../views/frontEnd/CustomerCheckout.vue')
+      },
+      {
+        path: 'payment_success/:orderId',
+        name: 'PaymentSuccess',
+        component: () => import('../views/frontEnd/PaymentSuccess.vue')
+      }
+    ]
   }
 ]
 

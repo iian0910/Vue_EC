@@ -1,12 +1,8 @@
 <template>
-  <div>
+  <div class="w-100">
     <loading :active.sync="isLoading">
       <Circle4></Circle4>
     </loading>
-    <!-- Start Header -->
-    <Header/>
-    <!-- End Header -->
-
     <!-- Start Content -->
     <div class="container">
         <div class="row mb-5">
@@ -76,7 +72,7 @@
                     </tr>
                   </table>
                   <div class="text-center">
-                    <router-link to="/" class="btn btn-secondary mb-4 mr-4">回首頁</router-link>
+                    <router-link to="/index" class="btn btn-secondary mb-4 mr-4">回首頁</router-link>
                     <router-link to="/products" class="btn btn-primary mb-4">繼續購物</router-link>
                   </div>
                 </form>
@@ -84,17 +80,11 @@
         </div>
     </div>
     <!-- End Content -->
-
-    <!-- Start Footer -->
-    <Footer/>
-    <!-- End Footer -->
   </div>
 </template>
 
 <script>
 import { Circle4 } from 'vue-loading-spinner'
-import Header from '../../components/Header'
-import Footer from '../../components/Footer'
 
 export default {
   name: 'customerCheckuot',
@@ -108,9 +98,7 @@ export default {
     }
   },
   components: {
-    Circle4,
-    Header,
-    Footer
+    Circle4
   },
   methods: {
     getOrder () {

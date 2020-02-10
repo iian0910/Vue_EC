@@ -3,24 +3,14 @@
     <footer class="footer">
       <img src="../assets/images/footerLogo.svg" class="footer_logo mb-3" alt="">
       <ul class="footer_mediaIcon d-flex flex-row justify-content-center mb-3">
-        <li class="icon">
-          <i class="fab fa-facebook-f"></i>
-        </li>
-        <li class="icon">
-          <i class="fab fa-twitter"></i>
-        </li>
-        <li class="icon">
-          <i class="fab fa-facebook-messenger"></i>
-        </li>
-        <li class="icon">
-          <i class="far fa-envelope-open"></i>
-        </li>
-        <li class="icon">
-          <i class="fas fa-share-alt"></i>
-        </li>
+        <a href="https://github.com/iian0910/Vue_EC" target="_blank" class="icon"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://github.com/iian0910/Vue_EC" target="_blank" class="icon"><i class="fab fa-twitter"></i></a>
+        <a href="https://github.com/iian0910/Vue_EC" target="_blank" class="icon"><i class="fab fa-facebook-messenger"></i></a>
+        <a href="https://github.com/iian0910/Vue_EC" target="_blank" class="icon"><i class="far fa-envelope-open"></i></a>
+        <a href="https://github.com/iian0910/Vue_EC" target="_blank" class="icon"><i class="fas fa-share-alt"></i></a>
       </ul>
       <p class="m-0 footer_text">
-        六角學院Vue課程練習
+        此網站僅做為個人學習使用，非商業用途。
       </p>
     </footer>
   </div>

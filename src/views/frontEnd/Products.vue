@@ -1,12 +1,8 @@
 <template>
-  <div class="mainContent">
-    <Alert/>
+  <div class="mainContent w-100">
     <loading :active.sync="isLoading">
       <Circle4></Circle4>
     </loading>
-    <!-- Start Header -->
-    <Header/>
-    <!-- End Header -->
     <!-- Start Content -->
     <div class="container">
       <div class="pageFullBanner mb-2"></div>
@@ -56,7 +52,11 @@
                     <h5 class="card-title m-0">{{ item.title | titleFilter}}</h5>
                     <span class="badge badge-pill badge-primary">{{item.category}}</span>
                   </div>
-                  <p class="card-text">{{ item.discription }}</p>
+                  <!-- <p class="card-text">{{ item.discription }}</p> -->
+                  <div class="d-flex align-items-end">
+                    <p class="card-text org_price mb-0" v-if="item.origin_price !== item.price">原價：<span>{{ item.origin_price | currency }}</span></p>
+                    <p class="card-text price mb-0">網路價：<span>{{ item.price | currency }}</span></p>
+                  </div>
                 </div>
                 <div class="card-footer productItem_footer d-flex justify-content-between">
                   <button type="button" class="btn btn-primary px-0" @click="getProduct(item.id)">查看更多</button>
@@ -92,22 +92,15 @@
       <!---->
     </div>
     <!-- End Content -->
-
-    <!-- Start Footer -->
-    <Footer/>
-    <!-- End Footer -->
   </div>
 </template>
 
 <script>
-import Alert from '../../components/AlertMessage'
 import { Circle4 } from 'vue-loading-spinner'
-import Header from '../../components/Header'
-import Footer from '../../components/Footer'
 import Cart from '../../components/Cart'
 
 export default {
-  name: 'product',
+  name: 'products',
   data () {
     return {
       breadcrumbName: '系列產品',
@@ -121,10 +114,7 @@ export default {
   },
   components: {
     Circle4,
-    Header,
-    Footer,
-    Cart,
-    Alert
+    Cart
   },
   computed: {
     filterData () {
@@ -182,14 +172,7 @@ export default {
     },
     getProduct (id) {
       const vm = this
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
-      vm.isLoading = true
-      vm.axios.get(api).then((response) => {
-        const pageID = response.data.product.id
-        console.log('pageID', pageID)
-        vm.$router.push(`/product/${pageID}`)
-        vm.isLoading = false
-      })
+      vm.$router.push(`/product/${id}`)
     },
     getCart () {
       const vm = this
@@ -249,9 +232,6 @@ export default {
     background-image: url('../../assets/images/page_productsBanner_mo.jpg');
   }
 }
-.mainContent{
-  height: 100vh;
-}
 .carousel-indicators{
   li{
     width: 10px;
@@ -281,10 +261,23 @@ export default {
       line-height: 24px;
       color: $black;
     }
-    .card-text{
+    .org_price{
       font-size: 12px;
       line-height: 18px;
-      color: $black
+      color: $secondary;
+      text-decoration: line-through;
+      margin-right: 8px;
+    }
+    .price{
+      font-size: 18px;
+      line-height: 18px;
+      color: $black;
+      span{
+        font-size: 22px;
+        line-height: 22px;
+        font-weight: bold;
+        color: $danger;
+      }
     }
   }
   .productItem_footer{

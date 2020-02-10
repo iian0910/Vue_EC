@@ -1,12 +1,8 @@
 <template>
-  <div>
+  <div class="w-100">
     <loading :active.sync="isLoading">
       <Circle4></Circle4>
     </loading>
-    <!-- Start Header -->
-    <Header/>
-    <!-- End Header -->
-
     <!-- Start Content -->
     <div class="container">
         <div class="row mb-5">
@@ -83,17 +79,11 @@
         </div>
     </div>
     <!-- End Content -->
-
-    <!-- Start Footer -->
-    <Footer/>
-    <!-- End Footer -->
   </div>
 </template>
 
 <script>
 import { Circle4 } from 'vue-loading-spinner'
-import Header from '../../components/Header'
-import Footer from '../../components/Footer'
 
 export default {
   name: 'customerCheckuot',
@@ -107,9 +97,7 @@ export default {
     }
   },
   components: {
-    Circle4,
-    Header,
-    Footer
+    Circle4
   },
   methods: {
     getOrder () {

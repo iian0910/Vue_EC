@@ -1,12 +1,8 @@
 <template>
-  <div class="mainContent">
+  <div class="mainContent w-100">
     <loading :active.sync="isLoading">
       <Circle4></Circle4>
     </loading>
-    <!-- Start Header -->
-    <Header/>
-    <!-- End Header -->
-
     <!-- Start Content -->
     <div class="container">
       <nav aria-label="breadcrumb">
@@ -23,7 +19,7 @@
           <select class="form-control mb-4" v-model="product.num">
             <option :value="num" v-for="num in 10" :key="num">選購 {{num}} {{product.unit}}</option>
           </select>
-          <button class="btn btn-primary btn-block" @click="addToCart(product.id, product.num)">加入購物車<i class="fas fa-spinner fa-spin ml-2" v-if="status.addToCartIcon"></i></button>
+          <button class="btn btn-primary btn-block" @click="addToCart(product.id, product.num)">加入購物車</button>
         </div>
         <div class="col-md-8">
           <img :src="`${product.imageUrl}`" :alt="`${product.title}`" class="img img-fluid mb-4">
@@ -34,21 +30,14 @@
       </div>
     </div>
     <!-- End Content -->
-
     <!-- cart Icon -->
     <Cart :cart="carts" @emitDelete="deleteItem"></Cart>
     <!---->
-
-    <!-- Start Footer -->
-    <Footer/>
-    <!-- End Footer -->
   </div>
 </template>
 
 <script>
 import { Circle4 } from 'vue-loading-spinner'
-import Header from '../../components/Header'
-import Footer from '../../components/Footer'
 import Cart from '../../components/Cart'
 
 export default {
@@ -66,8 +55,6 @@ export default {
   },
   components: {
     Circle4,
-    Header,
-    Footer,
     Cart
   },
   methods: {
@@ -99,11 +86,11 @@ export default {
         product_id: id,
         qty: qty
       }
-      vm.status.addToCartIcon = true
+      vm.isLoading = true
       vm.$http.post(api, { data: cart }).then(response => {
         console.log(response)
         vm.getCart()
-        vm.status.addToCartIcon = false
+        vm.isLoading = false
       })
     },
     deleteItem (id) {
