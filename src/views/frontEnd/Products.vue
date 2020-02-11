@@ -44,7 +44,7 @@
         <!-- Products Item + Pagination -->
         <div class="col-md-10">
           <div class="row">
-            <div class="col-md-3 mb-4" v-for="item in filterData[currentPage]" :key="item.id">
+            <div class="col-md-3 mb-4 productBox" v-for="item in filterData[currentPage]" :key="item.id">
               <div class="card productItem" @click="getProduct(item.id)">
                 <img class="card-img-top" :src="`${item.imageUrl}`" :alt="`${item.title}`">
                 <div class="card-body p-2">
@@ -54,16 +54,12 @@
                       <div class="origin_price mb-0">NT{{item.origin_price|currency}}</div>
                       <div class="final_price text-danger mb-0">NT{{item.price|currency}}</div>
                     </div>
-                    <!-- <div class="icon-group">
-                      <i class="far fa-heart mr-2" @click.prevent="heart()"></i>
-                      <i class="fas fa-shopping-cart" @click="addToCart(item.id, item.qty)"></i>
-                    </div> -->
+                  </div>
+                  <div class="icon-group">
+                    <i class="far fa-heart likeIcon mr-2" :class="{'fa': likeThis}" @click.stop="likeThisIcon()"></i>
+                    <i class="fas fa-shopping-cart" @click="addToCart(item.id, item.qty)"></i>
                   </div>
                 </div>
-              </div>
-              <div class="icon-group">
-                <i class="far fa-heart mr-2"></i>
-                <i class="fas fa-shopping-cart" @click="addToCart(item.id, item.qty)"></i>
               </div>
             </div>
           </div>
@@ -111,7 +107,8 @@ export default {
       currentCategory: '',
       currentPage: 0,
       carts: [],
-      isLoading: false
+      isLoading: false,
+      likeThis: false
     }
   },
   components: {
@@ -216,6 +213,10 @@ export default {
           vm.$bus.$emit('message:push', response.data.message, 'danger')
         }
       })
+    },
+    likeThisIcon () {
+      const vm = this
+      vm.likeThis = !vm.likeThis
     }
   },
   created () {
@@ -273,7 +274,7 @@ export default {
 .icon-group{
   cursor: pointer;
   position: absolute;
-  right: 27px;
+  right: 12px;
   bottom: 12px;
     i{
       color: rgb(80, 80, 80);
