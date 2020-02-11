@@ -49,7 +49,7 @@
               </li>
             </ul>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 d-none d-md-block">
             <img src="../../assets/images/newsImg.jpg" class="img img-fluid" alt="">
           </div>
         </div>
@@ -60,7 +60,6 @@
         <h3 class="sectionTitle mb-4 text-center">經典熱銷</h3>
         <div class="row">
           <div class="col-md-4" v-for="item in products.slice(0, 3)" :key="item.key">
-
             <div class="card productItem">
               <img class="card-img-top" :src="`${item.imageUrl}`" :alt="`${item.title}`">
               <div class="card-body productItem_body">
@@ -226,54 +225,59 @@ export default {
     color: $primary;
   }
 }
-.card{
-  .categoryItem{
-    cursor: pointer;
-  }
-  .productItem_body{
-    padding-bottom: 16px;
-    .badge{
-      font-size: 12px;
-      line-height: 12px;
-      width: 60px;
-      text-align: center;
+.hot{
+  .card{
+    @include screen ($mobile){
+      margin-bottom: 24px;
     }
-    .card-title{
-      font-size: 24px;
-      line-height: 24px;
-      color: $black;
+    .categoryItem{
+      cursor: pointer;
     }
-    .org_price{
-      font-size: 12px;
-      line-height: 18px;
-      color: $secondary;
-      text-decoration: line-through;
-      margin-right: 8px;
-    }
-    .price{
-      font-size: 18px;
-      line-height: 18px;
-      color: $black;
-      span{
-        font-size: 22px;
-        line-height: 22px;
-        font-weight: bold;
-        color: $danger;
+    .productItem_body{
+      padding-bottom: 16px;
+      .badge{
+        font-size: 12px;
+        line-height: 12px;
+        width: 60px;
+        text-align: center;
+      }
+      .card-title{
+        font-size: 24px;
+        line-height: 24px;
+        color: $black;
+      }
+      .org_price{
+        font-size: 12px;
+        line-height: 18px;
+        color: $secondary;
+        text-decoration: line-through;
+        margin-right: 8px;
+      }
+      .price{
+        font-size: 18px;
+        line-height: 18px;
+        color: $black;
+        span{
+          font-size: 22px;
+          line-height: 22px;
+          font-weight: bold;
+          color: $danger;
+        }
       }
     }
-  }
-  .productItem_footer{
-    padding: 0 20px 20px 20px;
-    border: none;
-    background-color: transparent;
-    .btn{
-      padding-top: calc((45px - 16px) / 2);
-      padding-bottom: calc((45px - 16px) / 2);
-      border-radius: 0;
-      font-size: 16px;
-      line-height: 16px;
-      text-align: center;
-      width: 50%;
+    .productItem_footer{
+      padding: 0 20px 20px 20px;
+      border: none;
+      background-color: transparent;
+      .btn{
+        padding-top: calc((45px - 16px) / 2);
+        padding-bottom: calc((45px - 16px) / 2);
+        border-radius: 0;
+        font-size: 16px;
+        line-height: 16px;
+        text-align: center;
+        width: 50%;
+      }
     }
   }
 }

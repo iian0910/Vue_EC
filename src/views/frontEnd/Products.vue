@@ -19,7 +19,7 @@
         <div class="col-md-2 mb-4 mb-md-0 d-none d-md-block">
           <div class="row">
             <div class="col">
-              <div class="card">
+              <div class="card selectCategory">
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item categoryItem" :class="{active:currentCategory === ''}" @click="currentCategory = ''" >全部</li>
                   <li class="list-group-item categoryItem" :class="{active:currentCategory === item}" v-for="item in categories" :key="item" @click="currentCategory = item">{{item}}</li>
@@ -44,24 +44,26 @@
         <!-- Products Item + Pagination -->
         <div class="col-md-10">
           <div class="row">
-            <div class="col-md-4 mb-4" v-for="item in filterData[currentPage]" :key="item.id">
-              <div class="card productItem">
+            <div class="col-md-3 mb-4" v-for="item in filterData[currentPage]" :key="item.id">
+              <div class="card productItem" @click="getProduct(item.id)">
                 <img class="card-img-top" :src="`${item.imageUrl}`" :alt="`${item.title}`">
-                <div class="card-body productItem_body">
-                  <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="card-title m-0">{{ item.title | titleFilter}}</h5>
-                    <span class="badge badge-pill badge-primary">{{item.category}}</span>
-                  </div>
-                  <!-- <p class="card-text">{{ item.discription }}</p> -->
-                  <div class="d-flex align-items-end">
-                    <p class="card-text org_price mb-0" v-if="item.origin_price !== item.price">原價：<span>{{ item.origin_price | currency }}</span></p>
-                    <p class="card-text price mb-0">網路價：<span>{{ item.price | currency }}</span></p>
+                <div class="card-body p-2">
+                  <h5 class="card-title productItem_title mb-0">{{item.title}}</h5>
+                  <div class="d-flex justify-content-between align-items-end px-1">
+                    <div class="price-group">
+                      <div class="origin_price mb-0">NT{{item.origin_price|currency}}</div>
+                      <div class="final_price text-danger mb-0">NT{{item.price|currency}}</div>
+                    </div>
+                    <!-- <div class="icon-group">
+                      <i class="far fa-heart mr-2" @click.prevent="heart()"></i>
+                      <i class="fas fa-shopping-cart" @click="addToCart(item.id, item.qty)"></i>
+                    </div> -->
                   </div>
                 </div>
-                <div class="card-footer productItem_footer d-flex justify-content-between">
-                  <button type="button" class="btn btn-primary px-0" @click="getProduct(item.id)">查看更多</button>
-                  <button type="button" class="btn btn-orange px-0" @click="addToCart(item.id, item.qty)">加入購物車</button>
-                </div>
+              </div>
+              <div class="icon-group">
+                <i class="far fa-heart mr-2"></i>
+                <i class="fas fa-shopping-cart" @click="addToCart(item.id, item.qty)"></i>
               </div>
             </div>
           </div>
@@ -137,10 +139,10 @@ export default {
       console.log(vm.currentCategory)
       const newProducts = []
       items.forEach((item, i) => {
-        if (i % 9 === 0) {
+        if (i % 12 === 0) {
           newProducts.push([])
         }
-        const page = parseInt(i / 9)
+        const page = parseInt(i / 12)
         newProducts[page].push(item)
       })
       console.log('newProducts', newProducts)
@@ -244,55 +246,40 @@ export default {
 .breadcrumb-link:active{
   text-decoration: none;
 }
-.card{
-  .categoryItem{
-    cursor: pointer;
+.selectCategory{
+  cursor: pointer;
+}
+.productItem{
+  cursor: pointer;
+  &:hover{
+    box-shadow: 0px 10px 15px -10px rgba(0,0,0,0.5)
   }
-  .productItem_body{
-    padding-bottom: 16px;
-    .badge{
-      font-size: 12px;
-      line-height: 12px;
-      width: 60px;
-      text-align: center;
-    }
-    .card-title{
-      font-size: 24px;
-      line-height: 24px;
-      color: $black;
-    }
-    .org_price{
-      font-size: 12px;
-      line-height: 18px;
-      color: $secondary;
-      text-decoration: line-through;
-      margin-right: 8px;
-    }
-    .price{
-      font-size: 18px;
-      line-height: 18px;
-      color: $black;
-      span{
-        font-size: 22px;
-        line-height: 22px;
-        font-weight: bold;
-        color: $danger;
-      }
-    }
+  &_title{
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.65px;
+    text-align: left;
   }
-  .productItem_footer{
-    padding: 0 20px 20px 20px;
-    border: none;
-    background-color: transparent;
-    .btn{
-      padding-top: calc((45px - 16px) / 2);
-      padding-bottom: calc((45px - 16px) / 2);
-      border-radius: 0;
-      font-size: 16px;
-      line-height: 16px;
-      text-align: center;
-      width: 50%;
-    }
+  .price-group .origin_price{
+    font-size: 14px;
+    color: grey;
+    text-decoration: line-through;
   }
+  .price-group .final_price{
+    font-size: 16px;
+    color: $danger;
+  }
+}
+.icon-group{
+  cursor: pointer;
+  position: absolute;
+  right: 27px;
+  bottom: 12px;
+    i{
+      color: rgb(80, 80, 80);
+    }
+    .fa.fa-heart{
+      color: $pink;
+    }
 }
 </style>
