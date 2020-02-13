@@ -57,7 +57,7 @@
                   </div>
                   <div class="icon-group">
                     <i class="far fa-heart likeIcon mr-2" :class="{'fa': item.likeThis}" @click.stop="item.likeThis =! item.likeThis"></i>
-                    <i class="fas fa-shopping-cart" @click="addToCart(item.id, item.qty)"></i>
+                    <i class="fas fa-shopping-cart" @click.stop="addToCart(item.id, item.qty)"></i>
                   </div>
                 </div>
               </div>
