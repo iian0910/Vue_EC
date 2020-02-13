@@ -56,7 +56,7 @@
                     </div>
                   </div>
                   <div class="icon-group">
-                    <i class="far fa-heart likeIcon mr-2" :class="{'fa': likeThis}" @click.stop="likeThisIcon()"></i>
+                    <i class="far fa-heart likeIcon mr-2" :class="{'fa': item.likeThis}" @click.stop="item.likeThis =! item.likeThis"></i>
                     <i class="fas fa-shopping-cart" @click="addToCart(item.id, item.qty)"></i>
                   </div>
                 </div>
@@ -107,8 +107,7 @@ export default {
       currentCategory: '',
       currentPage: 0,
       carts: [],
-      isLoading: false,
-      likeThis: false
+      isLoading: false
     }
   },
   components: {
@@ -154,6 +153,9 @@ export default {
       vm.axios.get(api).then((response) => {
         console.log(response.data)
         vm.products = response.data.products
+        vm.products.forEach(item => {
+          vm.$set(item, 'likeThis', false)
+        })
         vm.getCategory()
         vm.isLoading = false
       })
@@ -213,10 +215,6 @@ export default {
           vm.$bus.$emit('message:push', response.data.message, 'danger')
         }
       })
-    },
-    likeThisIcon () {
-      const vm = this
-      vm.likeThis = !vm.likeThis
     }
   },
   created () {
