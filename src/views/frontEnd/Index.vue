@@ -1,5 +1,8 @@
 <template>
   <div>
+    <loading :active.sync="isLoading">
+      <Circle4></Circle4>
+    </loading>
     <div class="container">
       <!-- Start Carousel -->
       <div id="indexBanner" class="carousel slide" data-ride="carousel">
@@ -56,29 +59,26 @@
       </section>
       <!-- End News -->
       <!-- Start Hot -->
-      <section class="section hot">
+      <section class="section">
         <h3 class="sectionTitle mb-4 text-center">經典熱銷</h3>
         <div class="row">
-          <div class="col-md-4" v-for="item in products.slice(0, 3)" :key="item.key">
-            <div class="card productItem">
+          <div class="col-md-3 mb-4 mb-md-0" v-for="item in products.slice(0, 4)" :key="item.key">
+            <div class="card productItem" @click="getProduct(item.id)">
               <img class="card-img-top" :src="`${item.imageUrl}`" :alt="`${item.title}`">
-              <div class="card-body productItem_body">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h5 class="card-title m-0">{{ item.title | titleFilter}}</h5>
-                  <span class="badge badge-pill badge-primary">{{item.category}}</span>
+              <div class="card-body p-2">
+                <h5 class="card-title productItem_title mb-0">{{item.title}}</h5>
+                <div class="d-flex justify-content-between align-items-end px-1">
+                  <div class="price-group">
+                    <div class="origin_price mb-0">NT{{item.origin_price|currency}}</div>
+                    <div class="final_price text-danger mb-0">NT{{item.price|currency}}</div>
+                  </div>
                 </div>
-                <!-- <p class="card-text">{{ item.discription }}</p> -->
-                <div class="d-flex align-items-end">
-                  <p class="card-text org_price mb-0" v-if="item.origin_price !== item.price">原價：<span>{{ item.origin_price | currency }}</span></p>
-                  <p class="card-text price mb-0">網路價：<span>{{ item.price | currency }}</span></p>
+                <div class="icon-group">
+                  <i class="far fa-heart likeIcon mr-2" :class="{'fa': item.likeThis}" @click.stop="item.likeThis =! item.likeThis"></i>
+                  <i class="fas fa-shopping-cart" @click.stop="addToCart(item.id, item.qty)"></i>
                 </div>
-              </div>
-              <div class="card-footer productItem_footer d-flex justify-content-between">
-                <button type="button" class="btn btn-primary px-0" @click="getProduct(item.id)">查看更多</button>
-                <button type="button" class="btn btn-orange px-0" @click="addToCart(item.id, item.qty)">加入購物車</button>
               </div>
             </div>
-
           </div>
         </div>
       </section>
@@ -134,29 +134,90 @@
         </div>
       </section>
       <!-- End Characters -->
+      <!-- cart Icon -->
+      <Cart :cart="carts" @emitDelete="deleteItem"></Cart>
+      <!---->
     </div>
   </div>
 </template>
 
 <script>
+import { Circle4 } from 'vue-loading-spinner'
+import Cart from '../../components/Cart'
+
 export default {
   name: 'index',
   data () {
     return {
-      products: []
+      products: [],
+      carts: [],
+      isLoading: false
     }
+  },
+  components: {
+    Circle4,
+    Cart
   },
   methods: {
     getProducts () {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
-      vm.axios.get(api).then((response) => {
+      vm.$http.get(api).then((response) => {
         console.log(response.data)
         vm.products = response.data.products
+        vm.products.forEach(item => {
+          vm.$set(item, 'likeThis', false)
+        })
+      })
+    },
+    getProduct (id) {
+      const vm = this
+      vm.$router.push(`/product/${id}`)
+    },
+    getCart () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      vm.$http.get(api).then((response) => {
+        console.log(response.data.data.carts)
+        vm.carts = response.data.data.carts
+      })
+    },
+    addToCart (id, qty = 1) {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      const cart = {
+        product_id: id,
+        qty: qty
+      }
+      vm.isLoading = true
+      vm.$http.post(api, { data: cart }).then(response => {
+        if (response.data.success) {
+          console.log(response)
+          vm.getCart()
+          vm.isLoading = false
+          vm.$bus.$emit('message:push', response.data.message, 'success')
+        } else {
+          vm.$bus.$emit('message:push', response.data.message, 'danger')
+        }
+      })
+    },
+    deleteItem (id) {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
+      vm.isLoading = true
+      vm.$http.delete(api).then((response) => {
+        if (response.data.success) {
+          vm.getCart()
+          vm.isLoading = false
+          vm.$bus.$emit('message:push', response.data.message, 'success')
+        } else {
+          vm.$bus.$emit('message:push', response.data.message, 'danger')
+        }
       })
     }
   },
   created () {
+    this.getCart()
     this.getProducts()
   }
 }
@@ -225,61 +286,38 @@ export default {
     color: $primary;
   }
 }
-.hot{
-  .card{
-    @include screen ($mobile){
-      margin-bottom: 24px;
-    }
-    .categoryItem{
-      cursor: pointer;
-    }
-    .productItem_body{
-      padding-bottom: 16px;
-      .badge{
-        font-size: 12px;
-        line-height: 12px;
-        width: 60px;
-        text-align: center;
-      }
-      .card-title{
-        font-size: 24px;
-        line-height: 24px;
-        color: $black;
-      }
-      .org_price{
-        font-size: 12px;
-        line-height: 18px;
-        color: $secondary;
-        text-decoration: line-through;
-        margin-right: 8px;
-      }
-      .price{
-        font-size: 18px;
-        line-height: 18px;
-        color: $black;
-        span{
-          font-size: 22px;
-          line-height: 22px;
-          font-weight: bold;
-          color: $danger;
-        }
-      }
-    }
-    .productItem_footer{
-      padding: 0 20px 20px 20px;
-      border: none;
-      background-color: transparent;
-      .btn{
-        padding-top: calc((45px - 16px) / 2);
-        padding-bottom: calc((45px - 16px) / 2);
-        border-radius: 0;
-        font-size: 16px;
-        line-height: 16px;
-        text-align: center;
-        width: 50%;
-      }
-    }
+.productItem{
+  cursor: pointer;
+  &:hover{
+    box-shadow: 0px 10px 15px -10px rgba(0,0,0,0.5)
   }
+  &_title{
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.65px;
+    text-align: left;
+  }
+  .price-group .origin_price{
+    font-size: 14px;
+    color: grey;
+    text-decoration: line-through;
+  }
+  .price-group .final_price{
+    font-size: 16px;
+    color: $danger;
+  }
+}
+.icon-group{
+  cursor: pointer;
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+    i{
+      color: rgb(80, 80, 80);
+    }
+    .fa.fa-heart{
+      color: $pink;
+    }
 }
 .charactersLink{
   display: block;

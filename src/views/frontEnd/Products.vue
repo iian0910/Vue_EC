@@ -150,7 +150,7 @@ export default {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
       vm.isLoading = true
-      vm.axios.get(api).then((response) => {
+      vm.$http.get(api).then((response) => {
         console.log(response.data)
         vm.products = response.data.products
         vm.products.forEach(item => {
@@ -178,7 +178,7 @@ export default {
     getCart () {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-      vm.axios.get(api).then((response) => {
+      vm.$http.get(api).then((response) => {
         console.log(response.data.data.carts)
         vm.carts = response.data.data.carts
       })
@@ -206,7 +206,7 @@ export default {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
       vm.isLoading = true
-      vm.axios.delete(api).then((response) => {
+      vm.$http.delete(api).then((response) => {
         if (response.data.success) {
           vm.getCart()
           vm.isLoading = false
