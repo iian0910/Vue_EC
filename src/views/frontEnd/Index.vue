@@ -62,11 +62,11 @@
       <section class="section">
         <h3 class="sectionTitle mb-4 text-center">經典熱銷</h3>
         <div class="row">
-          <div class="col-md-3 mb-4 mb-md-0" v-for="item in products.slice(0, 4)" :key="item.key">
+          <div class="col-6 col-md-3 mb-4 mb-md-0" v-for="item in products.slice(0, 4)" :key="item.key">
             <div class="card productItem" @click="getProduct(item.id)">
               <img class="card-img-top" :src="`${item.imageUrl}`" :alt="`${item.title}`">
               <div class="card-body p-2">
-                <h5 class="card-title productItem_title mb-0">{{item.title|titleFilter}}</h5>
+                <h5 class="card-title productItem_title mb-0">{{item.title|titleIndexFilter}}</h5>
                 <div class="d-flex justify-content-between align-items-end px-1">
                   <div class="price-group">
                     <div class="origin_price mb-0">NT{{item.origin_price|currency}}</div>

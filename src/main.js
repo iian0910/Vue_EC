@@ -18,6 +18,7 @@ import currencyFilter from './filters/currency'
 import dateFilter from './filters/date'
 import textFilter from './filters/textShow'
 import titleFilter from './filters/productTitleShow'
+import titleIndexFilter from './filters/productTitleShow_index'
 
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
@@ -30,6 +31,7 @@ Vue.filter('currency', currencyFilter)
 Vue.filter('date', dateFilter)
 Vue.filter('textShow', textFilter)
 Vue.filter('titleFilter', titleFilter)
+Vue.filter('titleIndexFilter', titleIndexFilter)
 
 // 跨網域撈資料設定
 axios.defaults.withCredentials = true

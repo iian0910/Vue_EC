@@ -19,7 +19,7 @@
               <img :src="`${product.imageUrl}`" :alt="`${product.title}`" class="img img-fluid productImg mb-4 mb-md-0">
             </div>
             <div class="col-md-6 d-flex align-items-end flex-column">
-              <div class="productInfo_up ">
+              <div class="productInfo_up w-100">
                 <h3 class="mb-4 productTitle">{{product.title}}</h3>
                 <div class="coupon d-flex mb-4">
                   <div class="coupon_item mr-1">指定新會員獨享</div>
@@ -69,7 +69,7 @@
           </div>
           <h4 class="productLike mb-3">你可能喜歡</h4>
           <div class="row mb-4">
-            <div class="col-md-4" v-for="item in filterData" :key="item.id">
+            <div class="col-6 col-md-4" v-for="item in filterData" :key="item.id">
               <div class="card productLike_item border-0" @click="getLikeProduct(item.id)">
                 <img class="card-img-top" :src="`${item.imageUrl}`" :alt="`${item.title}`">
                 <div class="card-body p-2">
