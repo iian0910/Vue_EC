@@ -69,8 +69,8 @@
           </div>
           <h4 class="productLike mb-3">你可能喜歡</h4>
           <div class="row mb-4">
-            <div class="col-md-3" v-for="item in filterData" :key="item.id">
-              <div class="card" @click="getLikeProduct(item.id)">
+            <div class="col-md-4" v-for="item in filterData" :key="item.id">
+              <div class="card productLike_item border-0" @click="getLikeProduct(item.id)">
                 <img class="card-img-top" :src="`${item.imageUrl}`" :alt="`${item.title}`">
                 <div class="card-body p-2">
                   <h3 class="productLike_title mb-0">{{item.title|titleFilter}}</h3>
@@ -116,8 +116,14 @@ export default {
     filterData () {
       const vm = this
       let items = []
+      let likeProducts = []
       items = vm.products.filter((item, i) => item.category === vm.category)
-      return items
+      items.forEach((item, i) => {
+        if (item.title !== vm.product.title) {
+          likeProducts.push(item)
+        }
+      })
+      return likeProducts
     }
   },
   methods: {
@@ -241,9 +247,15 @@ export default {
     text-align: left;
   }
 }
-.productLike_title{
-  font-size: 14px;
-  line-height: 20px;
-  text-align: left;
+.productLike{
+  &_item{
+    cursor: pointer;
+  }
+  &_title{
+    font-size: 14px;
+    line-height: 20px;
+    text-align: left;
+  }
 }
+
 </style>
