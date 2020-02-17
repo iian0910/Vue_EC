@@ -62,11 +62,11 @@
       <section class="section">
         <h3 class="sectionTitle mb-4 text-center">經典熱銷</h3>
         <div class="row">
-          <div class="col-6 col-md-3 mb-4 mb-md-0" v-for="item in products.slice(0, 4)" :key="item.key">
+          <div class="col-6 col-md-3 productBox" v-for="item in products.slice(0, 4)" :key="item.key">
             <div class="card productItem" @click="getProduct(item.id)">
               <img class="card-img-top" :src="`${item.imageUrl}`" :alt="`${item.title}`">
               <div class="card-body p-2">
-                <h5 class="card-title productItem_title mb-0">{{item.title|titleIndexFilter}}</h5>
+                <h5 class="card-title productItem_title mb-0">{{item.title|titleFilter}}</h5>
                 <div class="d-flex justify-content-between align-items-end px-1">
                   <div class="price-group">
                     <div class="origin_price mb-0">NT{{item.origin_price|currency}}</div>
@@ -296,6 +296,11 @@ export default {
     line-height: 24px;
     letter-spacing: 0.65px;
     text-align: left;
+    @include screen($mobile) {
+      font-size: 12px;
+      line-height: 20px;
+      letter-spacing: 0;
+    }
   }
   .price-group .origin_price{
     font-size: 14px;
@@ -347,6 +352,18 @@ export default {
       left: 0;
       background-color: rgba(245, 184, 87, 0.47);
       z-index: 10;
+    }
+  }
+}
+.productBox{
+  margin-bottom: 0px;
+  @include screen($mobile) {
+    margin-bottom: 8px;
+    &:nth-child(odd){
+      padding-right: 2px;
+    };
+    &:nth-child(even){
+      padding-left: 2px;
     }
   }
 }
