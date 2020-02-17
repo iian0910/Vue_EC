@@ -44,7 +44,7 @@
         <!-- Products Item + Pagination -->
         <div class="col-md-10">
           <div class="row">
-            <div class="col-md-3 mb-4 productBox" v-for="item in filterData[currentPage]" :key="item.id">
+            <div class="col-6 col-md-3 mb-2 mb-md-4 productBox" v-for="item in filterData[currentPage]" :key="item.id">
               <div class="card productItem" @click="getProduct(item.id)">
                 <img class="card-img-top" :src="`${item.imageUrl}`" :alt="`${item.title}`">
                 <div class="card-body p-2">
@@ -248,6 +248,16 @@ export default {
 .selectCategory{
   cursor: pointer;
 }
+.productBox{
+  @include screen($mobile) {
+    &:nth-child(odd){
+      padding-right: 2px;
+    };
+    &:nth-child(even){
+      padding-left: 2px;
+    }
+  }
+}
 .productItem{
   cursor: pointer;
   &:hover{
@@ -258,6 +268,11 @@ export default {
     line-height: 24px;
     letter-spacing: 0.65px;
     text-align: left;
+    @include screen($mobile) {
+      font-size: 12px;
+      line-height: 1.5;
+      letter-spacing: 0;
+    }
   }
   .price-group .origin_price{
     font-size: 14px;

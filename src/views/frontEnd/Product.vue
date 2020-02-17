@@ -69,7 +69,7 @@
           </div>
           <h4 class="productLike mb-3">你可能喜歡</h4>
           <div class="row mb-4">
-            <div class="col-6 col-md-4" v-for="item in filterData" :key="item.id">
+            <div class="col-6 col-md-4 productBox" v-for="item in filterData" :key="item.id">
               <div class="card productLike_item border-0" @click="getLikeProduct(item.id)">
                 <img class="card-img-top" :src="`${item.imageUrl}`" :alt="`${item.title}`">
                 <div class="card-body p-2">
@@ -257,5 +257,14 @@ export default {
     text-align: left;
   }
 }
-
+.productBox{
+  @include screen($mobile) {
+    &:nth-child(odd){
+      padding-right: 2px;
+    };
+    &:nth-child(even){
+      padding-left: 2px;
+    }
+  }
+}
 </style>
