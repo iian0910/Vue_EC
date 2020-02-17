@@ -48,7 +48,7 @@
                         <thead>
                           <tr>
                             <th width="20%"></th>
-                            <th class="text-left">產品名稱</th>
+                            <th width="40%" class="text-left">產品名稱</th>
                             <th class="text-center">單位</th>
                             <th class="text-right">價格</th>
                           </tr>

@@ -6,25 +6,77 @@
     <!-- Start Content -->
     <div class="container">
       <nav aria-label="breadcrumb">
-        <ol class="breadcrumb my-2 p-0 bg-transparent">
+        <ol class="breadcrumb my-2 p-0 bg-transparent mb-4">
           <li class="breadcrumb-item"><router-link to="/">首頁</router-link></li>
           <li class="breadcrumb-item"><router-link to="/products">相關產品</router-link></li>
           <li class="breadcrumb-item active" aria-current="page">{{product.title}}</li>
         </ol>
       </nav>
       <div class="row">
-        <div class="col-md-4">
-          <h3 class="mb-4 productTitle">{{product.title}}</h3>
-          <p class="mb-4 productPrice"><span class="origin_price mr-2" v-if="product.origin_price !== product.price">市價:{{product.origin_price | currency}}</span>網路價：<span class="price">{{product.price | currency}}</span></p>
-          <select class="form-control mb-4" v-model="product.num">
-            <option :value="num" v-for="num in 10" :key="num">選購 {{num}} {{product.unit}}</option>
-          </select>
-          <button class="btn btn-primary btn-block" @click="addToCart(product.id, product.num)">加入購物車</button>
-        </div>
-        <div class="col-md-8">
-          <img :src="`${product.imageUrl}`" :alt="`${product.title}`" class="img img-fluid mb-4">
-          <div class="jumbotron">
-            {{product.discription}}
+        <div class="col-md-8 offset-md-2">
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <img :src="`${product.imageUrl}`" :alt="`${product.title}`" class="img img-fluid productImg mb-4 mb-md-0">
+            </div>
+            <div class="col-md-6 d-flex align-items-end flex-column">
+              <div class="productInfo_up ">
+                <h3 class="mb-4 productTitle">{{product.title}}</h3>
+                <div class="coupon d-flex mb-4">
+                  <div class="coupon_item mr-1">指定新會員獨享</div>
+                  <div class="coupon_item mr-1">超取滿NT$899免運</div>
+                  <div class="coupon_item">國家/地區配送</div>
+                </div>
+                <div class="price">
+                  <div class="price_origin">NT{{product.origin_price|currency}}</div>
+                  <div class="price_final">NT{{product.price|currency}}</div>
+                </div>
+              </div>
+              <div class="productInfo_down w-100 mt-auto">
+                <select class="form-control mb-4" v-model="product.num">
+                  <option :value="num" v-for="num in 10" :key="num">選購 {{num}} {{product.unit}}</option>
+                </select>
+                <button class="btn btn-primary btn-block" @click="addToCart(product.id, product.num)">加入購物車</button>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-md-6 mb-4 mb-md-0">
+              <div class="giftInfo">
+                <div class="giftInfo_Item d-flex align-items-center mb-2">
+                  <div class="giftInfo_Item_title mr-2 text-center">折價券</div>
+                  <div class="giftInfo_Item_text">熊熊遇見你，可享首購優惠 8 折</div>
+                </div>
+                <div class="giftInfo_Item d-flex align-items-center mb-2">
+                  <div class="giftInfo_Item_title mr-2 text-center">贈品</div>
+                  <div class="giftInfo_Item_text">小熊維尼聯名蜂蜜奶茶一罐</div>
+                </div>
+                <div class="giftInfo_Item d-flex align-items-center mb-2">
+                  <div class="giftInfo_Item_title mr-2 text-center">白金會員</div>
+                  <div class="giftInfo_Item_text">單筆消費滿千可享折扣 75 折</div>
+                </div>
+                <div class="giftInfo_Item d-flex align-items-center">
+                  <div class="giftInfo_Item_title mr-2 text-center">鑽石會員</div>
+                  <div class="giftInfo_Item_text">單筆消費滿千可享折扣 76 折</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="jumbotron special p-3 h-100">
+                <p class="special_title m-0">商品特色</p>
+                <div class="special_text">{{product.content}}</div>
+              </div>
+            </div>
+          </div>
+          <h4 class="productLike mb-3">你可能喜歡</h4>
+          <div class="row mb-4">
+            <div class="col-md-3" v-for="item in filterData" :key="item.id">
+              <div class="card" @click="getLikeProduct(item.id)">
+                <img class="card-img-top" :src="`${item.imageUrl}`" :alt="`${item.title}`">
+                <div class="card-body p-2">
+                  <h3 class="productLike_title mb-0">{{item.title|titleFilter}}</h3>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -45,8 +97,11 @@ export default {
   data () {
     return {
       pageName: '系列產品',
+      products: [],
       product: {},
+      sameProducts: [],
       carts: [],
+      category: '',
       isLoading: false,
       status: {
         addToCartIcon: false
@@ -57,7 +112,23 @@ export default {
     Circle4,
     Cart
   },
+  computed: {
+    filterData () {
+      const vm = this
+      let items = []
+      items = vm.products.filter((item, i) => item.category === vm.category)
+      return items
+    }
+  },
   methods: {
+    getProducts () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
+      vm.$http.get(api).then((response) => {
+        console.log(response.data)
+        vm.products = response.data.products
+      })
+    },
     getProduct () {
       const vm = this
       const productID = vm.$route.params.id
@@ -67,9 +138,15 @@ export default {
         console.log(response.data.product)
         vm.isLoading = false
         vm.product = response.data.product
+        vm.category = response.data.product.category
         // 數量預設值為1
         vm.product.num = 1
       })
+    },
+    getLikeProduct (id) {
+      const vm = this
+      vm.$router.push(`/product/${id}`)
+      vm.getProduct()
     },
     getCart () {
       const vm = this
@@ -104,6 +181,7 @@ export default {
     }
   },
   created () {
+    this.getProducts()
     this.getProduct()
     this.getCart()
   }
@@ -113,24 +191,59 @@ export default {
 <style lang="scss" scoped>
 @import "../../assets/all.scss";
 
-.mainContent{
-  height: 100vh;
+.productImg{
+  margin: 0 auto;
 }
 .productTitle{
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 24px;
-}
-.productPrice{
   font-size: 16px;
-  line-height: 16px;
-  .price{
-    font-size: 20px;
-    font-weight: bold;
+  line-height: 1.4;
+}
+.coupon{
+  &_item{
+    padding: 3px;
+    border: 1px solid $primary;
+    color: $primary;
   }
-  .origin_price{
+}
+.price{
+  &_origin{
+    font-size: 14px;
+    line-height: 1.5;
+    color: gray;
     text-decoration: line-through;
-    color: #cccccc;
   }
+  &_final{
+    font-size: 20px;
+    line-height: 1.5;
+    color: $danger;
+  }
+}
+.giftInfo{
+  padding: 10px;
+  border: 1px solid black;
+  border-top-width: 2px;
+  &_Item_title{
+    min-width: 20%;
+    border: 1px solid $primary;
+    padding: 2px 4px;
+    color: $primary;
+  }
+}
+.special{
+  margin-bottom: 0;
+  &_title{
+    font-size: 16px;
+    line-height: 32px;
+  }
+  &_text{
+    font-size: 14px;
+    line-height: 20px;
+    text-align: left;
+  }
+}
+.productLike_title{
+  font-size: 14px;
+  line-height: 20px;
+  text-align: left;
 }
 </style>

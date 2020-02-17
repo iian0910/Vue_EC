@@ -48,7 +48,7 @@
               <div class="card productItem" @click="getProduct(item.id)">
                 <img class="card-img-top" :src="`${item.imageUrl}`" :alt="`${item.title}`">
                 <div class="card-body p-2">
-                  <h5 class="card-title productItem_title mb-0">{{item.title}}</h5>
+                  <h5 class="card-title productItem_title mb-0">{{item.title|titleFilter}}</h5>
                   <div class="d-flex justify-content-between align-items-end px-1">
                     <div class="price-group">
                       <div class="origin_price mb-0">NT{{item.origin_price|currency}}</div>
