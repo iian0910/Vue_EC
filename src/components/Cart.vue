@@ -54,7 +54,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/all.scss";
+@import "../assets/scss/all.scss";
 
 $mobile: '568px';
 $pad-m: '768px';

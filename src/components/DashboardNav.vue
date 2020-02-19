@@ -34,7 +34,6 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/logout`
       vm.isLoading = true
       vm.$http.post(api).then(response => {
-        console.log(response.data)
         vm.isLoading = false
         if (response.data.success) {
           vm.$router.push('/login')

@@ -6,7 +6,7 @@ import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 import VeeValidate from 'vee-validate'
 import zhTWValidate from 'vee-validate/dist/locale/zh_TW'
-// BT 套件
+// BS 套件
 import 'bootstrap'
 // 官方套件
 import App from './App.vue'
@@ -39,7 +39,6 @@ router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
     const api = `${process.env.VUE_APP_APIPATH}/api/user/check`
     axios.post(api).then((response) => {
-      console.log(response.data)
       if (response.data.success) {
         next()
       } else {

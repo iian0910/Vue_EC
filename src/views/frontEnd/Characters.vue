@@ -102,7 +102,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../../assets/all.scss";
+@import "../../assets/scss/all.scss";
 
 .pageFullBanner{
   background-image: url('../../assets/images/page_charactersBanner.jpg');

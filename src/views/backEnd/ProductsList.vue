@@ -276,7 +276,6 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/products?page=${page}`
       vm.isLoading = true
       vm.$http.get(api).then(response => {
-        console.log(response)
         vm.isLoading = false
         vm.products = response.data.products
         vm.pagination = response.data.pagination
@@ -308,7 +307,6 @@ export default {
           vm.getProducts()
         } else {
           $('#productModal').modal('hide')
-          console.log('新增失敗')
         }
       })
     },
@@ -345,7 +343,6 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`
       vm.status.loadingItem = vm.tempProduct.id
       vm.$http.delete(api).then(response => {
-        console.log(response)
         $('#delProductModal').modal('hide')
         vm.status.loadingItem = ''
         vm.getProducts()

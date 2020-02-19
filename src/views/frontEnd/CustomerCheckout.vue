@@ -105,7 +105,6 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderId}`
       vm.isLoading = true
       vm.$http.get(api).then((response) => {
-        console.log(response)
         vm.order = response.data.order
         vm.isLoading = false
       })
@@ -116,10 +115,9 @@ export default {
       vm.isLoading = true
       vm.$http.post(api).then((response) => {
         if (response.data.success) {
-          console.log(response)
           vm.$router.push(`/payment_success/${vm.orderId}`)
         } else {
-          console.log('結帳失敗')
+          vm.$bus.$emit('message:push', response.data.message, 'danger')
         }
         vm.isLoading = false
       })
@@ -133,7 +131,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/all.scss";
+@import "../../assets/scss/all.scss";
 
 .step{
     width: 100%;

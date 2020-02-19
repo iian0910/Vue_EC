@@ -207,7 +207,6 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons`
       vm.isLoading = true
       vm.$http.get(api).then(response => {
-        console.log(response.data)
         vm.isLoading = false
         vm.coupons = response.data.coupons
       })
@@ -237,7 +236,6 @@ export default {
       }
       vm.isLoading = true
       vm.$http[httpMethod](api, { data: vm.tempCoupon }).then(response => {
-        console.log(response.data)
         vm.isLoading = false
         $('#couponModal').modal('hide')
         vm.getCoupons()
@@ -254,7 +252,6 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`
       vm.status.loadingItem = vm.tempCoupon.id
       vm.$http.delete(api).then(response => {
-        console.log(response.data)
         vm.status.loadingItem = ''
         $('#delCouponModal').modal('hide')
         vm.getCoupons()
