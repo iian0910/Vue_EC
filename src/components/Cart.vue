@@ -6,7 +6,7 @@
       </div>
       <div class="collapse cartCollapse" id="cartCollapse">
         <div class="card card-body p-3">
-          <div class="overflowCtr">
+          <div class="overflowCtr mb-3" v-if="cart.length !== 0" :class="{'overflowY':cart.length >= 3}">
             <table class="table table-sm">
               <thead>
                 <tr>
@@ -18,14 +18,14 @@
               <tbody>
                 <tr v-for="item in cart" :key="item.id">
                   <th scope="row" class="px-0 text-center"><button class="btn btn-sm btn-outline-danger" @click="deleteItem(item.id)"><i class="far fa-trash-alt"></i></button></th>
-                  <td>{{item.product.title}}</td>
+                  <td>{{item.product.title | titleFilter}}</td>
                   <td>{{item.product.price * item.qty | currency}}</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <button class="btn btn-orange btn-block" :disabled="cart.length === 0" @click="getCart">結帳去</button>
-          <button class="btn btn-danger btn-block" v-if="cart.length === 0">購物去</button>
+          <button class="btn btn-orange btn-block" v-if="cart.length !== 0" @click="getCart">結帳去</button>
+          <button class="btn btn-danger btn-block" v-if="cart.length === 0" @click="goShopping">購物去</button>
         </div>
       </div>
     </div>
@@ -49,6 +49,10 @@ export default {
       vm.$http.get(api).then((response) => {
         vm.$router.push(`/checkout`)
       })
+    },
+    goShopping () {
+      const vm = this
+      vm.$router.push('/products')
     }
   }
 }
@@ -104,7 +108,7 @@ $pad-l: '960px';
   }
   .cartCollapse{
     position: absolute;
-    bottom: 60px;
+    bottom: 64px;
     right: 0;
     width: 300px;
   }
@@ -112,6 +116,8 @@ $pad-l: '960px';
     display: block;
     max-height: 190px;
     overflow: hidden;
+  }
+  .overflowY{
     overflow-y: scroll;
   }
 }

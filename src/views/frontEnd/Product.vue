@@ -20,7 +20,7 @@
             </div>
             <div class="col-md-6 d-flex align-items-end flex-column">
               <div class="productInfo_up w-100">
-                <h3 class="mb-4 productTitle">{{product.title}}</h3>
+                <h4 class="mb-4 productTitle">{{product.title}}</h4>
                 <div class="coupon d-flex mb-4">
                   <div class="coupon_item mr-1">指定新會員獨享</div>
                   <div class="coupon_item mr-1">超取滿NT$899免運</div>
@@ -41,21 +41,21 @@
           </div>
           <div class="row mb-4">
             <div class="col-md-6 mb-4 mb-md-0">
-              <div class="giftInfo">
+              <div class="giftInfo rounded">
                 <div class="giftInfo_Item d-flex align-items-center mb-2">
-                  <div class="giftInfo_Item_title mr-2 text-center">折價券</div>
+                  <div class="giftInfo_Item_title mr-2 text-center rounded">折價券</div>
                   <div class="giftInfo_Item_text">熊熊遇見你，可享首購優惠 8 折</div>
                 </div>
                 <div class="giftInfo_Item d-flex align-items-center mb-2">
-                  <div class="giftInfo_Item_title mr-2 text-center">贈品</div>
+                  <div class="giftInfo_Item_title mr-2 text-center rounded">贈品</div>
                   <div class="giftInfo_Item_text">小熊維尼聯名蜂蜜奶茶一罐</div>
                 </div>
                 <div class="giftInfo_Item d-flex align-items-center mb-2">
-                  <div class="giftInfo_Item_title mr-2 text-center">白金會員</div>
+                  <div class="giftInfo_Item_title mr-2 text-center rounded">白金會員</div>
                   <div class="giftInfo_Item_text">單筆消費滿千可享折扣 75 折</div>
                 </div>
                 <div class="giftInfo_Item d-flex align-items-center">
-                  <div class="giftInfo_Item_title mr-2 text-center">鑽石會員</div>
+                  <div class="giftInfo_Item_title mr-2 text-center rounded">鑽石會員</div>
                   <div class="giftInfo_Item_text">單筆消費滿千可享折扣 76 折</div>
                 </div>
               </div>
@@ -197,8 +197,7 @@ export default {
   margin: 0 auto;
 }
 .productTitle{
-  font-size: 16px;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 .coupon{
   &_item{
@@ -222,7 +221,7 @@ export default {
 }
 .giftInfo{
   padding: 10px;
-  border: 1px solid black;
+  border: 1px solid #737373;
   border-top-width: 2px;
   &_Item_title{
     min-width: 20%;
@@ -249,7 +248,7 @@ export default {
   }
   &_title{
     font-size: 14px;
-    line-height: 20px;
+    line-height: 1.5;
     text-align: left;
   }
 }

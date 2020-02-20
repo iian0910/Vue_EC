@@ -6,16 +6,16 @@
     <!-- Start Content -->
     <div class="container">
         <div class="row mb-5">
-            <div class="col-md-10 offset-md-1">
+            <div class="col-md-6 offset-md-3">
                 <div class="row">
                     <div class="col-md-4 mb-2 mb-md-4">
-                        <div class="step">資料填寫</div>
+                        <div class="step rounded">資料填寫</div>
                     </div>
                     <div class="col-md-4 mb-2 mb-md-4">
-                        <div class="step active">確認訂單</div>
+                        <div class="step active rounded">確認訂單</div>
                     </div>
                     <div class="col-md-4 mb-2 mb-md-4">
-                        <div class="step">完成</div>
+                        <div class="step rounded">完成</div>
                     </div>
                 </div>
             </div>
@@ -48,23 +48,23 @@
                       <td colspan="2" class="text-center border-0 memberTitle">會員資料核對</td>
                     </tr>
                     <tr>
-                      <td width="20%">Email</td>
+                      <td width="25%">Email</td>
                       <td>{{ order.user.email }}</td>
                     </tr>
                     <tr>
-                      <td width="20%">姓名</td>
+                      <td width="25%">姓名</td>
                       <td>{{ order.user.name }}</td>
                     </tr>
                     <tr>
-                      <td width="20%">電話</td>
+                      <td width="25%">電話</td>
                       <td>{{ order.user.tel }}</td>
                     </tr>
                     <tr>
-                      <td width="20%">地址</td>
+                      <td width="25%">地址</td>
                       <td>{{ order.user.address }}</td>
                     </tr>
                     <tr>
-                      <td width="20%">付款狀態</td>
+                      <td width="25%">付款狀態</td>
                       <td>
                         <span v-if="!order.is_paid">尚未付款</span>
                         <span v-else class="text-success">付款完成</span>
@@ -141,7 +141,6 @@ export default {
     text-align: center;
     color: $primary;
     border: 1px solid $primary;
-    border-radius: 20px;
     &.active{
         background-color: $primary;
         color: white

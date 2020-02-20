@@ -30,7 +30,7 @@
         <div class="row align-items-center">
           <div class="col-md-6">
             <ul class="news_list">
-              <li class="news_list_item">
+              <li class="news_list_item mb-2">
                 <div class="news_date">2020.02.10</div>
                 <div class="news_text">戀愛季節【熊愛你】，購物滿 $5,000 送 $500</div>
               </li>
@@ -74,7 +74,7 @@
                   </div>
                 </div>
                 <div class="icon-group">
-                  <i class="far fa-heart likeIcon mr-2" :class="{'fa': item.likeThis}" @click.stop="item.likeThis =! item.likeThis"></i>
+                  <i class="far fa-heart likeIcon mr-3" :class="{'fa': item.likeThis}" @click.stop="item.likeThis =! item.likeThis"></i>
                   <i class="fas fa-shopping-cart" @click.stop="addToCart(item.id, item.qty)"></i>
                 </div>
               </div>
@@ -278,9 +278,16 @@ export default {
     color: $yellow;
     margin-right: 16px;
     font-weight: bold;
+    @include screen($mobile){
+      margin-right: 0;
+      font-size: 16px;
+    }
   }
   &_text{
     color: $primary;
+    @include screen($mobile){
+      font-size: 16px;
+    }
   }
 }
 .productItem{
@@ -314,12 +321,28 @@ export default {
   position: absolute;
   right: 12px;
   bottom: 12px;
-    i{
-      color: rgb(80, 80, 80);
+  @include screen ($mobile) {
+    position: sticky;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+  }
+  i{
+    color: rgb(80, 80, 80);
+    @include screen ($mobile) {
+      width: 50%;
+      height: 45px;
+      color: #505050;
+      border-radius: 5px;
+      font-size: 26px;
+      line-height: 45px;
+      text-align: center;
     }
-    .fa.fa-heart{
-      color: $pink;
-    }
+  }
+  .fa.fa-heart{
+    color: $pink;
+  }
 }
 .charactersLink{
   display: block;

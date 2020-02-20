@@ -6,16 +6,16 @@
     <!-- Start Content -->
     <div class="container">
       <div class="row">
-        <div class="col-md-10 offset-md-1">
+        <div class="col-md-6 offset-md-3">
           <div class="row">
             <div class="col-md-4 mb-2 mb-md-4">
-              <div class="step active">資料填寫</div>
+              <div class="step active rounded">資料填寫</div>
             </div>
             <div class="col-md-4 mb-2 mb-md-4">
-              <div class="step">確認訂單</div>
+              <div class="step rounded">確認訂單</div>
             </div>
             <div class="col-md-4 mb-2 mb-md-4">
-              <div class="step">完成</div>
+              <div class="step rounded">完成</div>
             </div>
           </div>
         </div>
@@ -112,7 +112,7 @@
                     id="email"
                     v-model="form.user.email"
                     v-validate="'required|email'"
-                    placeholder="請輸入 Email"
+                    placeholder="請輸入 Email(必填)"
                   />
                   <span class="text-danger" v-if="errors.has('email')">{{ errors.first('email') }}</span>
                 </div>
@@ -126,7 +126,7 @@
                     id="userName"
                     v-model="form.user.name"
                     v-validate="'required'"
-                    placeholder="請輸入姓名"
+                    placeholder="請輸入姓名(必填)"
                   />
                   <span class="text-danger" v-if="errors.has('name')">姓名必須輸入</span>
                 </div>
@@ -140,7 +140,7 @@
                     id="userTel"
                     v-model="form.user.tel"
                     v-validate="'required'"
-                    placeholder="請輸入電話"
+                    placeholder="請輸入電話(必填)"
                   />
                   <span class="text-danger" v-if="errors.has('tel')">電話必須輸入</span>
                 </div>
@@ -154,7 +154,7 @@
                     id="userAdd"
                     v-model="form.user.address"
                     v-validate="'required'"
-                    placeholder="請輸入地址"
+                    placeholder="請輸入地址(必填)"
                   />
                   <span class="text-danger" v-if="errors.has('address')">地址欄位不得留空</span>
                 </div>
@@ -177,7 +177,6 @@
 </template>
 
 <script>
-/* global response */
 import { Circle4 } from 'vue-loading-spinner'
 
 export default {
@@ -221,8 +220,13 @@ export default {
       }
       vm.isLoading = true
       vm.$http.post(api, { data: coupon }).then(response => {
-        vm.getCart()
-        vm.isLoading = false
+        if (response.data.success) {
+          vm.getCart()
+          vm.isLoading = false
+        } else {
+          vm.$bus.$emit('message:push', response.data.message, 'danger')
+          vm.isLoading = false
+        }
       })
     },
     createOrder () {
@@ -239,7 +243,7 @@ export default {
             vm.isLoading = false
           })
         } else {
-          vm.$bus.$emit('message:push', response.data.message, 'danger')
+          vm.isLoading = false
         }
       })
     }
@@ -261,7 +265,6 @@ export default {
   text-align: center;
   color: $primary;
   border: 1px solid $primary;
-  border-radius: 20px;
   &.active {
     background-color: $primary;
     color: white;

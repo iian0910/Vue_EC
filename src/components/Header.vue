@@ -13,6 +13,10 @@
               <span></span>
             </div>
             <ul class="list d-md-flex mr-auto pt-5 pt-md-0">
+              <div class="navMoBtnClose" @click="hideNav">
+                <span></span>
+                <span></span>
+              </div>
               <router-link to="/about" class="list_link">
                 <li class="list_item" @click="hideNav">關於我們</li>
               </router-link>
@@ -82,6 +86,35 @@ export default {
     }
   }
 }
+.navMoBtnClose{
+  display: none;
+  @include screen($mobile){
+    display: block;
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    border: 1px solid $primary;
+    border-radius: 3px;
+    position: absolute;
+    top: 1%;
+    right: 2%;
+    span{
+      display: block;
+      width: 100%;
+      height: 5px;
+      background-color: $primary;
+      position: absolute;
+      top: 84%;
+      left: 35%;
+      transform: rotate(45deg) translate(-50%, -50%);
+      &:last-child{
+        top: 43%;
+        left: 4%;
+        transform: rotate(-45deg);
+      }
+    }
+  }
+}
 .nav{
   @include screen($mobile){
     padding-left: 15px;
@@ -126,6 +159,8 @@ export default {
       @include screen($mobile){
         padding: 8px 10px;
         text-align: center;
+        font-size: 1.5rem;
+        line-height: 1.5;
       }
     }
     &.open{
