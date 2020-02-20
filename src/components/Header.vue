@@ -3,34 +3,36 @@
     <div class="nav winnieMallBar">
       <div class="container">
         <div class="row align-items-center">
-          <router-link to="/" class="mr-auto mr-md-4">
-            <img src="../assets/images/logo.svg" class="img img-fluid nav_logo" alt="">
-          </router-link>
-          <div class="navMoBtn" @click="showNav">
-            <span></span>
-            <span></span>
-            <span></span>
+          <div class="nav_bar d-flex align-items-center">
+            <router-link to="/" class="mr-auto mr-md-4">
+              <img src="../assets/images/logo.svg" class="img img-fluid nav_logo" alt="">
+            </router-link>
+            <div class="navMoBtn" @click="showNav">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <ul class="list d-md-flex mr-auto pt-5 pt-md-0">
+              <router-link to="/about" class="list_link">
+                <li class="list_item" @click="hideNav">關於我們</li>
+              </router-link>
+              <router-link to="/favourable" class="list_link">
+                <li class="list_item" @click="hideNav">優惠活動</li>
+              </router-link>
+              <router-link to="/characters" class="list_link">
+                <li class="list_item" @click="hideNav">角色介紹</li>
+              </router-link>
+              <router-link to="/products" class="list_link">
+                <li class="list_item" @click="hideNav">相關產品</li>
+              </router-link>
+              <router-link to="/login" class="list_link d-block d-md-none">
+                <li class="list_item">後台管理</li>
+              </router-link>
+            </ul>
+            <router-link to="/login" target="_blank" class="iconItem d-none d-md-block">
+              <i class="fas fa-user d-none d-md-block"></i> <p class="d-black d-md-none text-center">後台管理</p>
+            </router-link>
           </div>
-          <ul class="list d-md-flex mr-auto pt-5 pt-md-0">
-            <router-link to="/about" class="list_link">
-              <li class="list_item" @click="hideNav">關於我們</li>
-            </router-link>
-            <router-link to="/favourable" class="list_link">
-              <li class="list_item" @click="hideNav">優惠活動</li>
-            </router-link>
-            <router-link to="/characters" class="list_link">
-              <li class="list_item" @click="hideNav">角色介紹</li>
-            </router-link>
-            <router-link to="/products" class="list_link">
-              <li class="list_item" @click="hideNav">相關產品</li>
-            </router-link>
-            <router-link to="/login" class="list_link d-block d-md-none">
-              <li class="list_item">後台管理</li>
-            </router-link>
-          </ul>
-          <router-link to="/login" target="_blank" class="iconItem d-none d-md-block">
-            <i class="fas fa-user d-none d-md-block"></i> <p class="d-black d-md-none text-center">後台管理</p>
-          </router-link>
         </div>
       </div>
     </div>
@@ -40,11 +42,11 @@
 <script>
 export default {
   methods: {
-    showNav (e) {
+    showNav () {
       let list = document.querySelector('.list')
       list.classList.add('open')
     },
-    hideNav (e) {
+    hideNav () {
       let list = document.querySelector('.list')
       list.classList.remove('open')
     }
@@ -53,7 +55,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/all.scss";
+@import "../assets/scss/all.scss";
 
 .winnieMallBar{
   padding-top: 10px;
@@ -84,6 +86,13 @@ export default {
   @include screen($mobile){
     padding-left: 15px;
     padding-right: 15px;
+  }
+  &_bar{
+    width: 100%;
+    padding: 0 15px;
+    @include screen($mobile){
+      padding: 0;
+    }
   }
   &_logo{
     width: 60px;

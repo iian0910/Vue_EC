@@ -163,7 +163,6 @@ export default {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
       vm.$http.get(api).then((response) => {
-        console.log(response.data)
         vm.products = response.data.products
         vm.products.forEach(item => {
           vm.$set(item, 'likeThis', false)
@@ -178,7 +177,6 @@ export default {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       vm.$http.get(api).then((response) => {
-        console.log(response.data.data.carts)
         vm.carts = response.data.data.carts
       })
     },
@@ -192,7 +190,6 @@ export default {
       vm.isLoading = true
       vm.$http.post(api, { data: cart }).then(response => {
         if (response.data.success) {
-          console.log(response)
           vm.getCart()
           vm.isLoading = false
           vm.$bus.$emit('message:push', response.data.message, 'success')
@@ -224,7 +221,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/all.scss";
+@import "../../assets/scss/all.scss";
 
 .section{
   padding-top: 80px;

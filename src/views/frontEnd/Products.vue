@@ -101,7 +101,7 @@ export default {
   name: 'products',
   data () {
     return {
-      breadcrumbName: '系列產品',
+      breadcrumbName: '相關產品',
       products: [],
       categories: [],
       currentCategory: '',
@@ -122,7 +122,6 @@ export default {
       vm.currentPage = 0
       if (vm.currentCategory !== '') {
         items = vm.products.filter((item, i) => {
-          console.log(item)
           return item.category === vm.currentCategory
         })
       } else {
@@ -132,7 +131,6 @@ export default {
       // 分頁要點1: 總共有幾頁
       // 分頁要點2: 每頁的內容
       // 分頁要點3: 組成二維陣列 [[1...],[2...],[3...]]
-      console.log(vm.currentCategory)
       const newProducts = []
       items.forEach((item, i) => {
         if (i % 12 === 0) {
@@ -141,7 +139,6 @@ export default {
         const page = parseInt(i / 12)
         newProducts[page].push(item)
       })
-      console.log('newProducts', newProducts)
       return newProducts
     }
   },
@@ -151,7 +148,6 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
       vm.isLoading = true
       vm.$http.get(api).then((response) => {
-        console.log(response.data)
         vm.products = response.data.products
         vm.products.forEach(item => {
           vm.$set(item, 'likeThis', false)
@@ -179,7 +175,6 @@ export default {
       const vm = this
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       vm.$http.get(api).then((response) => {
-        console.log(response.data.data.carts)
         vm.carts = response.data.data.carts
       })
     },
@@ -193,7 +188,6 @@ export default {
       vm.isLoading = true
       vm.$http.post(api, { data: cart }).then(response => {
         if (response.data.success) {
-          console.log(response)
           vm.getCart()
           vm.isLoading = false
           vm.$bus.$emit('message:push', response.data.message, 'success')
@@ -225,7 +219,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/all.scss";
+@import "../../assets/scss/all.scss";
 
 .pageFullBanner{
   background-image: url('../../assets/images/page_productsBanner.jpg');

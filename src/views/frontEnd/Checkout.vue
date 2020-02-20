@@ -177,6 +177,7 @@
 </template>
 
 <script>
+/* global response */
 import { Circle4 } from 'vue-loading-spinner'
 
 export default {
@@ -208,7 +209,6 @@ export default {
       vm.isLoading = true
       vm.$http.get(api).then(response => {
         vm.isLoading = false
-        console.log('response.data.data', response.data.data)
         vm.cart = response.data.data
         vm.finalTotal = response.data.data.final_total
       })
@@ -221,7 +221,6 @@ export default {
       }
       vm.isLoading = true
       vm.$http.post(api, { data: coupon }).then(response => {
-        console.log(response)
         vm.getCart()
         vm.isLoading = false
       })
@@ -234,14 +233,13 @@ export default {
       vm.$validator.validate().then(result => {
         if (result) {
           vm.$http.post(api, { data: order }).then(response => {
-            console.log('訂單已建立', response)
             if (response.data.success) {
               vm.$router.push(`/checkout/${response.data.orderId}`)
             }
             vm.isLoading = false
           })
         } else {
-          console.log('欄位不完整')
+          vm.$bus.$emit('message:push', response.data.message, 'danger')
         }
       })
     }
@@ -253,7 +251,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/all.scss";
+@import "../../assets/scss/all.scss";
 
 .step {
   width: 100%;

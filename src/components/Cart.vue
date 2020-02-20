@@ -25,6 +25,7 @@
             </table>
           </div>
           <button class="btn btn-orange btn-block" :disabled="cart.length === 0" @click="getCart">結帳去</button>
+          <button class="btn btn-danger btn-block" v-if="cart.length === 0">購物去</button>
         </div>
       </div>
     </div>
@@ -54,7 +55,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/all.scss";
+@import "../assets/scss/all.scss";
 
 $mobile: '568px';
 $pad-m: '768px';
@@ -69,7 +70,7 @@ $pad-l: '960px';
 .cartInfo{
   position: fixed;
   right: 5%;
-  bottom: 15%;
+  bottom: 5%;
   z-index: 9999;
   cursor: pointer;
   @include screen($mobile){
@@ -77,8 +78,8 @@ $pad-l: '960px';
     bottom: 2%
   }
   .cartIcon{
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     border: 1px solid $primary;
     background-color: white;
