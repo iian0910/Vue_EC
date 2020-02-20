@@ -132,6 +132,9 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
       vm.$http.get(api).then((response) => {
         vm.products = response.data.products
+        vm.products.forEach(item => {
+          vm.$set(item, 'likeThis', false)
+        })
       })
     },
     getProduct () {
@@ -145,6 +148,7 @@ export default {
         vm.category = response.data.product.category
         // 數量預設值為1
         vm.product.num = 1
+        console.log('response.data.product.likeThis', response.data.product.likeThis)
       })
     },
     getLikeProduct (id) {

@@ -73,10 +73,11 @@
                     <div class="final_price text-danger mb-0">NT{{item.price|currency}}</div>
                   </div>
                 </div>
-                <div class="icon-group">
+                <!-- <div class="icon-group">
                   <i class="far fa-heart likeIcon mr-3" :class="{'fa': item.likeThis}" @click.stop="item.likeThis =! item.likeThis"></i>
                   <i class="fas fa-shopping-cart" @click.stop="addToCart(item.id, item.qty)"></i>
-                </div>
+                </div> -->
+                <ProductIcon :product="products" @emitDelete="deleteItem"></ProductIcon>
               </div>
             </div>
           </div>
@@ -144,6 +145,7 @@
 <script>
 import { Circle4 } from 'vue-loading-spinner'
 import Cart from '../../components/Cart'
+import ProductIcon from '../../components/ProductIcon'
 
 export default {
   name: 'index',
@@ -156,7 +158,8 @@ export default {
   },
   components: {
     Circle4,
-    Cart
+    Cart,
+    ProductIcon
   },
   methods: {
     getProducts () {
@@ -316,34 +319,34 @@ export default {
     color: $danger;
   }
 }
-.icon-group{
-  cursor: pointer;
-  position: absolute;
-  right: 12px;
-  bottom: 12px;
-  @include screen ($mobile) {
-    position: sticky;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: space-around;
-  }
-  i{
-    color: rgb(80, 80, 80);
-    @include screen ($mobile) {
-      width: 50%;
-      height: 45px;
-      color: #505050;
-      border-radius: 5px;
-      font-size: 26px;
-      line-height: 45px;
-      text-align: center;
-    }
-  }
-  .fa.fa-heart{
-    color: $pink;
-  }
-}
+// .icon-group{
+//   cursor: pointer;
+//   position: absolute;
+//   right: 12px;
+//   bottom: 12px;
+//   @include screen ($mobile) {
+//     position: sticky;
+//     right: 0;
+//     bottom: 0;
+//     display: flex;
+//     justify-content: space-around;
+//   }
+//   i{
+//     color: rgb(80, 80, 80);
+//     @include screen ($mobile) {
+//       width: 50%;
+//       height: 45px;
+//       color: #505050;
+//       border-radius: 5px;
+//       font-size: 26px;
+//       line-height: 45px;
+//       text-align: center;
+//     }
+//   }
+//   .fa.fa-heart{
+//     color: $pink;
+//   }
+// }
 .charactersLink{
   display: block;
   width: 100%;
