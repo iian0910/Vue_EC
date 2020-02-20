@@ -72,7 +72,7 @@
                     </tr>
                   </table>
                   <div class="text-center">
-                    <router-link to="/index" class="btn btn-secondary mb-4 mr-4">回首頁</router-link>
+                    <router-link to="/" class="btn btn-secondary mb-4 mr-4">回首頁</router-link>
                     <router-link to="/products" class="btn btn-primary mb-4">繼續購物</router-link>
                   </div>
                 </form>

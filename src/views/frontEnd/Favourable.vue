@@ -18,7 +18,7 @@
             <div class="coupont text-center">
               <h3 class="mb-0 coupont_title">─ 熊熊認識你 ─</h3>
               <p class="coupont_code mb-0">[ WinnieMall0910 ]</p>
-              <p class="coupont_text mb-0">輸入下面代碼</p>
+              <p class="coupont_text mb-0">輸入上面代碼</p>
               <p class="coupont_text mb-0">可享首購優惠 8 折</p>
             </div>
           </div>
