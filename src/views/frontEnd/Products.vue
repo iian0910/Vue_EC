@@ -374,7 +374,7 @@ export default {
   right: 12px;
   bottom: 12px;
   @include screen ($mobile) {
-    position: sticky;
+    position: static;
     right: 0;
     bottom: 0;
     display: flex;
