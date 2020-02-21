@@ -50,6 +50,38 @@ const routes = [
         component: () => import('../views/frontEnd/About.vue')
       },
       {
+        path: 'news',
+        name: 'News',
+        component: () => import('../views/frontEnd/News.vue'),
+        children: [
+          {
+            path: 'news20200210',
+            name: 'News20200210',
+            component: () => import('../views/frontEnd/News20200210.vue')
+          },
+          {
+            path: 'news20200123',
+            name: 'News20200123',
+            component: () => import('../views/frontEnd/News20200123.vue')
+          },
+          {
+            path: 'news20200120',
+            name: 'News20200120',
+            component: () => import('../views/frontEnd/News20200120.vue')
+          },
+          {
+            path: 'news20200101',
+            name: 'News20200101',
+            component: () => import('../views/frontEnd/News20200101.vue')
+          },
+          {
+            path: 'news20191225',
+            name: 'News20191225',
+            component: () => import('../views/frontEnd/News20191225.vue')
+          }
+        ]
+      },
+      {
         path: 'favourable',
         name: 'Favourable',
         component: () => import('../views/frontEnd/Favourable.vue')

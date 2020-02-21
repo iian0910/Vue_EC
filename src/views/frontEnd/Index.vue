@@ -59,46 +59,56 @@
         <div class="row align-items-center">
           <div class="col-md-6">
             <ul class="news_list">
-              <li class="news_list_item mb-2">
-                <div class="news_date">
-                  2020.02.10
-                </div>
-                <div class="news_text">
-                  戀愛季節【熊愛你】，購物滿 $5,000 送 $500
-                </div>
-              </li>
-              <li class="news_list_item mb-2">
-                <div class="news_date">
-                  2020.01.23
-                </div>
-                <div class="news_text">
-                  返鄉過年【熊黑皮】，過年期間暫停營業
-                </div>
-              </li>
-              <li class="news_list_item mb-2">
-                <div class="news_date">
-                  2020.01.20
-                </div>
-                <div class="news_text">
-                  過年放假【熊放肆】，食品系列商品 6 折起
-                </div>
-              </li>
-              <li class="news_list_item mb-2">
-                <div class="news_date">
-                  2020.01.01
-                </div>
-                <div class="news_text">
-                  跨年無伴【熊孤單】，玩偶系列商品 7 折起
-                </div>
-              </li>
-              <li class="news_list_item mb-2">
-                <div class="news_date">
-                  2019.12.25
-                </div>
-                <div class="news_text">
-                  冬季聖誕【熊溫暖】，服飾系列商品 85 折起
-                </div>
-              </li>
+              <router-link to="/news/news20200210" class="news_link">
+                <li class="news_list_item mb-2">
+                  <div class="news_date">
+                    2020.02.10
+                  </div>
+                  <div class="news_text">
+                    戀愛季節【熊愛你】，購物滿 $5,000 送 $500
+                  </div>
+                </li>
+              </router-link>
+              <router-link to="/news/news20200123" class="news_link">
+                <li class="news_list_item mb-2">
+                  <div class="news_date">
+                    2020.01.23
+                  </div>
+                  <div class="news_text">
+                    返鄉過年【熊黑皮】，過年期間暫停營業
+                  </div>
+                </li>
+              </router-link>
+              <router-link to="/news/news20200120" class="news_link">
+                <li class="news_list_item mb-2">
+                  <div class="news_date">
+                    2020.01.20
+                  </div>
+                  <div class="news_text">
+                    過年放假【熊放肆】，食品系列商品 6 折起
+                  </div>
+                </li>
+              </router-link>
+              <router-link to="news/news20200101" class="news_link">
+                <li class="news_list_item mb-2">
+                  <div class="news_date">
+                    2020.01.01
+                  </div>
+                  <div class="news_text">
+                    跨年無伴【熊孤單】，玩偶系列商品 7 折起
+                  </div>
+                </li>
+              </router-link>
+              <router-link to="news/news20191225" class="news_link">
+                <li class="news_list_item mb-2">
+                  <div class="news_date">
+                    2019.12.25
+                  </div>
+                  <div class="news_text">
+                    冬季聖誕【熊溫暖】，服飾系列商品 8 折起
+                  </div>
+                </li>
+              </router-link>
             </ul>
           </div>
           <div class="col-md-6 d-none d-md-block">
@@ -391,6 +401,10 @@ export default {
   }
 }
 .news{
+  &_link,
+  &_link:hover{
+    text-decoration: none
+  }
   &_list{
     padding: 0;
     margin: 0;
