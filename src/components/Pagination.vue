@@ -7,25 +7,37 @@
           :class="{'disabled': !pages.has_pre}"
           @click="updatePage(pages.current_page - 1)"
         >
-          <a class="page-link" href="#" aria-label="Previous">
+          <a
+            class="page-link"
+            href="#"
+            aria-label="Previous"
+          >
             <span aria-hidden="true">&laquo;</span>
             <span class="sr-only">Previous</span>
           </a>
         </li>
         <li
-          class="page-item"
           v-for="page in pages.total_pages"
           :key="page"
+          class="page-item"
           :class="{'active': page === pages.current_page}"
         >
-          <a class="page-link" href="#" @click.prevent="updatePage(page)">{{ page }}</a>
+          <a
+            class="page-link"
+            href="#"
+            @click.prevent="updatePage(page)"
+          >{{ page }}</a>
         </li>
         <li
           class="page-item"
           :class="{'disabled': !pages.has_next}"
           @click="updatePage(pages.current_page + 1)"
         >
-          <a class="page-link" href="#" aria-label="Next">
+          <a
+            class="page-link"
+            href="#"
+            aria-label="Next"
+          >
             <span aria-hidden="true">&raquo;</span>
             <span class="sr-only">Next</span>
           </a>

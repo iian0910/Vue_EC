@@ -1,83 +1,158 @@
 <template>
   <div>
     <loading :active.sync="isLoading">
-      <Circle4></Circle4>
+      <Circle4 />
     </loading>
     <div class="container">
       <!-- Start Carousel -->
-      <div id="indexBanner" class="carousel slide" data-ride="carousel">
+      <div
+        id="indexBanner"
+        class="carousel slide"
+        data-ride="carousel"
+      >
         <ol class="carousel-indicators">
-          <li data-target="#indexBanner" data-slide-to="0" class="active"></li>
-          <li data-target="#indexBanner" data-slide-to="1"></li>
+          <li
+            data-target="#indexBanner"
+            data-slide-to="0"
+            class="active"
+          />
+          <li
+            data-target="#indexBanner"
+            data-slide-to="1"
+          />
         </ol>
         <div class="carousel-inner">
-          <div class="carousel-item activeBanner01 active"></div>
-          <div class="carousel-item activeBanner02"></div>
+          <div class="carousel-item activeBanner01 active" />
+          <div class="carousel-item activeBanner02" />
         </div>
-        <a class="carousel-control-prev" href="#indexBanner" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <a
+          class="carousel-control-prev"
+          href="#indexBanner"
+          role="button"
+          data-slide="prev"
+        >
+          <span
+            class="carousel-control-prev-icon"
+            aria-hidden="true"
+          />
           <span class="sr-only">Previous</span>
         </a>
-        <a class="carousel-control-next" href="#indexBanner" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <a
+          class="carousel-control-next"
+          href="#indexBanner"
+          role="button"
+          data-slide="next"
+        >
+          <span
+            class="carousel-control-next-icon"
+            aria-hidden="true"
+          />
           <span class="sr-only">Next</span>
         </a>
       </div>
       <!-- End Carousel -->
       <!-- Start News -->
       <section class="section news">
-        <h3 class="sectionTitle mb-4 text-center">最新消息</h3>
+        <h3 class="sectionTitle mb-4 text-center">
+          最新消息
+        </h3>
         <div class="row align-items-center">
           <div class="col-md-6">
             <ul class="news_list">
               <li class="news_list_item mb-2">
-                <div class="news_date">2020.02.10</div>
-                <div class="news_text">戀愛季節【熊愛你】，購物滿 $5,000 送 $500</div>
+                <div class="news_date">
+                  2020.02.10
+                </div>
+                <div class="news_text">
+                  戀愛季節【熊愛你】，購物滿 $5,000 送 $500
+                </div>
               </li>
               <li class="news_list_item mb-2">
-                <div class="news_date">2020.01.23</div>
-                <div class="news_text">返鄉過年【熊黑皮】，過年期間暫停營業</div>
+                <div class="news_date">
+                  2020.01.23
+                </div>
+                <div class="news_text">
+                  返鄉過年【熊黑皮】，過年期間暫停營業
+                </div>
               </li>
               <li class="news_list_item mb-2">
-                <div class="news_date">2020.01.20</div>
-                <div class="news_text">過年放假【熊放肆】，食品系列商品 6 折起</div>
+                <div class="news_date">
+                  2020.01.20
+                </div>
+                <div class="news_text">
+                  過年放假【熊放肆】，食品系列商品 6 折起
+                </div>
               </li>
               <li class="news_list_item mb-2">
-                <div class="news_date">2020.01.01</div>
-                <div class="news_text">跨年無伴【熊孤單】，玩偶系列商品 7 折起</div>
+                <div class="news_date">
+                  2020.01.01
+                </div>
+                <div class="news_text">
+                  跨年無伴【熊孤單】，玩偶系列商品 7 折起
+                </div>
               </li>
               <li class="news_list_item mb-2">
-                <div class="news_date">2019.12.25</div>
-                <div class="news_text">冬季聖誕【熊溫暖】，服飾系列商品 85 折起</div>
+                <div class="news_date">
+                  2019.12.25
+                </div>
+                <div class="news_text">
+                  冬季聖誕【熊溫暖】，服飾系列商品 85 折起
+                </div>
               </li>
             </ul>
           </div>
           <div class="col-md-6 d-none d-md-block">
-            <img src="../../assets/images/newsImg.jpg" class="img img-fluid" alt="">
+            <img
+              src="../../assets/images/newsImg.jpg"
+              class="img img-fluid"
+              alt=""
+            >
           </div>
         </div>
       </section>
       <!-- End News -->
       <!-- Start Hot -->
       <section class="section">
-        <h3 class="sectionTitle mb-4 text-center">經典熱銷</h3>
+        <h3 class="sectionTitle mb-4 text-center">
+          經典熱銷
+        </h3>
         <div class="row">
-          <div class="col-6 col-md-3 productBox" v-for="item in products.slice(0, 4)" :key="item.key">
-            <div class="card productItem" @click="getProduct(item.id)">
-              <img class="card-img-top" :src="`${item.imageUrl}`" :alt="`${item.title}`">
+          <div
+            v-for="item in products.slice(0, 4)"
+            :key="item.key"
+            class="col-6 col-md-3 productBox"
+          >
+            <div
+              class="card productItem"
+              @click="getProduct(item.id)"
+            >
+              <img
+                class="card-img-top"
+                :src="`${item.imageUrl}`"
+                :alt="`${item.title}`"
+              >
               <div class="card-body p-2">
-                <h5 class="card-title productItem_title mb-0">{{item.title|titleFilter}}</h5>
+                <h5 class="card-title productItem_title mb-0">
+                  {{ item.title|titleFilter }}
+                </h5>
                 <div class="d-flex justify-content-between align-items-end px-1">
                   <div class="price-group">
-                    <div class="origin_price mb-0">NT{{item.origin_price|currency}}</div>
-                    <div class="final_price text-danger mb-0">NT{{item.price|currency}}</div>
+                    <div class="origin_price mb-0">
+                      NT{{ item.origin_price|currency }}
+                    </div>
+                    <div class="final_price text-danger mb-0">
+                      NT{{ item.price|currency }}
+                    </div>
                   </div>
                 </div>
                 <!-- <div class="icon-group">
                   <i class="far fa-heart likeIcon mr-3" :class="{'fa': item.likeThis}" @click.stop="item.likeThis =! item.likeThis"></i>
                   <i class="fas fa-shopping-cart" @click.stop="addToCart(item.id, item.qty)"></i>
                 </div> -->
-                <ProductIcon :product="products" @emitDelete="deleteItem"></ProductIcon>
+                <ProductIcon
+                  :product="products"
+                  @emitDelete="deleteItem"
+                />
               </div>
             </div>
           </div>
@@ -86,57 +161,106 @@
       <!-- End Hot -->
       <!-- Start Characters -->
       <section class="section characters">
-        <h3 class="sectionTitle mb-4 text-center">系列角色</h3>
+        <h3 class="sectionTitle mb-4 text-center">
+          系列角色
+        </h3>
         <div class="row">
           <div class="col-6 col-md-3">
-            <router-link to="/characters" class="charactersLink">
+            <router-link
+              to="/characters"
+              class="charactersLink"
+            >
               <div class="card border-0">
-                <img src="../../assets/images/winnie_lg.png" alt="" class="rounded-circle img-fluid">
+                <img
+                  src="../../assets/images/winnie_lg.png"
+                  alt=""
+                  class="rounded-circle img-fluid"
+                >
                 <div class="card-body">
-                  <h5 class="card-title text-center">維尼（Winnie）</h5>
+                  <h5 class="card-title text-center">
+                    維尼（Winnie）
+                  </h5>
                 </div>
               </div>
-              <button class="btn btn-danger btn-lg charactersBtn">看更多</button>
+              <button class="btn btn-danger btn-lg charactersBtn">
+                看更多
+              </button>
             </router-link>
           </div>
           <div class="col-6 col-md-3">
-            <router-link to="/characters" class="charactersLink">
+            <router-link
+              to="/characters"
+              class="charactersLink"
+            >
               <div class="card border-0">
-                <img src="../../assets/images/pig_lg.png" alt="" class="rounded-circle img-fluid">
+                <img
+                  src="../../assets/images/pig_lg.png"
+                  alt=""
+                  class="rounded-circle img-fluid"
+                >
                 <div class="card-body">
-                  <h5 class="card-title text-center">小豬（Piglet）</h5>
+                  <h5 class="card-title text-center">
+                    小豬（Piglet）
+                  </h5>
                 </div>
               </div>
-              <button class="btn btn-danger btn-lg charactersBtn">看更多</button>
+              <button class="btn btn-danger btn-lg charactersBtn">
+                看更多
+              </button>
             </router-link>
           </div>
           <div class="col-6 col-md-3">
-            <router-link to="/characters" class="charactersLink">
+            <router-link
+              to="/characters"
+              class="charactersLink"
+            >
               <div class="card border-0">
-                <img src="../../assets/images/tiger_lg.png" alt="" class="rounded-circle img-fluid">
+                <img
+                  src="../../assets/images/tiger_lg.png"
+                  alt=""
+                  class="rounded-circle img-fluid"
+                >
                 <div class="card-body">
-                  <h5 class="card-title text-center">跳跳虎（Tiger）</h5>
+                  <h5 class="card-title text-center">
+                    跳跳虎（Tiger）
+                  </h5>
                 </div>
               </div>
-              <button class="btn btn-danger btn-lg charactersBtn">看更多</button>
+              <button class="btn btn-danger btn-lg charactersBtn">
+                看更多
+              </button>
             </router-link>
           </div>
           <div class="col-6 col-md-3">
-            <router-link to="/characters" class="charactersLink">
+            <router-link
+              to="/characters"
+              class="charactersLink"
+            >
               <div class="card border-0">
-                <img src="../../assets/images/eeyore_lg.png" alt="" class="rounded-circle img-fluid">
+                <img
+                  src="../../assets/images/eeyore_lg.png"
+                  alt=""
+                  class="rounded-circle img-fluid"
+                >
                 <div class="card-body">
-                  <h5 class="card-title text-center">屹耳（Eeyore）</h5>
+                  <h5 class="card-title text-center">
+                    屹耳（Eeyore）
+                  </h5>
                 </div>
               </div>
-              <button class="btn btn-danger btn-lg charactersBtn">看更多</button>
+              <button class="btn btn-danger btn-lg charactersBtn">
+                看更多
+              </button>
             </router-link>
           </div>
         </div>
       </section>
       <!-- End Characters -->
       <!-- cart Icon -->
-      <Cart :cart="carts" @emitDelete="deleteItem"></Cart>
+      <Cart
+        :cart="carts"
+        @emitDelete="deleteItem"
+      />
       <!---->
     </div>
   </div>
@@ -148,7 +272,12 @@ import Cart from '../../components/Cart'
 import ProductIcon from '../../components/ProductIcon'
 
 export default {
-  name: 'index',
+  name: 'Index',
+  components: {
+    Circle4,
+    Cart,
+    ProductIcon
+  },
   data () {
     return {
       products: [],
@@ -156,10 +285,9 @@ export default {
       isLoading: false
     }
   },
-  components: {
-    Circle4,
-    Cart,
-    ProductIcon
+  created () {
+    this.getCart()
+    this.getProducts()
   },
   methods: {
     getProducts () {
@@ -215,10 +343,6 @@ export default {
         }
       })
     }
-  },
-  created () {
-    this.getCart()
-    this.getProducts()
   }
 }
 </script>

@@ -1,41 +1,84 @@
 <template>
   <div class="mainContent w-100">
     <loading :active.sync="isLoading">
-      <Circle4></Circle4>
+      <Circle4 />
     </loading>
     <!-- Start Content -->
     <div class="container">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb my-2 p-0 bg-transparent mb-4">
-          <li class="breadcrumb-item"><router-link to="/">首頁</router-link></li>
-          <li class="breadcrumb-item"><router-link to="/products">相關產品</router-link></li>
-          <li class="breadcrumb-item active" aria-current="page">{{product.title}}</li>
+          <li class="breadcrumb-item">
+            <router-link to="/">
+              首頁
+            </router-link>
+          </li>
+          <li class="breadcrumb-item">
+            <router-link to="/products">
+              相關產品
+            </router-link>
+          </li>
+          <li
+            class="breadcrumb-item active"
+            aria-current="page"
+          >
+            {{ product.title }}
+          </li>
         </ol>
       </nav>
       <div class="row">
         <div class="col-md-8 offset-md-2">
           <div class="row mb-4">
             <div class="col-md-6">
-              <img :src="`${product.imageUrl}`" :alt="`${product.title}`" class="img img-fluid productImg mb-4 mb-md-0">
+              <img
+                :src="`${product.imageUrl}`"
+                :alt="`${product.title}`"
+                class="img img-fluid productImg mb-4 mb-md-0"
+              >
             </div>
             <div class="col-md-6 d-flex align-items-end flex-column">
               <div class="productInfo_up w-100">
-                <h4 class="mb-4 productTitle">{{product.title}}</h4>
+                <h4 class="mb-4 productTitle">
+                  {{ product.title }}
+                </h4>
                 <div class="coupon d-flex mb-4">
-                  <div class="coupon_item mr-1">指定新會員獨享</div>
-                  <div class="coupon_item mr-1">超取滿NT$899免運</div>
-                  <div class="coupon_item">國家/地區配送</div>
+                  <div class="coupon_item mr-1">
+                    指定新會員獨享
+                  </div>
+                  <div class="coupon_item mr-1">
+                    超取滿NT$899免運
+                  </div>
+                  <div class="coupon_item">
+                    國家/地區配送
+                  </div>
                 </div>
                 <div class="price">
-                  <div class="price_origin">NT{{product.origin_price|currency}}</div>
-                  <div class="price_final">NT{{product.price|currency}}</div>
+                  <div class="price_origin">
+                    NT{{ product.origin_price|currency }}
+                  </div>
+                  <div class="price_final">
+                    NT{{ product.price|currency }}
+                  </div>
                 </div>
               </div>
               <div class="productInfo_down w-100 mt-auto">
-                <select class="form-control mb-4" v-model="product.num">
-                  <option :value="num" v-for="num in 10" :key="num">選購 {{num}} {{product.unit}}</option>
+                <select
+                  v-model="product.num"
+                  class="form-control mb-4"
+                >
+                  <option
+                    v-for="num in 10"
+                    :key="num"
+                    :value="num"
+                  >
+                    選購 {{ num }} {{ product.unit }}
+                  </option>
                 </select>
-                <button class="btn btn-primary btn-block" @click="addToCart(product.id, product.num)">加入購物車</button>
+                <button
+                  class="btn btn-primary btn-block"
+                  @click="addToCart(product.id, product.num)"
+                >
+                  加入購物車
+                </button>
               </div>
             </div>
           </div>
@@ -43,37 +86,72 @@
             <div class="col-md-6 mb-4 mb-md-0">
               <div class="giftInfo rounded">
                 <div class="giftInfo_Item d-flex align-items-center mb-2">
-                  <div class="giftInfo_Item_title mr-2 text-center rounded">折價券</div>
-                  <div class="giftInfo_Item_text">熊熊遇見你，可享首購優惠 8 折</div>
+                  <div class="giftInfo_Item_title mr-2 text-center rounded">
+                    折價券
+                  </div>
+                  <div class="giftInfo_Item_text">
+                    熊熊遇見你，可享首購優惠 8 折
+                  </div>
                 </div>
                 <div class="giftInfo_Item d-flex align-items-center mb-2">
-                  <div class="giftInfo_Item_title mr-2 text-center rounded">贈品</div>
-                  <div class="giftInfo_Item_text">小熊維尼聯名蜂蜜奶茶一罐</div>
+                  <div class="giftInfo_Item_title mr-2 text-center rounded">
+                    贈品
+                  </div>
+                  <div class="giftInfo_Item_text">
+                    小熊維尼聯名蜂蜜奶茶一罐
+                  </div>
                 </div>
                 <div class="giftInfo_Item d-flex align-items-center mb-2">
-                  <div class="giftInfo_Item_title mr-2 text-center rounded">白金會員</div>
-                  <div class="giftInfo_Item_text">單筆消費滿千可享折扣 75 折</div>
+                  <div class="giftInfo_Item_title mr-2 text-center rounded">
+                    白金會員
+                  </div>
+                  <div class="giftInfo_Item_text">
+                    單筆消費滿千可享折扣 75 折
+                  </div>
                 </div>
                 <div class="giftInfo_Item d-flex align-items-center">
-                  <div class="giftInfo_Item_title mr-2 text-center rounded">鑽石會員</div>
-                  <div class="giftInfo_Item_text">單筆消費滿千可享折扣 76 折</div>
+                  <div class="giftInfo_Item_title mr-2 text-center rounded">
+                    鑽石會員
+                  </div>
+                  <div class="giftInfo_Item_text">
+                    單筆消費滿千可享折扣 76 折
+                  </div>
                 </div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="jumbotron special p-3 h-100">
-                <p class="special_title m-0">商品特色</p>
-                <div class="special_text">{{product.content}}</div>
+                <p class="special_title m-0">
+                  商品特色
+                </p>
+                <div class="special_text">
+                  {{ product.content }}
+                </div>
               </div>
             </div>
           </div>
-          <h4 class="productLike mb-3">你可能喜歡</h4>
+          <h4 class="productLike mb-3">
+            你可能喜歡
+          </h4>
           <div class="row mb-4">
-            <div class="col-6 col-md-4 productBox" v-for="item in filterData" :key="item.id">
-              <div class="card productLike_item border-0" @click="getLikeProduct(item.id)">
-                <img class="card-img-top" :src="`${item.imageUrl}`" :alt="`${item.title}`">
+            <div
+              v-for="item in filterData"
+              :key="item.id"
+              class="col-6 col-md-4 productBox"
+            >
+              <div
+                class="card productLike_item border-0"
+                @click="getLikeProduct(item.id)"
+              >
+                <img
+                  class="card-img-top"
+                  :src="`${item.imageUrl}`"
+                  :alt="`${item.title}`"
+                >
                 <div class="card-body p-2">
-                  <h3 class="productLike_title mb-0">{{item.title|titleFilter}}</h3>
+                  <h3 class="productLike_title mb-0">
+                    {{ item.title|titleFilter }}
+                  </h3>
                 </div>
               </div>
             </div>
@@ -83,7 +161,10 @@
     </div>
     <!-- End Content -->
     <!-- cart Icon -->
-    <Cart :cart="carts" @emitDelete="deleteItem"></Cart>
+    <Cart
+      :cart="carts"
+      @emitDelete="deleteItem"
+    />
     <!---->
   </div>
 </template>
@@ -93,7 +174,11 @@ import { Circle4 } from 'vue-loading-spinner'
 import Cart from '../../components/Cart'
 
 export default {
-  name: 'product',
+  name: 'Product',
+  components: {
+    Circle4,
+    Cart
+  },
   data () {
     return {
       pageName: '系列產品',
@@ -108,10 +193,6 @@ export default {
       }
     }
   },
-  components: {
-    Circle4,
-    Cart
-  },
   computed: {
     filterData () {
       const vm = this
@@ -125,6 +206,11 @@ export default {
       })
       return likeProducts
     }
+  },
+  created () {
+    this.getProducts()
+    this.getProduct()
+    this.getCart()
   },
   methods: {
     getProducts () {
@@ -185,11 +271,6 @@ export default {
         vm.isLoading = false
       })
     }
-  },
-  created () {
-    this.getProducts()
-    this.getProduct()
-    this.getCart()
   }
 }
 </script>

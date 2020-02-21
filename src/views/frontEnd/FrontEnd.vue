@@ -1,13 +1,13 @@
 <template>
   <div class="dashboard">
-    <Header/>
-    <Alert/>
+    <Header />
+    <Alert />
     <div class="container">
       <div class="row">
-        <router-view></router-view>
+        <router-view />
       </div>
     </div>
-    <Footer/>
+    <Footer />
   </div>
 </template>
 
@@ -17,7 +17,7 @@ import Footer from '../../components/Footer'
 import Alert from '../../components/AlertMessage'
 
 export default {
-  name: 'frontEnd',
+  name: 'FrontEnd',
   components: {
     Header,
     Footer,

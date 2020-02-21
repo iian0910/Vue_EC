@@ -1,42 +1,82 @@
 <template>
   <div class="products">
     <loading :active.sync="isLoading">
-      <Circle4></Circle4>
+      <Circle4 />
     </loading>
 
     <table class="table table-hover mt-4">
       <thead>
         <tr>
-          <th class="text-left" width="150">購買時間</th>
-          <th class="text-left">Email</th>
-          <th class="text-left">購買款項</th>
-          <th class="text-center" width="100">應付金額</th>
-          <th class="text-center" width="100">是否付款</th>
+          <th
+            class="text-left"
+            width="150"
+          >
+            購買時間
+          </th>
+          <th class="text-left">
+            Email
+          </th>
+          <th class="text-left">
+            購買款項
+          </th>
+          <th
+            class="text-center"
+            width="100"
+          >
+            應付金額
+          </th>
+          <th
+            class="text-center"
+            width="100"
+          >
+            是否付款
+          </th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in orders"
-            :key="item.id"
-            :class="{'text-secondary': !item.is_paid}"
+        <tr
+          v-for="item in orders"
+          :key="item.id"
+          :class="{'text-secondary': !item.is_paid}"
         >
-          <td class="text-left">{{item.create_at | date }}</td>
-          <td class="text-left">{{item.user.email}}</td>
+          <td class="text-left">
+            {{ item.create_at | date }}
+          </td>
+          <td class="text-left">
+            {{ item.user.email }}
+          </td>
           <td class="text-left">
             <ul class="list-unstyled">
-              <li v-for="product in item.products" :key="product.id">{{ product.product.title }} 數量：{{product.qty}}/{{ product.product.unit }}</li>
+              <li
+                v-for="product in item.products"
+                :key="product.id"
+              >
+                {{ product.product.title }} 數量：{{ product.qty }}/{{ product.product.unit }}
+              </li>
             </ul>
           </td>
-          <td class="text-right">{{ item.total | currency }}</td>
+          <td class="text-right">
+            {{ item.total | currency }}
+          </td>
           <td class="text-center">
-            <strong v-if="item.is_paid" class="text-success">已付款</strong>
-            <span v-else class="text-muted">尚未起用</span>
+            <strong
+              v-if="item.is_paid"
+              class="text-success"
+            >已付款</strong>
+            <span
+              v-else
+              class="text-muted"
+            >尚未起用</span>
           </td>
         </tr>
       </tbody>
     </table>
     <!-- Start Pagination -->
     <div class="d-flex justify-content-center">
-      <Pagination :pages="pagination" @emitPages="getOrders"></Pagination>
+      <Pagination
+        :pages="pagination"
+        @emitPages="getOrders"
+      />
     </div>
     <!-- End Pagination -->
   </div>
@@ -46,7 +86,7 @@ import { Circle4 } from 'vue-loading-spinner'
 import Pagination from '../../components/Pagination'
 
 export default {
-  name: 'orderList',
+  name: 'OrderList',
   components: {
     Pagination,
     Circle4
@@ -57,6 +97,9 @@ export default {
       pagination: {},
       isLoading: false
     }
+  },
+  created () {
+    this.getOrders()
   },
   methods: {
     getOrders (page = 1) {
@@ -69,9 +112,6 @@ export default {
         vm.pagination = response.data.pagination
       })
     }
-  },
-  created () {
-    this.getOrders()
   }
 }
 </script>

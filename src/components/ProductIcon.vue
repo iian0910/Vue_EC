@@ -1,15 +1,23 @@
 <template>
   <div>
-    <div class="icon-group" v-for="item in product.slice(0, 4)" :key="item.id">
-      <i class="far fa-heart likeIcon mr-3" :class="{'fa': item.likeThis}" @click.stop="item.likeThis =! item.likeThis"></i>
-      <i class="fas fa-shopping-cart"></i>
+    <div
+      v-for="item in product.slice(0, 4)"
+      :key="item.id"
+      class="icon-group"
+    >
+      <i
+        class="far fa-heart likeIcon mr-3"
+        :class="{'fa': item.likeThis}"
+        @click.stop="item.likeThis =! item.likeThis"
+      />
+      <i class="fas fa-shopping-cart" />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'product',
+  name: 'Product',
   props: ['product'],
   data () {
     return {}

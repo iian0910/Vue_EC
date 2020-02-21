@@ -1,17 +1,27 @@
 <template>
   <div class="mainContent w-100">
     <loading :active.sync="isLoading">
-      <Circle4></Circle4>
+      <Circle4 />
     </loading>
     <!-- Start Content -->
     <div class="container">
-      <div class="pageFullBanner mb-2"></div>
+      <div class="pageFullBanner mb-2" />
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb mb-2 p-0 bg-transparent">
           <li class="breadcrumb-item">
-            <router-link to="/" class="breadcrumb-link">首頁</router-link>
+            <router-link
+              to="/"
+              class="breadcrumb-link"
+            >
+              首頁
+            </router-link>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">{{breadcrumbName}}</li>
+          <li
+            class="breadcrumb-item active"
+            aria-current="page"
+          >
+            {{ breadcrumbName }}
+          </li>
         </ol>
       </nav>
       <div class="row">
@@ -21,8 +31,22 @@
             <div class="col">
               <div class="card selectCategory">
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item categoryItem" :class="{active:currentCategory === ''}" @click="currentCategory = ''" >全部</li>
-                  <li class="list-group-item categoryItem" :class="{active:currentCategory === item}" v-for="item in categories" :key="item" @click="currentCategory = item">{{item}}</li>
+                  <li
+                    class="list-group-item categoryItem"
+                    :class="{active:currentCategory === ''}"
+                    @click="currentCategory = ''"
+                  >
+                    全部
+                  </li>
+                  <li
+                    v-for="item in categories"
+                    :key="item"
+                    class="list-group-item categoryItem"
+                    :class="{active:currentCategory === item}"
+                    @click="currentCategory = item"
+                  >
+                    {{ item }}
+                  </li>
                 </ul>
               </div>
             </div>
@@ -32,9 +56,21 @@
           <div class="row">
             <div class="col">
               <div class="form-group mb-0">
-                <select class="form-control" id="selectMobile" v-model="currentCategory">
-                  <option value="">全部</option>
-                  <option v-for="item in categories" :key="item" :value="`${item}`">{{item}}</option>
+                <select
+                  id="selectMobile"
+                  v-model="currentCategory"
+                  class="form-control"
+                >
+                  <option value="">
+                    全部
+                  </option>
+                  <option
+                    v-for="item in categories"
+                    :key="item"
+                    :value="`${item}`"
+                  >
+                    {{ item }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -44,37 +80,88 @@
         <!-- Products Item + Pagination -->
         <div class="col-md-10">
           <div class="row">
-            <div class="col-6 col-md-3 mb-2 mb-md-4 productBox" v-for="item in filterData[currentPage]" :key="item.id">
-              <div class="card productItem" @click="getProduct(item.id)">
-                <img class="card-img-top" :src="`${item.imageUrl}`" :alt="`${item.title}`">
+            <div
+              v-for="item in filterData[currentPage]"
+              :key="item.id"
+              class="col-6 col-md-3 mb-2 mb-md-4 productBox"
+            >
+              <div
+                class="card productItem"
+                @click="getProduct(item.id)"
+              >
+                <img
+                  class="card-img-top"
+                  :src="`${item.imageUrl}`"
+                  :alt="`${item.title}`"
+                >
                 <div class="card-body p-2">
-                  <h5 class="card-title productItem_title mb-0">{{item.title|titleFilter}}</h5>
+                  <h5 class="card-title productItem_title mb-0">
+                    {{ item.title|titleFilter }}
+                  </h5>
                   <div class="d-flex justify-content-between align-items-end px-1">
                     <div class="price-group">
-                      <div class="origin_price mb-0">NT{{item.origin_price|currency}}</div>
-                      <div class="final_price text-danger mb-0">NT{{item.price|currency}}</div>
+                      <div class="origin_price mb-0">
+                        NT{{ item.origin_price|currency }}
+                      </div>
+                      <div class="final_price text-danger mb-0">
+                        NT{{ item.price|currency }}
+                      </div>
                     </div>
                   </div>
                   <div class="icon-group">
-                    <i class="far fa-heart likeIcon mr-3" :class="{'fa': item.likeThis}" @click.stop="item.likeThis =! item.likeThis"></i>
-                    <i class="fas fa-shopping-cart" @click.stop="addToCart(item.id, item.qty)"></i>
+                    <i
+                      class="far fa-heart likeIcon mr-3"
+                      :class="{'fa': item.likeThis}"
+                      @click.stop="item.likeThis =! item.likeThis"
+                    />
+                    <i
+                      class="fas fa-shopping-cart"
+                      @click.stop="addToCart(item.id, item.qty)"
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row mb-4 justify-content-center" v-if="filterData.length >= 2">
+          <div
+            v-if="filterData.length >= 2"
+            class="row mb-4 justify-content-center"
+          >
             <nav aria-label="Page navigation example">
               <ul class="pagination m-0">
-                <li class="page-item" :class="{'disabled':currentPage === 0}">
-                  <a class="page-link" href="#" aria-label="Previous" @click.prevent="currentPage = currentPage - 1">
+                <li
+                  class="page-item"
+                  :class="{'disabled':currentPage === 0}"
+                >
+                  <a
+                    class="page-link"
+                    href="#"
+                    aria-label="Previous"
+                    @click.prevent="currentPage = currentPage - 1"
+                  >
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                   </a>
                 </li>
-                <li class="page-item" :class="{active:currentPage === page-1}" v-for="page in filterData.length" :key="page"><a class="page-link" href="#" @click.prevent="currentPage = page - 1">{{page}}</a></li>
+                <li
+                  v-for="page in filterData.length"
+                  :key="page"
+                  class="page-item"
+                  :class="{active:currentPage === page-1}"
+                >
+                  <a
+                    class="page-link"
+                    href="#"
+                    @click.prevent="currentPage = page - 1"
+                  >{{ page }}</a>
+                </li>
                 <li class="page-item">
-                  <a class="page-link" href="#" aria-label="Next" @click.prevent="currentPage = currentPage + 1">
+                  <a
+                    class="page-link"
+                    href="#"
+                    aria-label="Next"
+                    @click.prevent="currentPage = currentPage + 1"
+                  >
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Next</span>
                   </a>
@@ -86,7 +173,10 @@
         <!---->
       </div>
       <!-- cart Icon -->
-      <Cart :cart="carts" @emitDelete="deleteItem"></Cart>
+      <Cart
+        :cart="carts"
+        @emitDelete="deleteItem"
+      />
       <!---->
     </div>
     <!-- End Content -->
@@ -98,7 +188,11 @@ import { Circle4 } from 'vue-loading-spinner'
 import Cart from '../../components/Cart'
 
 export default {
-  name: 'products',
+  name: 'Products',
+  components: {
+    Circle4,
+    Cart
+  },
   data () {
     return {
       breadcrumbName: '相關產品',
@@ -109,10 +203,6 @@ export default {
       carts: [],
       isLoading: false
     }
-  },
-  components: {
-    Circle4,
-    Cart
   },
   computed: {
     filterData () {
@@ -141,6 +231,10 @@ export default {
       })
       return newProducts
     }
+  },
+  created () {
+    this.getProducts()
+    this.getCart()
   },
   methods: {
     getProducts () {
@@ -210,10 +304,6 @@ export default {
         }
       })
     }
-  },
-  created () {
-    this.getProducts()
-    this.getCart()
   }
 }
 </script>

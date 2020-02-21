@@ -1,12 +1,15 @@
 <template>
   <div class="dashboard">
-    <Navbar/>
-    <Alert/>
+    <Navbar />
+    <Alert />
     <div class="container-fluid">
       <div class="row">
-        <Sidebar/>
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-          <router-view></router-view>
+        <Sidebar />
+        <main
+          role="main"
+          class="col-md-9 ml-sm-auto col-lg-10 px-4"
+        >
+          <router-view />
         </main>
       </div>
     </div>
@@ -19,7 +22,7 @@ import Sidebar from '../../components/DashboardSidebar'
 import Alert from '../../components/AlertMessage'
 
 export default {
-  name: 'dashboard',
+  name: 'Dashboard',
   components: {
     Navbar,
     Sidebar,

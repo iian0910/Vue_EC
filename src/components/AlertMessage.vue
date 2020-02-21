@@ -1,10 +1,18 @@
 <template>
   <div class="message-alert">
-    <div class="alert alert-dismissible"
+    <div
+      v-for="(item, i) in messages"
+      :key="i"
+      class="alert alert-dismissible"
       :class="'alert-' + item.status"
-      v-for="(item, i) in messages" :key="i">
+    >
       {{ item.message }}
-      <button type="button" class="close" @click="removeMessage(i)" aria-label="Close">
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        @click="removeMessage(i)"
+      >
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -18,6 +26,14 @@ export default {
     return {
       messages: []
     }
+  },
+  created () {
+    const vm = this
+    // 外層使用 $on() 來註冊事件
+    // 內層使用 $emit() 來觸發
+    vm.$bus.$on('message:push', (message, status = 'warning') => {
+      vm.updateMessage(message, status)
+    })
   },
   methods: {
     updateMessage (message, status) {
@@ -42,14 +58,6 @@ export default {
         })
       }, 5000)
     }
-  },
-  created () {
-    const vm = this
-    // 外層使用 $on() 來註冊事件
-    // 內層使用 $emit() 來觸發
-    vm.$bus.$on('message:push', (message, status = 'warning') => {
-      vm.updateMessage(message, status)
-    })
   }
 }
 </script>

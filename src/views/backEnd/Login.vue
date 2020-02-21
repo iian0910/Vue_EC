@@ -1,33 +1,55 @@
 <template>
   <div class="login">
     <loading :active.sync="isLoading">
-      <Circle4></Circle4>
+      <Circle4 />
     </loading>
 
     <div class="signin-bg">
-      <form class="form-signin" @submit.prevent="signin">
-        <img class="mb-3 logo" src="../../assets/images/logo.svg" alt="logo" width="100" height="100" />
-        <h1 class="h3 mb-3 font-weight-normal text-center">登入</h1>
-        <label for="inputEmail" class="sr-only">帳號</label>
+      <form
+        class="form-signin"
+        @submit.prevent="signin"
+      >
+        <img
+          class="mb-3 logo"
+          src="../../assets/images/logo.svg"
+          alt="logo"
+          width="100"
+          height="100"
+        >
+        <h1 class="h3 mb-3 font-weight-normal text-center">
+          登入
+        </h1>
+        <label
+          for="inputEmail"
+          class="sr-only"
+        >帳號</label>
         <input
-          type="email"
           id="inputEmail"
+          v-model="user.username"
+          type="email"
           class="form-control"
           placeholder="請輸入帳號"
-          v-model="user.username"
           required
           autofocus
-        />
-        <label for="inputPassword" class="sr-only">密碼</label>
+        >
+        <label
+          for="inputPassword"
+          class="sr-only"
+        >密碼</label>
         <input
-          type="password"
           id="inputPassword"
+          v-model="user.password"
+          type="password"
           class="form-control"
           placeholder="請輸入密碼"
-          v-model="user.password"
           required
-        />
-        <button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
+        >
+        <button
+          class="btn btn-lg btn-primary btn-block"
+          type="submit"
+        >
+          登入
+        </button>
       </form>
     </div>
   </div>

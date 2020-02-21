@@ -1,31 +1,88 @@
 <template>
   <div>
     <div class="cartInfo">
-      <div class="cartIcon" data-toggle="collapse" data-target="#cartCollapse">
-        <i class="fas fa-shopping-cart"><div class="dot" v-if="cart.length !== 0"></div></i>
+      <div
+        class="cartIcon"
+        data-toggle="collapse"
+        data-target="#cartCollapse"
+      >
+        <i class="fas fa-shopping-cart"><div
+          v-if="cart.length !== 0"
+          class="dot"
+        /></i>
       </div>
-      <div class="collapse cartCollapse" id="cartCollapse">
+      <div
+        id="cartCollapse"
+        class="collapse cartCollapse"
+      >
         <div class="card card-body p-3">
-          <div class="overflowCtr mb-3" v-if="cart.length !== 0" :class="{'overflowY':cart.length >= 3}">
+          <div
+            v-if="cart.length !== 0"
+            class="overflowCtr mb-3"
+            :class="{'overflowY':cart.length >= 3}"
+          >
             <table class="table table-sm">
               <thead>
                 <tr>
-                  <th scope="col" width="25%" class="text-center">刪除</th>
-                  <th scope="col" width="50%" class="text-left">品名</th>
-                  <th scope="col" width="25%" class="text-left">價格</th>
+                  <th
+                    scope="col"
+                    width="25%"
+                    class="text-center"
+                  >
+                    刪除
+                  </th>
+                  <th
+                    scope="col"
+                    width="50%"
+                    class="text-left"
+                  >
+                    品名
+                  </th>
+                  <th
+                    scope="col"
+                    width="25%"
+                    class="text-left"
+                  >
+                    價格
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="item in cart" :key="item.id">
-                  <th scope="row" class="px-0 text-center"><button class="btn btn-sm btn-outline-danger" @click="deleteItem(item.id)"><i class="far fa-trash-alt"></i></button></th>
-                  <td>{{item.product.title | titleFilter}}</td>
-                  <td>{{item.product.price * item.qty | currency}}</td>
+                <tr
+                  v-for="item in cart"
+                  :key="item.id"
+                >
+                  <th
+                    scope="row"
+                    class="px-0 text-center"
+                  >
+                    <button
+                      class="btn btn-sm btn-outline-danger"
+                      @click="deleteItem(item.id)"
+                    >
+                      <i class="far fa-trash-alt" />
+                    </button>
+                  </th>
+                  <td>{{ item.product.title | titleFilter }}</td>
+                  <td>{{ item.product.price * item.qty | currency }}</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <button class="btn btn-orange btn-block" v-if="cart.length !== 0" @click="getCart">結帳去</button>
-          <button class="btn btn-danger btn-block" v-if="cart.length === 0" @click="goShopping">購物去</button>
+          <button
+            v-if="cart.length !== 0"
+            class="btn btn-orange btn-block"
+            @click="getCart"
+          >
+            結帳去
+          </button>
+          <button
+            v-if="cart.length === 0"
+            class="btn btn-danger btn-block"
+            @click="goShopping"
+          >
+            購物去
+          </button>
         </div>
       </div>
     </div>
@@ -34,7 +91,7 @@
 
 <script>
 export default {
-  name: 'cart',
+  name: 'Cart',
   props: ['cart'],
   data () {
     return {}

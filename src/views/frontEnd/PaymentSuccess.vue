@@ -1,83 +1,150 @@
 <template>
   <div class="w-100">
     <loading :active.sync="isLoading">
-      <Circle4></Circle4>
+      <Circle4 />
     </loading>
     <!-- Start Content -->
     <div class="container">
-        <div class="row mb-5">
-            <div class="col-md-6 offset-md-3">
-                <div class="row">
-                    <div class="col-md-4 mb-2 mb-md-4">
-                        <div class="step rounded">資料填寫</div>
-                    </div>
-                    <div class="col-md-4 mb-2 mb-md-4">
-                        <div class="step rounded">確認訂單</div>
-                    </div>
-                    <div class="col-md-4 mb-2 mb-md-4">
-                        <div class="step active rounded">完成</div>
-                    </div>
-                </div>
+      <div class="row mb-0">
+        <div class="col-md-6 offset-md-3">
+          <div class="row">
+            <div class="col-md-4 mb-2 mb-md-4">
+              <div class="step rounded">
+                資料填寫
+              </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <form>
-                  <table class="table mb-5">
-                    <thead>
-                      <tr>
-                        <td class="text-left">品名</td>
-                        <td width="20%" class="text-center">數量</td>
-                        <td width="30%" class="text-center">單價</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="item in order.products" :key="item.id">
-                        <td class="text-left">{{ item.product.title }}</td>
-                        <td class="text-center">{{ item.qty }}/{{ item.product.unit }}</td>
-                        <td class="text-right">{{ item.final_total | currency }}</td>
-                      </tr>
-                      <tr>
-                        <td colspan="2" class="text-right checkoutFinalTotal">總計</td>
-                        <td class="text-right checkoutFinalTotal">{{ order.total | currency }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <table class="table mb-5">
-                    <tr>
-                      <td colspan="2" class="text-center border-0 memberTitle">會員資料核對</td>
-                    </tr>
-                    <tr>
-                      <td width="25%">Email</td>
-                      <td>{{ order.user.email }}</td>
-                    </tr>
-                    <tr>
-                      <td width="25%">姓名</td>
-                      <td>{{ order.user.name }}</td>
-                    </tr>
-                    <tr>
-                      <td width="25%">電話</td>
-                      <td>{{ order.user.tel }}</td>
-                    </tr>
-                    <tr>
-                      <td width="25%">地址</td>
-                      <td>{{ order.user.address }}</td>
-                    </tr>
-                    <tr>
-                      <td width="25%">付款狀態</td>
-                      <td>
-                        <span v-if="!order.is_paid">尚未付款</span>
-                        <span v-else class="text-success">付款完成</span>
-                      </td>
-                    </tr>
-                  </table>
-                  <div class="text-center">
-                    <router-link to="/" class="btn btn-secondary mb-4 mr-4">回首頁</router-link>
-                    <router-link to="/products" class="btn btn-primary mb-4">繼續購物</router-link>
-                  </div>
-                </form>
+            <div class="col-md-4 mb-2 mb-md-4">
+              <div class="step rounded">
+                確認訂單
+              </div>
             </div>
+            <div class="col-md-4 mb-2 mb-md-4">
+              <div class="step active rounded">
+                完成
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="row mb-5">
+        <div class="col-md-6 offset-md-3">
+          <img src="../../assets/images/payment_success.jpg" class="img img-fluid" alt="">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <form>
+            <table class="table mb-5">
+              <thead>
+                <tr>
+                  <td class="text-left">
+                    品名
+                  </td>
+                  <td
+                    width="20%"
+                    class="text-center"
+                  >
+                    數量
+                  </td>
+                  <td
+                    width="30%"
+                    class="text-center"
+                  >
+                    單價
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="item in order.products"
+                  :key="item.id"
+                >
+                  <td class="text-left">
+                    {{ item.product.title }}
+                  </td>
+                  <td class="text-center">
+                    {{ item.qty }}/{{ item.product.unit }}
+                  </td>
+                  <td class="text-right">
+                    {{ item.final_total | currency }}
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    colspan="2"
+                    class="text-right checkoutFinalTotal"
+                  >
+                    總計
+                  </td>
+                  <td class="text-right checkoutFinalTotal">
+                    {{ order.total | currency }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="table mb-5">
+              <tr>
+                <td
+                  colspan="2"
+                  class="text-center border-0 memberTitle"
+                >
+                  會員資料核對
+                </td>
+              </tr>
+              <tr>
+                <td width="25%">
+                  Email
+                </td>
+                <td>{{ order.user.email }}</td>
+              </tr>
+              <tr>
+                <td width="25%">
+                  姓名
+                </td>
+                <td>{{ order.user.name }}</td>
+              </tr>
+              <tr>
+                <td width="25%">
+                  電話
+                </td>
+                <td>{{ order.user.tel }}</td>
+              </tr>
+              <tr>
+                <td width="25%">
+                  地址
+                </td>
+                <td>{{ order.user.address }}</td>
+              </tr>
+              <tr>
+                <td width="25%">
+                  付款狀態
+                </td>
+                <td>
+                  <span v-if="!order.is_paid">尚未付款</span>
+                  <span
+                    v-else
+                    class="text-success"
+                  >付款完成</span>
+                </td>
+              </tr>
+            </table>
+            <div class="text-center">
+              <router-link
+                to="/"
+                class="btn btn-secondary mb-4 mr-4"
+              >
+                回首頁
+              </router-link>
+              <router-link
+                to="/products"
+                class="btn btn-primary mb-4"
+              >
+                繼續購物
+              </router-link>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
     <!-- End Content -->
   </div>
@@ -87,7 +154,10 @@
 import { Circle4 } from 'vue-loading-spinner'
 
 export default {
-  name: 'customerCheckuot',
+  name: 'CustomerCheckuot',
+  components: {
+    Circle4
+  },
   data () {
     return {
       isLoading: false,
@@ -97,8 +167,9 @@ export default {
       orderId: ''
     }
   },
-  components: {
-    Circle4
+  created () {
+    this.orderId = this.$route.params.orderId
+    this.getOrder()
   },
   methods: {
     getOrder () {
@@ -110,10 +181,6 @@ export default {
         vm.isLoading = false
       })
     }
-  },
-  created () {
-    this.orderId = this.$route.params.orderId
-    this.getOrder()
   }
 }
 </script>
