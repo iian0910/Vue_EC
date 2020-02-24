@@ -160,6 +160,7 @@
                     v-validate="'required|email'"
                     type="email"
                     class="form-control"
+                    :class="{'is-invalid' : errors.has('email')}"
                     name="email"
                     placeholder="請輸入 Email(必填)"
                   >

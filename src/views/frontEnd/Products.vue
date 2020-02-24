@@ -110,7 +110,7 @@
                   </div>
                   <div class="icon-group">
                     <i
-                      class="far fa-heart likeIcon mr-3"
+                      class="far fa-heart likeIcon mr-0 mr-md-3"
                       :class="{'fa': item.likeThis}"
                       @click.stop="item.likeThis =! item.likeThis"
                     />
@@ -374,7 +374,7 @@ export default {
   right: 12px;
   bottom: 12px;
   @include screen ($mobile) {
-    position: static;
+    position: absolute;
     right: 0;
     bottom: 0;
     display: flex;
@@ -383,12 +383,11 @@ export default {
   i{
     color: rgb(80, 80, 80);
     @include screen ($mobile) {
-      width: 50%;
-      height: 45px;
+      width: 44px;
+      height: 44px;
       color: #505050;
-      border-radius: 5px;
-      font-size: 26px;
-      line-height: 45px;
+      font-size: 20px;
+      line-height: 44px;
       text-align: center;
     }
   }
