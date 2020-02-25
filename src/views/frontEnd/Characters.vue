@@ -24,8 +24,8 @@
         </nav>
         <!-- End Breadcrumb -->
         <div class="row">
-          <div class="col-md-4 mb-4">
-            <router-link to="characters/winnie">
+          <div class="col-6 col-md-4 mb-2 mb-md-4 characterItem">
+            <router-link to="characters/winnie" class="characterLink">
               <div
                 class="card"
               >
@@ -42,8 +42,8 @@
               </div>
             </router-link>
           </div>
-          <div class="col-md-4 mb-4">
-            <router-link to="characters/pig">
+          <div class="col-6 col-md-4 mb-2 mb-md-4 characterItem">
+            <router-link to="characters/pig" class="characterLink">
               <div
                 class="card"
               >
@@ -60,8 +60,8 @@
               </div>
             </router-link>
           </div>
-          <div class="col-md-4 mb-4">
-            <router-link to="characters/tiger">
+          <div class="col-6 col-md-4 mb-2 mb-md-4 characterItem">
+            <router-link to="characters/tiger" class="characterLink">
               <div
                 class="card"
               >
@@ -78,8 +78,8 @@
               </div>
             </router-link>
           </div>
-          <div class="col-md-4 mb-4">
-            <router-link to="characters/eeyore">
+          <div class="col-6 col-md-4 mb-2 mb-md-4 characterItem">
+            <router-link to="characters/eeyore" class="characterLink">
               <div
                 class="card"
               >
@@ -96,8 +96,8 @@
               </div>
             </router-link>
           </div>
-          <div class="col-md-4 mb-4">
-            <router-link to="characters/rabbit">
+          <div class="col-6 col-md-4 mb-2 mb-md-4 characterItem">
+            <router-link to="characters/rabbit" class="characterLink">
               <div
                 class="card"
               >
@@ -114,8 +114,8 @@
               </div>
             </router-link>
           </div>
-          <div class="col-md-4 mb-4">
-            <router-link to="characters/kanga">
+          <div class="col-6 col-md-4 mb-2 mb-md-4 characterItem">
+            <router-link to="characters/kanga" class="characterLink">
               <div
                 class="card"
               >
@@ -132,8 +132,8 @@
               </div>
             </router-link>
           </div>
-          <div class="col-md-4 mb-4">
-            <router-link to="characters/roo">
+          <div class="col-6 col-md-4 mb-2 mb-md-4 characterItem">
+            <router-link to="characters/roo" class="characterLink">
               <div
                 class="card"
               >
@@ -150,8 +150,8 @@
               </div>
             </router-link>
           </div>
-          <div class="col-md-4 mb-4">
-            <router-link to="characters/owl">
+          <div class="col-6 col-md-4 mb-2 mb-md-4 characterItem">
+            <router-link to="characters/owl" class="characterLink">
               <div
                 class="card"
               >
@@ -168,8 +168,8 @@
               </div>
             </router-link>
           </div>
-          <div class="col-md-4 mb-0 mb-md-4">
-            <router-link to="characters/robin">
+          <div class="col-6 col-md-4 mb-0 mb-md-4 characterItem">
+            <router-link to="characters/robin" class="characterLink">
               <div
                 class="card"
               >
@@ -201,12 +201,30 @@
     background-image: url('../../assets/images/page_charactersBanner_mo.jpg');
   }
 }
+.characterItem{
+  @include screen($mobile){
+    &:nth-child(odd){
+      padding-right: 2px;
+    };
+    &:nth-child(even){
+      padding-left: 2px;
+    }
+  }
+}
 .card-title{
   font-weight: bold;
+}
+.card-body{
+  padding: 0;
 }
 .card-text{
   font-size: 18px;
   letter-spacing: 1px;
   line-height: 27px;
+}
+.characterLink,
+.characterLink:hover{
+  text-decoration: none;
+  color: $primary;
 }
 </style>

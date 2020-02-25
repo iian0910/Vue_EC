@@ -67,47 +67,47 @@ const routes = [
       {
         path: 'characters/winnie',
         name: 'Character_winnie',
-        component: () => import('../views/frontEnd/Character_winnie.vue')
+        component: () => import('../views/frontEnd/character/Character_winnie.vue')
       },
       {
         path: 'characters/pig',
         name: 'Character_pig',
-        component: () => import('../views/frontEnd/Character_pig.vue')
+        component: () => import('../views/frontEnd/character/Character_pig.vue')
       },
       {
         path: 'characters/tiger',
         name: 'Character_tiger',
-        component: () => import('../views/frontEnd/Character_tiger.vue')
+        component: () => import('../views/frontEnd/character/Character_tiger.vue')
       },
       {
         path: 'characters/eeyore',
         name: 'Character_eeyore',
-        component: () => import('../views/frontEnd/Character_eeyore.vue')
+        component: () => import('../views/frontEnd/character/Character_eeyore.vue')
       },
       {
         path: 'characters/rabbit',
         name: 'Character_rabbit',
-        component: () => import('../views/frontEnd/Character_rabbit.vue')
+        component: () => import('../views/frontEnd/character/Character_rabbit.vue')
       },
       {
         path: 'characters/kanga',
         name: 'Character_kanga',
-        component: () => import('../views/frontEnd/Character_kanga.vue')
+        component: () => import('../views/frontEnd/character/Character_kanga.vue')
       },
       {
         path: 'characters/roo',
         name: 'Character_roo',
-        component: () => import('../views/frontEnd/Character_roo.vue')
+        component: () => import('../views/frontEnd/character/Character_roo.vue')
       },
       {
         path: 'characters/owl',
         name: 'Character_owl',
-        component: () => import('../views/frontEnd/Character_owl.vue')
+        component: () => import('../views/frontEnd/character/Character_owl.vue')
       },
       {
         path: 'characters/robin',
         name: 'Character_robin',
-        component: () => import('../views/frontEnd/Character_robin.vue')
+        component: () => import('../views/frontEnd/character/Character_robin.vue')
       },
       {
         path: 'products',
