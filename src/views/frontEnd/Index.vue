@@ -59,45 +59,15 @@
         <div class="row align-items-center">
           <div class="col-md-6">
             <ul class="news_list">
-              <li class="news_list_item mb-2">
-                <div class="news_date">
-                  2020.02.10
-                </div>
-                <div class="news_text">
-                  戀愛季節【熊愛你】，購物滿 $5,000 送 $500
-                </div>
-              </li>
-              <li class="news_list_item mb-2">
-                <div class="news_date">
-                  2020.01.23
-                </div>
-                <div class="news_text">
-                  返鄉過年【熊黑皮】，過年期間暫停營業
-                </div>
-              </li>
-              <li class="news_list_item mb-2">
-                <div class="news_date">
-                  2020.01.20
-                </div>
-                <div class="news_text">
-                  過年放假【熊放肆】，食品系列商品 6 折起
-                </div>
-              </li>
-              <li class="news_list_item mb-2">
-                <div class="news_date">
-                  2020.01.01
-                </div>
-                <div class="news_text">
-                  跨年無伴【熊孤單】，玩偶系列商品 7 折起
-                </div>
-              </li>
-              <li class="news_list_item mb-2">
-                <div class="news_date">
-                  2019.12.25
-                </div>
-                <div class="news_text">
-                  冬季聖誕【熊溫暖】，服飾系列商品 8 折起
-                </div>
+              <li class="news_list_item mb-2" v-for="item in jsonData" :key="item.id">
+                <router-link class="news_link" :to="{ name:'News',query: { queryId: item.id }}">
+                  <div class="news_date">
+                    {{item.date}}
+                  </div>
+                  <div class="news_text">
+                    {{item.title}}
+                  </div>
+                </router-link>
               </li>
             </ul>
           </div>
@@ -265,6 +235,7 @@
 <script>
 import { Circle4 } from 'vue-loading-spinner'
 import Cart from '../../components/Cart'
+import jsonData from '../../assets/news.json'
 
 export default {
   name: 'Index',
@@ -276,6 +247,7 @@ export default {
     return {
       products: [],
       carts: [],
+      jsonData,
       isLoading: false
     }
   },
