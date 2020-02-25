@@ -52,34 +52,7 @@ const routes = [
       {
         path: 'news',
         name: 'News',
-        component: () => import('../views/frontEnd/News.vue'),
-        children: [
-          {
-            path: 'news20200210',
-            name: 'News20200210',
-            component: () => import('../views/frontEnd/News20200210.vue')
-          },
-          {
-            path: 'news20200123',
-            name: 'News20200123',
-            component: () => import('../views/frontEnd/News20200123.vue')
-          },
-          {
-            path: 'news20200120',
-            name: 'News20200120',
-            component: () => import('../views/frontEnd/News20200120.vue')
-          },
-          {
-            path: 'news20200101',
-            name: 'News20200101',
-            component: () => import('../views/frontEnd/News20200101.vue')
-          },
-          {
-            path: 'news20191225',
-            name: 'News20191225',
-            component: () => import('../views/frontEnd/News20191225.vue')
-          }
-        ]
+        component: () => import('../views/frontEnd/News.vue')
       },
       {
         path: 'favourable',
@@ -90,6 +63,51 @@ const routes = [
         path: 'characters',
         name: 'Characters',
         component: () => import('../views/frontEnd/Characters.vue')
+      },
+      {
+        path: 'characters/winnie',
+        name: 'Character_winnie',
+        component: () => import('../views/frontEnd/Character_winnie.vue')
+      },
+      {
+        path: 'characters/pig',
+        name: 'Character_pig',
+        component: () => import('../views/frontEnd/Character_pig.vue')
+      },
+      {
+        path: 'characters/tiger',
+        name: 'Character_tiger',
+        component: () => import('../views/frontEnd/Character_tiger.vue')
+      },
+      {
+        path: 'characters/eeyore',
+        name: 'Character_eeyore',
+        component: () => import('../views/frontEnd/Character_eeyore.vue')
+      },
+      {
+        path: 'characters/rabbit',
+        name: 'Character_rabbit',
+        component: () => import('../views/frontEnd/Character_rabbit.vue')
+      },
+      {
+        path: 'characters/kanga',
+        name: 'Character_kanga',
+        component: () => import('../views/frontEnd/Character_kanga.vue')
+      },
+      {
+        path: 'characters/roo',
+        name: 'Character_roo',
+        component: () => import('../views/frontEnd/Character_roo.vue')
+      },
+      {
+        path: 'characters/owl',
+        name: 'Character_owl',
+        component: () => import('../views/frontEnd/Character_owl.vue')
+      },
+      {
+        path: 'characters/robin',
+        name: 'Character_robin',
+        component: () => import('../views/frontEnd/Character_robin.vue')
       },
       {
         path: 'products',
