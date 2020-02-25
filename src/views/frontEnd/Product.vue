@@ -41,13 +41,13 @@
                   {{ product.title }}
                 </h4>
                 <div class="coupon d-flex mb-4">
-                  <div class="coupon_item mr-1">
+                  <div class="coupon_item mr-1 rounded">
                     指定新會員獨享
                   </div>
-                  <div class="coupon_item mr-1">
+                  <div class="coupon_item mr-1 rounded">
                     超取滿NT$899免運
                   </div>
-                  <div class="coupon_item">
+                  <div class="coupon_item rounded">
                     國家/地區配送
                   </div>
                 </div>
@@ -234,7 +234,6 @@ export default {
         vm.category = response.data.product.category
         // 數量預設值為1
         vm.product.num = 1
-        console.log('response.data.product.likeThis', response.data.product.likeThis)
       })
     },
     getLikeProduct (id) {
