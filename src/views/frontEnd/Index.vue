@@ -116,7 +116,7 @@
                   </div>
                 </div>
                 <div class="icon-group">
-                  <i class="far fa-heart likeIcon mr-0 mr-md-3" :class="{'fa': item.likeThis}" @click.stop="item.likeThis =! item.likeThis"></i>
+                  <i class="far fa-heart likeIcon mr-0 mr-md-3" :class="{'fa': item.likeThis}" @click.stop="saveLocalStorage(item); getLocalStorage(item);"></i>
                   <i class="fas fa-shopping-cart" @click.stop="addToCart(item.id, item.qty)"></i>
                 </div>
               </div>
@@ -251,10 +251,6 @@ export default {
       isLoading: false
     }
   },
-  created () {
-    this.getCart()
-    this.getProducts()
-  },
   methods: {
     getProducts () {
       const vm = this
@@ -308,7 +304,19 @@ export default {
           vm.$bus.$emit('message:push', response.data.message, 'danger')
         }
       })
+    },
+    saveLocalStorage (item) {
+      item.likeThis = !item.likeThis
+      localStorage.setItem(`${item.id}`, JSON.stringify(item))
+      item = this.getLocalStorage(item)
+    },
+    getLocalStorage (item) {
+      console.log(JSON.parse(localStorage.getItem(`${item.id}`)))
     }
+  },
+  created () {
+    this.getCart()
+    this.getProducts()
   }
 }
 </script>

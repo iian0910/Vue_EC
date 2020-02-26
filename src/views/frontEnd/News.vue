@@ -24,7 +24,7 @@
         </nav>
         <!-- End Breadcrumb -->
         <div class="row">
-          <div class="col-md-10 offset-md-1">
+          <div class="col-md-8 offset-md-2">
             <img :src="`${filterData[0].image}`" class="img img-fluid" alt="">
           </div>
         </div>
