@@ -126,13 +126,13 @@ $pad-l: '960px';
   @media(max-width: $size){
     @content
   }
-}
+};
 
 .cartInfo{
-  position: fixed;
-  right: 5%;
-  bottom: 5%;
-  z-index: 9999;
+  // position: fixed;
+  // right: 5%;
+  // bottom: 5%;
+  // z-index: 9999;
   cursor: pointer;
   @include screen($mobile){
     right: 3%;
@@ -147,7 +147,7 @@ $pad-l: '960px';
     .fa-shopping-cart{
       font-size: 20px;
       line-height: 20px;
-      position: absolute;
+      position: relative;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);

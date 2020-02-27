@@ -160,30 +160,41 @@
       </div>
     </div>
     <!-- End Content -->
-    <!-- cart Icon -->
-    <Cart
-      :cart="carts"
-      @emitDelete="deleteItem"
-    />
-    <!---->
+    <div class="sideiconGruop">
+      <!-- like Icon -->
+      <LikeProduct
+        :likeProduct="likeProducts"
+        @emitLike="likeItem"
+      />
+      <!---->
+      <!-- cart Icon -->
+      <Cart
+        :cart="carts"
+        @emitDelete="deleteItem"
+      />
+      <!---->
+    </div>
   </div>
 </template>
 
 <script>
 import { Circle4 } from 'vue-loading-spinner'
 import Cart from '../../components/Cart'
+import LikeProduct from '../../components/LikeProduct'
 
 export default {
   name: 'Product',
   components: {
     Circle4,
-    Cart
+    Cart,
+    LikeProduct
   },
   data () {
     return {
       pageName: '系列產品',
       products: [],
       product: {},
+      likeProducts: [],
       sameProducts: [],
       carts: [],
       category: '',
@@ -269,6 +280,15 @@ export default {
         vm.getCart()
         vm.isLoading = false
       })
+    },
+    likeItem (item) {
+      item.likeThis = !item.likeThis
+      console.log(item)
+      if (item.likeThis) {
+        this.likeProducts.push(item)
+      } else {
+        this.likeProducts.splice(item.id, 1)
+      }
     }
   }
 }
@@ -345,5 +365,13 @@ export default {
       padding-left: 2px;
     }
   }
+}
+.sideiconGruop{
+  width: 60px;
+  height: auto;
+  position: fixed;
+  right: 5%;
+  bottom: 5%;
+  z-index: 10;
 }
 </style>

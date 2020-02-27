@@ -111,8 +111,8 @@
                   <div class="icon-group">
                     <i
                       class="far fa-heart likeIcon mr-0 mr-md-3"
-                      :class="{'fa': item.likeThis}"
-                      @click.stop="item.likeThis =! item.likeThis"
+                       :class="{'fa': item.likeThis}"
+                       @click.stop="likeItem(item)"
                     />
                     <i
                       class="fas fa-shopping-cart"
@@ -172,12 +172,20 @@
         </div>
         <!---->
       </div>
-      <!-- cart Icon -->
-      <Cart
-        :cart="carts"
-        @emitDelete="deleteItem"
-      />
-      <!---->
+      <div class="sideiconGruop">
+        <!-- like Icon -->
+        <LikeProduct
+          :likeProduct="likeProducts"
+          @emitLike="likeItem"
+        />
+        <!---->
+        <!-- cart Icon -->
+        <Cart
+          :cart="carts"
+          @emitDelete="deleteItem"
+        />
+        <!---->
+      </div>
     </div>
     <!-- End Content -->
   </div>
@@ -186,12 +194,14 @@
 <script>
 import { Circle4 } from 'vue-loading-spinner'
 import Cart from '../../components/Cart'
+import LikeProduct from '../../components/LikeProduct'
 
 export default {
   name: 'Products',
   components: {
     Circle4,
-    Cart
+    Cart,
+    LikeProduct
   },
   data () {
     return {
@@ -201,6 +211,7 @@ export default {
       currentCategory: '',
       currentPage: 0,
       carts: [],
+      likeProducts: [],
       isLoading: false
     }
   },
@@ -303,6 +314,15 @@ export default {
           vm.$bus.$emit('message:push', response.data.message, 'danger')
         }
       })
+    },
+    likeItem (item) {
+      item.likeThis = !item.likeThis
+      console.log(item)
+      if (item.likeThis) {
+        this.likeProducts.push(item)
+      } else {
+        this.likeProducts.splice(item.id, 1)
+      }
     }
   }
 }
@@ -394,5 +414,13 @@ export default {
   .fa.fa-heart{
     color: $pink;
   }
+}
+.sideiconGruop{
+  width: 60px;
+  height: auto;
+  position: fixed;
+  right: 5%;
+  bottom: 5%;
+  z-index: 10;
 }
 </style>

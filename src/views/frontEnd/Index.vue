@@ -116,7 +116,7 @@
                   </div>
                 </div>
                 <div class="icon-group">
-                  <i class="far fa-heart likeIcon mr-0 mr-md-3" :class="{'fa': item.likeThis}" @click.stop="saveLocalStorage(item); getLocalStorage(item);"></i>
+                  <i class="far fa-heart likeIcon mr-0 mr-md-3" :class="{'fa': item.likeThis}" @click.stop="likeItem(item); saveLocalStorage(item)"></i>
                   <i class="fas fa-shopping-cart" @click.stop="addToCart(item.id, item.qty)"></i>
                 </div>
               </div>
@@ -222,12 +222,20 @@
         </div>
       </section>
       <!-- End Characters -->
-      <!-- cart Icon -->
-      <Cart
-        :cart="carts"
-        @emitDelete="deleteItem"
-      />
-      <!---->
+      <div class="sideiconGruop">
+        <!-- like Icon -->
+        <LikeProduct
+          :likeProduct="likeProducts"
+          @emitLike="likeItem"
+        />
+        <!---->
+        <!-- cart Icon -->
+        <Cart
+          :cart="carts"
+          @emitDelete="deleteItem"
+        />
+        <!---->
+      </div>
     </div>
   </div>
 </template>
@@ -235,18 +243,21 @@
 <script>
 import { Circle4 } from 'vue-loading-spinner'
 import Cart from '../../components/Cart'
+import LikeProduct from '../../components/LikeProduct'
 import jsonData from '../../assets/news.json'
 
 export default {
   name: 'Index',
   components: {
     Circle4,
-    Cart
+    Cart,
+    LikeProduct
   },
   data () {
     return {
       products: [],
       carts: [],
+      likeProducts: [],
       jsonData,
       isLoading: false
     }
@@ -304,6 +315,13 @@ export default {
           vm.$bus.$emit('message:push', response.data.message, 'danger')
         }
       })
+    },
+    likeItem (item) {
+      item.likeThis = !item.likeThis
+      console.log('item', item)
+      if (item.likeThis) {
+        this.likeProducts.push(item)
+      }
     },
     saveLocalStorage (item) {
       item.likeThis = !item.likeThis
@@ -490,5 +508,13 @@ export default {
       padding-left: 2px;
     }
   }
+}
+.sideiconGruop{
+  width: 60px;
+  height: auto;
+  position: fixed;
+  right: 5%;
+  bottom: 5%;
+  z-index: 10;
 }
 </style>
