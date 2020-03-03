@@ -44,9 +44,7 @@ export default {
   name: 'Likeproduct',
   props: ['likeProduct'],
   data () {
-    return {
-      likeProducts: []
-    }
+    return {}
   },
   methods: {},
   created () {

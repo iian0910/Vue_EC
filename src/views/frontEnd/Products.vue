@@ -111,8 +111,8 @@
                   <div class="icon-group">
                     <i
                       class="far fa-heart likeIcon mr-0 mr-md-3"
-                       :class="{'fa': item.likeThis}"
-                       @click.stop="likeItem(item)"
+                      :class="{'fa': item.likeThis}"
+                      @click.stop="addToLike(item)"
                     />
                     <i
                       class="fas fa-shopping-cart"
@@ -176,7 +176,6 @@
         <!-- like Icon -->
         <LikeProduct
           :likeProduct="likeProducts"
-          @emitLike="likeItem"
         />
         <!---->
         <!-- cart Icon -->
@@ -315,14 +314,12 @@ export default {
         }
       })
     },
-    likeItem (item) {
+    addToLike (item) {
+      const vm = this
       item.likeThis = !item.likeThis
-      console.log(item)
-      if (item.likeThis) {
-        this.likeProducts.push(item)
-      } else {
-        this.likeProducts.splice(item.id, 1)
-      }
+      vm.likeProducts = vm.products.filter((item) => {
+        return item.likeThis === true
+      })
     }
   }
 }

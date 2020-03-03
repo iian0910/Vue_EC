@@ -164,7 +164,6 @@
       <!-- like Icon -->
       <LikeProduct
         :likeProduct="likeProducts"
-        @emitLike="likeItem"
       />
       <!---->
       <!-- cart Icon -->
@@ -281,14 +280,12 @@ export default {
         vm.isLoading = false
       })
     },
-    likeItem (item) {
+    addToLike (item) {
+      const vm = this
       item.likeThis = !item.likeThis
-      console.log(item)
-      if (item.likeThis) {
-        this.likeProducts.push(item)
-      } else {
-        this.likeProducts.splice(item.id, 1)
-      }
+      vm.likeProducts = vm.products.filter((item) => {
+        return item.likeThis === true
+      })
     }
   }
 }
