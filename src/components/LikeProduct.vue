@@ -28,7 +28,7 @@
               </thead>
               <tbody>
                 <tr class="border-0" v-for="item in likeProduct" :key="item.id">
-                  <td><img :src="`${item.imageUrl}`" class="img img-fluid likeImg" alt=""></td>
+                  <td @click="getProduct(item.id)"><img :src="`${item.imageUrl}`" class="img img-fluid likeImg" alt=""></td>
                 </tr>
               </tbody>
             </table>
@@ -46,7 +46,12 @@ export default {
   data () {
     return {}
   },
-  methods: {},
+  methods: {
+    getProduct (id) {
+      const vm = this
+      vm.$router.push(`/product/${id}`)
+    }
+  },
   created () {
     this.$emit('emitLike')
   }

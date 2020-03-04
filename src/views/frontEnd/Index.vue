@@ -116,7 +116,7 @@
                   </div>
                 </div>
                 <div class="icon-group">
-                  <i class="far fa-heart likeIcon mr-0 mr-md-3" :class="{'fa': item.likeThis}" @click.stop="addToLike(item)"></i>
+                  <i class="far fa-heart likeIcon mr-0 mr-md-3" :class="{'fa': item.likeThis}" @click.stop="addToLike(item)" v-likeItem="{item}"></i>
                   <i class="fas fa-shopping-cart" @click.stop="addToCart(item.id, item.qty)"></i>
                 </div>
               </div>
@@ -321,11 +321,40 @@ export default {
       vm.likeProducts = vm.products.filter((item) => {
         return item.likeThis === true
       })
+      vm.addToLocalStorage(vm.likeProducts)
+    },
+    addToLocalStorage (item) {
+      const vm = this
+      // 陣列轉字串 JSON.stringify
+      localStorage.setItem('item', JSON.stringify(item))
+      vm.getLocalStorage()
+    },
+    getLocalStorage () {
+      const vm = this
+      // 陣列轉字串 JSON.parse
+      vm.likeProducts = JSON.parse(localStorage.getItem('item') || '[]')
+    }
+  },
+  directives: {
+    likeItem: {
+      update (el, binding, vnode) {
+        let getStorage = JSON.parse(localStorage.getItem('item') || '[]')
+        console.log('getStorage', getStorage)
+        // 新增後指定項目下
+        // vnode.context.products[x].likeThis 為 true
+        console.log('update', el, binding, vnode)
+      },
+      inserted (el, binding, vnode) {
+        // 重新整理後這邊的
+        // vnode.context.products[x].likeThis 恢復到 false
+        console.log('inserted', el, binding, vnode)
+      }
     }
   },
   created () {
     this.getCart()
     this.getProducts()
+    this.likeProducts = JSON.parse(localStorage.getItem('item') || '[]')
   }
 }
 </script>
