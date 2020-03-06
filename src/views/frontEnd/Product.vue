@@ -283,26 +283,6 @@ export default {
         vm.isLoading = false
       })
     },
-    addToLike (Item) {
-      const vm = this
-      let newIndex = ''
-      Item.likeThis = !Item.likeThis
-      if (Item.likeThis) {
-        vm.likeProducts.push(Item)
-      } else {
-        vm.likeProducts.forEach((item, key) => {
-          if (Item.id === item.id) {
-            newIndex = key
-          }
-        })
-        vm.likeProducts.splice(newIndex, 1)
-      }
-      vm.addToLocalStorage(vm.likeProducts)
-    },
-    addToLocalStorage (likeProducts) {
-      // 陣列轉字串 JSON.stringify
-      localStorage.setItem('likeProducts', JSON.stringify(likeProducts))
-    },
     getLocalStorage () {
       const vm = this
       // 陣列轉字串 JSON.parse
