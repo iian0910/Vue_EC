@@ -217,11 +217,6 @@ export default {
       return likeProducts
     }
   },
-  created () {
-    this.getProducts()
-    this.getProduct()
-    this.getCart()
-  },
   methods: {
     getProducts () {
       const vm = this
@@ -230,6 +225,14 @@ export default {
         vm.products = response.data.products
         vm.products.forEach(item => {
           vm.$set(item, 'likeThis', false)
+        })
+        // 比對 likeProducts 將 products 的 likeThis 改值
+        vm.products.forEach((item) => {
+          vm.likeProducts.forEach((likeItem) => {
+            if (likeItem.id === item.id) {
+              item.likeThis = !item.likeThis
+            }
+          })
         })
       })
     },
@@ -280,13 +283,38 @@ export default {
         vm.isLoading = false
       })
     },
-    addToLike (item) {
+    addToLike (Item) {
       const vm = this
-      item.likeThis = !item.likeThis
-      vm.likeProducts = vm.products.filter((item) => {
-        return item.likeThis === true
-      })
+      let newIndex = ''
+      Item.likeThis = !Item.likeThis
+      if (Item.likeThis) {
+        vm.likeProducts.push(Item)
+      } else {
+        vm.likeProducts.forEach((item, key) => {
+          if (Item.id === item.id) {
+            newIndex = key
+          }
+        })
+        vm.likeProducts.splice(newIndex, 1)
+      }
+      vm.addToLocalStorage(vm.likeProducts)
+    },
+    addToLocalStorage (likeProducts) {
+      // 陣列轉字串 JSON.stringify
+      localStorage.setItem('likeProducts', JSON.stringify(likeProducts))
+    },
+    getLocalStorage () {
+      const vm = this
+      // 陣列轉字串 JSON.parse
+      // 將 localStorage 資料倒回 likeProducts 內
+      vm.likeProducts = JSON.parse(localStorage.getItem('likeProducts') || '[]')
     }
+  },
+  created () {
+    this.getProducts()
+    this.getProduct()
+    this.getCart()
+    this.getLocalStorage()
   }
 }
 </script>

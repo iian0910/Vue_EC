@@ -270,6 +270,14 @@ export default {
         vm.products.forEach(item => {
           vm.$set(item, 'likeThis', false)
         })
+        // 比對 likeProducts 將 products 的 likeThis 改值
+        vm.products.forEach((item) => {
+          vm.likeProducts.forEach((likeItem) => {
+            if (likeItem.id === item.id) {
+              item.likeThis = !item.likeThis
+            }
+          })
+        })
       })
     },
     getProduct (id) {
@@ -340,7 +348,6 @@ export default {
       // 陣列轉字串 JSON.parse
       // 將 localStorage 資料倒回 likeProducts 內
       vm.likeProducts = JSON.parse(localStorage.getItem('likeProducts') || '[]')
-      // 將 products 的 likeThis 改值
     }
   },
   created () {
