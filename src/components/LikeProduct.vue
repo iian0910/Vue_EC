@@ -48,8 +48,9 @@ export default {
   },
   methods: {
     getProduct (id) {
-      const vm = this
-      vm.$router.push(`/product/${id}`)
+      // const vm = this
+      // vm.$router.push(`/product/${id}`)
+      this.$emit('emitgetLikeProduct', id)
     }
   },
   created () {

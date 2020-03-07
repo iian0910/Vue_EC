@@ -164,6 +164,7 @@
       <!-- like Icon -->
       <LikeProduct
         :likeProduct="likeProducts"
+        @emitgetLikeProduct="getLikeProduct"
       />
       <!---->
       <!-- cart Icon -->
