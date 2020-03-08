@@ -391,7 +391,10 @@ export default {
 .productItem{
   cursor: pointer;
   &:hover{
-    box-shadow: 0px 10px 15px -10px rgba(0,0,0,0.5)
+    box-shadow: 0px 10px 15px -10px rgba(0,0,0,0.5);
+    @include screen($mobile){
+      box-shadow: none;
+    }
   }
   &_title{
     font-size: 14px;

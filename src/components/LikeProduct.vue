@@ -15,17 +15,13 @@
         id="likeCollapse"
         class="collapse likeCollapse"
       >
-        <div class="card card-body p-0">
+        <div class="card">
+          <h3 class="card-title text-pink">我的最愛</h3>
           <div
-            class="overflowCtr"
+            class="overflowCtr card-body p-0"
             :class="{'overflowY':likeProduct.length >= 3}"
           >
             <table class="table-sm">
-              <thead>
-                <th align="center">
-                  <td class="text-pink">我的最愛</td>
-                </th>
-              </thead>
               <tbody>
                 <tr class="border-0" v-for="item in likeProduct" :key="item.id">
                   <td @click="getProduct(item.id)"><img :src="`${item.imageUrl}`" class="img img-fluid likeImg" alt=""></td>
@@ -71,7 +67,15 @@ $pad-l: '960px';
     @content
   }
 };
-
+.card-title{
+  margin: 0;
+  font-size: 18px;
+  line-height: 18px;
+  padding: 0.3rem 0;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
 .likeInfo{
   // position: fixed;
   // right: 5%;
